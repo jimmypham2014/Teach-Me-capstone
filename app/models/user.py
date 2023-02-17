@@ -3,6 +3,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+likes = db.Table(
+    'likes',
+    db.Model.metadata,
+    db.Column('users',db.Integer, db.ForeignKey('users.id'))
+    sb.Column('services', db.Integer, db.ForeignKey('services.id'))
+)
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -10,9 +18,15 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    firstName = db.Column(db.String(40), nullable = False)
+    lastName = db.Column(db.String(40), nullable = False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    is_student =  db.Column(db.Boolean, nullable = False)
+    description = db.Column(db.String(500), nullable = True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    
+    services = db.relationship('Service', back_populates=)
 
     @property
     def password(self):
@@ -28,6 +42,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'firstName': self.firstName,
+            'lastName': self.lastName,
             'username': self.username,
             'email': self.email
         }
