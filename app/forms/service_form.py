@@ -3,11 +3,11 @@ from wtforms import StringField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
 
-class ServiceForm(Flaskform):
+class ServiceForm(FlaskForm):
     title = StringField('Title', validators =[DataRequired()])
     subject = StringField('Subject', validators = [DataRequired()])
     description = StringField('Description', validators =[DataRequired()])
-    subjet_level = StringField('Subject Level', validators =[DataRequired()])
+    subject_level = StringField('Subject Level')
     
     
     
