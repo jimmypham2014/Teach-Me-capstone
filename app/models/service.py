@@ -15,6 +15,7 @@ class Service(db.Model, UserMixin):
     subject = db.Column(db.String(40), nullable = False)
     description = db.Column(db.String(1000), nullable = False)
     subject_level = db.Column(db.String(40), nullable = True)
+    price = db.Column(db.Integer, nullable = False)
     tutor_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
      
     tutor = db.relationship('User', back_populates='services')
@@ -26,6 +27,8 @@ class Service(db.Model, UserMixin):
             'title': self.title,
             'subject': self.subject,
             'description': self.description,
+            'tutor':self.tutor.username,
+            'price': self.price,
             'subject_level': self.subject_level
         }
    

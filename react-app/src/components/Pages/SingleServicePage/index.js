@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { getSingleService,deleteService } from "../../../store/service";
+import { getSingleService,deleteService, getAllServices } from "../../../store/service";
 import EditServiceForm from "../../Forms/EditServiceForm";
 
 function ServiceDetailPage(){
     const dispatch = useDispatch()
     const {serviceId} = useParams()
-    console.log(serviceId)
-    const service = useSelector(state=> state.service[serviceId])
-    console.log(service)
+    const service = useSelector(state => state.service[serviceId])
+    const sessionUser = useSelector(state=>state.session)
     const history = useHistory()
     const [open, setOpen] = useState(false)
+
 
 
 
@@ -20,9 +20,20 @@ function ServiceDetailPage(){
 
     },[dispatch])
 
+
+
     const removeService = ()=>{
         dispatch(deleteService(serviceId))
        history.push('/')
+    }
+
+    if(!service){
+        return null
+    }
+
+    const editService = ()=>{
+        history.push(`/services/${serviceId}/editform`)
+    
     }
 
 
@@ -30,6 +41,8 @@ function ServiceDetailPage(){
         <div>
         {service&&(
             <div>
+        
+
             {service.title}
             {service.subject}
 
@@ -38,8 +51,11 @@ function ServiceDetailPage(){
             </div>
 
         )}
-        <button onClick={()=>setOpen(true)}>Edit</button>
-        <button onClick={removeService}>Delete</button>
+        {sessionUser && service.tutor && service.tutor === sessionUser.user.username ? 
+            <div>
+            <button onClick={editService}>Edit</button>
+             <button onClick={removeService}>Delete</button> 
+            </div>: null}
 
         </div>
     )

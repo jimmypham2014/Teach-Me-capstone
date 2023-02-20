@@ -4,6 +4,7 @@ import { NavLink, useHistory, useParams } from "react-router-dom";
 import { deleteService, getAllServices } from "../../../store/service";
 import EditServiceForm from "../../Forms/EditServiceForm";
 import './ServicePage.css'
+import heart from '../../../icons/favorite.png'
 
 function ServicePage(){
 
@@ -11,7 +12,7 @@ function ServicePage(){
     const dispatch = useDispatch()
     const history = useHistory()
     const {serviceId} = useParams()
-    console.log(services)
+
 
     useEffect(()=>{
         dispatch(getAllServices())
@@ -30,9 +31,24 @@ function ServicePage(){
             return (
                 <div className="service_container">
                     <div className="service_detail"> 
-                    <h1>{service.title}</h1>
-                    {service.subject}
-                    {service.description}
+                        <div>
+                        
+                        <h1>{service.title}</h1>
+                        {service.subject}
+                        {service.description}
+                        </div>
+
+                        <div>{service.tutor}</div>
+
+
+                        <div>
+                            <img src={heart}/>
+                            
+                            <h5>My rate is ${service.price}/hr</h5>
+                        
+                        </div>
+
+
                     </div>
                     <button onClick={()=>history.push(`/services/${service.id}`)}>View</button>
                     <button onClick={()=> dispatch(deleteService(service.id))}>Delete</button>                  

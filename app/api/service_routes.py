@@ -21,7 +21,7 @@ def add_service():
     form = ServiceForm()
     
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
+    print(form.data, 'backend')
     if form.validate_on_submit():
         data = form.data
         new_service = Service(tutor_id=current_user.get_id(),
@@ -35,16 +35,16 @@ def add_service():
         return new_service.to_dict()
     
 
-@service_routes.route('/<int:id>', methods=["PUT"])
+@service_routes.route('/<int:id>', methods=["PUT","PATCH"])
 @login_required
 def edit_service(id):
     form = ServiceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data)
     if form.validate_on_submit():
         data = form.data
         service = Service.query.get(id)
-        
-        for key, value in data.item():
+        for key, value in data.items():
             setattr(service,key,value)
             
         db.session.commit()

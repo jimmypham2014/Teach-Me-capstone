@@ -9,14 +9,23 @@ import CreateServiceForm from "./components/Forms/CreateServiceForm";
 import ServicePage from "./components/Pages/ServicePage";
 import EditServiceForm from "./components/Forms/EditServiceForm";
 import ServiceDetailPage from "./components/Pages/SingleServicePage";
+import { getAllServices } from "./store/service";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const {serviceId} = useParams()
+
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  useEffect(()=>{
+    dispatch(getAllServices())
+},[dispatch])
+
+
+
 
   return (
     <>
@@ -35,8 +44,11 @@ function App() {
           <ServicePage/>
           </Route>
 
-          <Route path= '/services/:serviceId'>
+          <Route exact path= '/services/:serviceId'>
           <ServiceDetailPage/>
+          </Route>
+
+          <Route path= "/services/:serviceId/editform">
           <EditServiceForm/>
           </Route>
 

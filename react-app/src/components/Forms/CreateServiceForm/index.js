@@ -8,6 +8,7 @@ function CreateServiceForm(){
     const [subject,setSubject] = useState("")
     const [description, setDescription] = useState("")
     const [subjectLevel, setSubjectLevel] = useState("")
+    const [price, setPrice] = useState("")
 
 
     const handleSubmit = async (e)=>{
@@ -17,9 +18,9 @@ function CreateServiceForm(){
             title,
             subject,
             description,
-            subjectLevel
+            subjectLevel,
+            price
         }
-        console.log(payload)
         await dispatch(addService(payload))
         
     }
@@ -58,6 +59,15 @@ function CreateServiceForm(){
         value={subjectLevel}
         required
         onChange={(e) =>setSubjectLevel(e.target.value)}
+        />
+        </label>
+
+        <label>Price
+        <input
+        type = 'number'
+        value={price}
+        required
+        onChange={(e) =>setPrice(e.target.value)}
         />
         </label>
     

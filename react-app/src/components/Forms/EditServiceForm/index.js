@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
-import { addService, getAllServices } from "../../../store/service";
+import {  editService } from "../../../store/service";
 
 function EditServiceForm(){
     const {serviceId} = useParams()
@@ -9,12 +9,15 @@ function EditServiceForm(){
     const specificService = allServices[serviceId]
     const dispatch = useDispatch()
     const history = useHistory()
-    console.log(specificService)
+
+    console.log(serviceId, 'edit form')
+
     const [title, setTitle] = useState(specificService.title)
     const [subject, setSubject] = useState(specificService.subject)
     const [ description, setDescription] = useState(specificService.description)
+    const [subject_level, setSubject_Level] = useState(specificService.subjectLevel)
+    const [price, setPrice] = useState(specificService.price)
 
-   console.log(serviceId)
    if(!specificService) return null
 
   
@@ -22,13 +25,18 @@ function EditServiceForm(){
     const handleSubmit=(e)=>{
 
         e.preventDefault()
+
         const payload={
             title,
             subject,
-            description
+            description,
+            price,
+            subject_level
+            
         }
-        dispatch(addService(payload))
-        history.push('/')
+        console.log(payload,'edit form')
+        dispatch(editService(serviceId,payload))
+        history.push(`/services/${serviceId}`)
 
     }
 
@@ -66,10 +74,25 @@ function EditServiceForm(){
              type ='text'
              value={description}
              onChange={(e)=>setDescription(e.target.value)}
-
-
              />
-            
+            </label>
+
+            <label>Subject Level
+            <input
+            type = 'text'
+            value={subject_level}
+            required
+            onChange={(e) =>setSubject_Level(e.target.value)}
+            />
+            </label>
+    
+            <label>Price
+            <input
+            type = 'number'
+            value={price}
+            required
+            onChange={(e) =>setPrice(e.target.value)}
+            />
             </label>
     
         

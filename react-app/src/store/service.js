@@ -17,9 +17,9 @@ const add_service = (service) =>({
     payload: service
 })
 
-const removeService = (service)=>({
+const removeService = (serviceId)=>({
     type:DELETE_SERVICE,
-    service
+    serviceId
 })
 
 
@@ -58,6 +58,7 @@ if(res.ok){
 }
 
 export const editService =(serviceId, serviceData) => async(dispatch)=>{
+   
     const res = await fetch(`/api/services/${serviceId}`,{
         method: "PUT",
         headers:{
@@ -68,6 +69,7 @@ export const editService =(serviceId, serviceData) => async(dispatch)=>{
     })
     if(res.ok){
         const serviceData = await res.json()
+        console.log(serviceData)
         dispatch(add_service(serviceData))
         return serviceData
     }
@@ -81,9 +83,9 @@ export const deleteService = (serviceId) =>async(dispatch)=>{
         "Content-Type": "application/json"
     }
 })
-if(res.ok){
+    if(res.ok){
     dispatch(removeService(serviceId))
-}
+    }
 }
 
 
@@ -92,6 +94,7 @@ export const getSingleService=(serviceId) => async(dispatch)=>{
     if(res.ok){
         const data = await res.json()
         dispatch(add_service(data))
+
         return data
     }
 }
@@ -100,27 +103,23 @@ export const getSingleService=(serviceId) => async(dispatch)=>{
 const defaultState = {}
 
 const serviceReducer = (state= defaultState,action) =>{
-
+    let newState = {...state}
     switch(action.type){
-        case LOAD_SERVICE:{
-            const newState = {...state}
+        case LOAD_SERVICE:
             action.payload.forEach(service=>{
                 newState[service.id] = service
             })
            
             return newState
-        }
+        
 
-        case ADD_SERVICE:{
-            const newState = {...state}
+        case ADD_SERVICE:
             newState[action.payload.id ]= action.payload
             return newState
-        }
-        case DELETE_SERVICE:{
-            const newState ={...state}
-            delete newState[action.service.id]
+        
+        case DELETE_SERVICE:
+            delete newState[action.serviceId]
             return newState
-        }
             
      
         default:
