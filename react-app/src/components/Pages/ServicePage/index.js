@@ -26,7 +26,7 @@ function ServicePage(){
 
 
     return (
-        <div>
+        <div className ='service_page_container'>
         {services.map((service)=>{
             return (
                 <div className="service_container">
@@ -50,8 +50,11 @@ function ServicePage(){
 
 
                     </div>
+
+                    <div>
                     <button onClick={()=>history.push(`/services/${service.id}`)}>View</button>
-                    <button onClick={()=> dispatch(deleteService(service.id))}>Delete</button>                  
+                    <button onClick={()=> dispatch(deleteService(service.id))}>Delete</button>                 
+                    </div> 
 
                 
                 </div>

@@ -18,8 +18,11 @@ class User(db.Model, UserMixin):
     is_student =  db.Column(db.Boolean, nullable = False)
     description = db.Column(db.String(500), nullable = True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profileImg = db.Column(db.String(512))
     
     services = db.relationship('Service', back_populates='tutor')
+
+    bookings = db.relationship('Booking', back_populates = 'student')
   
 
     @property
@@ -39,5 +42,6 @@ class User(db.Model, UserMixin):
             'firstName': self.firstName,
             'lastName': self.lastName,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'profileImg': self.profileImg
         }

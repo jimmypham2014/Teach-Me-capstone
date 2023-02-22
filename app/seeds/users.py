@@ -1,4 +1,4 @@
-from app.models import db, User, Service, environment, SCHEMA
+from app.models import db, User, Service, Booking,environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
@@ -18,7 +18,6 @@ def seed_users():
     service5 = Service(title = 'Literature', subject = 'English', description ='Im the best tutor ever', subject_level= 'K12 - College', price = 34 , tutor = marnie)
     service6 = Service(title = 'Coding', subject = 'Python', description ='Im the best tutor ever', subject_level= 'K12 - College', price = 35 , tutor = bobbie)
     service7 = Service(title = 'Geometry', subject = 'Math', description ='Im the best tutor ever', subject_level= 'K12 - College', price = 36 , tutor = demo)
-
 
 
     db.session.add(service1) 

@@ -35,14 +35,17 @@ function Navigation({ isLoaded }){
 					<div>
 					<img src={favorite}/>
 					</div>
-					<div>
-						Bookings
-					</div>
+					<NavLink to='/bookings'>
+					Bookings
+					
+					</NavLink>
+
+
 					<div>
 					<ProfileButton user={sessionUser} />
 
 					</div>
-					
+
 
 				</div>
 				

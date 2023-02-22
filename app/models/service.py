@@ -19,6 +19,8 @@ class Service(db.Model, UserMixin):
     tutor_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
      
     tutor = db.relationship('User', back_populates='services')
+
+    booking = db.relationship('Booking', back_populates ='service')
      
      
     def to_dict(self):
