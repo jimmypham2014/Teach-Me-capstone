@@ -28,9 +28,11 @@ class Booking(db.Model):
         return {
             'id': self.id,
             'booking_date': self.booking_date,
-            'booking_time_to': self.booking_time_to,
-            'booking_time_from': self.booking_time_from,
-            'student_id': self.student_id
+            'booking_time_to': str(self.booking_time_to),
+            'booking_time_from': str(self.booking_time_from),
+            'student_id': self.student_id,
+            'student': self.student.username,
+    
     
         }
 

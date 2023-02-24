@@ -12,6 +12,7 @@ import ServiceDetailPage from "./components/Pages/SingleServicePage";
 import { getAllServices } from "./store/service";
 import CreateBookingForm from "./components/Forms/CreateBookingForm";
 import Bookings from "./components/Pages/BookingPage";
+import EditBookingForm from "./components/Forms/EditBookingForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,15 +56,16 @@ function App() {
           </Route>
 
           <Route path= "/services/:serviceId/bookings">
-          
           <CreateBookingForm/>
           </Route>
 
           <Route path= "/bookings">
-          
           <Bookings/>
           </Route>
 
+          <Route path = "/bookings/:bookingId/editform">
+          <EditBookingForm/>
+          </Route>
 
 
         </Switch>

@@ -35,6 +35,7 @@ function Navigation({ isLoaded }){
 					<div>
 					<img src={favorite}/>
 					</div>
+
 					<NavLink to='/bookings'>
 					Bookings
 					

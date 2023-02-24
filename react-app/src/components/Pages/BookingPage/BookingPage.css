@@ -1,0 +1,13 @@
+
+
+.fc-col_header{
+    width: 30px;
+}
+
+.booking_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+
+}

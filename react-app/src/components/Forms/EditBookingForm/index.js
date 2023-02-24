@@ -1,15 +1,18 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux"
-import { add_booking } from "../../../store/booking";
-import {allTimes} from '../../utils/allTimes'
+import {useDispatch, useSelector} from "react-redux"
+import { useParams } from "react-router-dom";
+import { add_booking, edit_booking } from "../../../store/booking";
 
 
-function CreateBookingForm(){
+function EditBookingForm(){
     const dispatch = useDispatch()
-    const [date, setDate] = useState('')
-    const [time_from, setTimeFrom] = useState('')
-    const [time_to, setTimeTo] = useState('')
-
+    const {bookingId} = useParams()
+    const allBookings = useSelector(state=> state.booking)
+    const specificBooking = allBookings[bookingId]
+    const [date, setDate] = useState(specificBooking.booking_date)
+    const [time_from, setTimeFrom] = useState(specificBooking.booking_time_from)
+    const [time_to, setTimeTo] = useState(specificBooking.booking_time_to)
+   
     const handleSubmit =(e)=>{
         e.preventDefault()
         const payload ={
@@ -18,9 +21,8 @@ function CreateBookingForm(){
             time_to
         }
         console.log(payload)
-        dispatch(add_booking(payload))
+        dispatch(edit_booking(bookingId,payload))
     }
-
 
     return(
         <div>
@@ -51,9 +53,8 @@ function CreateBookingForm(){
         
         <button type='submit'>Submit</button>
         </form>
-        
         </div>
     )
 }
 
-export default CreateBookingForm
+export default EditBookingForm

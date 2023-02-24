@@ -52,8 +52,7 @@ function ServicePage(){
                     </div>
 
                     <div>
-                    <button onClick={()=>history.push(`/services/${service.id}`)}>View</button>
-                    <button onClick={()=> dispatch(deleteService(service.id))}>Delete</button>                 
+                    <button onClick={()=>history.push(`/services/${service.id}`)}>View</button>              
                     </div> 
 
                 

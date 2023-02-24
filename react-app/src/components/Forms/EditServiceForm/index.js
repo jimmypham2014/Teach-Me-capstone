@@ -10,11 +10,9 @@ function EditServiceForm(){
     const dispatch = useDispatch()
     const history = useHistory()
 
-    console.log(serviceId, 'edit form')
-
     const [title, setTitle] = useState(specificService.title)
     const [subject, setSubject] = useState(specificService.subject)
-    const [ description, setDescription] = useState(specificService.description)
+    const [description, setDescription] = useState(specificService.description)
     const [subject_level, setSubject_Level] = useState(specificService.subjectLevel)
     const [price, setPrice] = useState(specificService.price)
 

@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from app.models import  db, Booking
 from app.forms import BookingForm
 
+
 booking_routes = Blueprint('bookings', __name__)
 
 
@@ -13,13 +14,19 @@ def add_booking():
     
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, 'backenddd')
+    date = form.data["date"]
+    time_to = form.data["time_to"]
+    time_from =form.data["time_from"]
+
+
+
     if form.validate_on_submit():
         data =form.data
 
         new_booking = Booking(student_id = current_user.get_id(), 
-                               booking_date = jsonify(data['date']),
-                               booking_time_from = request.json['time_to'],
-                               booking_time_to= request.json['time_from'],
+                               booking_date = date,
+                               booking_time_from = time_from,
+                               booking_time_to= time_to,
                                )
                                
         print(new_booking)
@@ -36,4 +43,25 @@ def getBookings():
     return jsonify([booking.to_dict() for booking in bookings])
 
 
+@booking_routes.route('/<int:id>', methods =['DELETE'])
+def delete_booking(id):
+    booking = Booking.query.get(id)
+    print(booking)
+    db.session.delete(booking)
+    db.session.commit()
+    return jsonify(message="Sucessfully removed Service")
     
+
+@booking_routes.route('/<int:id>', methods=["PUT","PATCH"])
+def edit_booking(id):
+    form = BookingForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data)
+    if form.validate_on_submit():
+        data = form.data
+        booking = Booking.query.get(id)
+        for key, value in data.items():
+            setattr(service,key,value)
+            
+        db.session.commit()
+        return booking.to_dict()
