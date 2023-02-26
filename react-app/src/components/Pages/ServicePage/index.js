@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import { deleteService, getAllServices } from "../../../store/service";
 import EditServiceForm from "../../Forms/EditServiceForm";
 import './ServicePage.css'
@@ -26,37 +26,39 @@ function ServicePage(){
 
 
     return (
+
         <div className ='service_page_container'>
         {services.map((service)=>{
             return (
-                <div className="service_container">
+                <Link key={service.id} to={`/services/${service.id}`} className="service_container">
                     <div className="service_detail"> 
+
                         <div>
                         
                         <h1>{service.title}</h1>
-                        {service.subject}
-                        {service.description}
+                            {service.subject}
+                            
                         </div>
 
                         <div>{service.tutor}</div>
+                        <div>{service.description}</div>
 
 
-                        <div>
-                            <img src={heart}/>
-                            
-                            <h5>My rate is ${service.price}/hr</h5>
+                        <div className='favorite_price'>
+                                <div>
+                                <img src={heart}/>
+                                </div>
+
+                                <div>
+                                    <h5>My rate is ${service.price}/hr</h5>
+                                </div>
                         
                         </div>
 
 
                     </div>
-
-                    <div>
-                    <button onClick={()=>history.push(`/services/${service.id}`)}>View</button>              
-                    </div> 
-
                 
-                </div>
+                </Link>
             )
         })}
         </div>

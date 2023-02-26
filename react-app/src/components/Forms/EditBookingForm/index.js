@@ -9,10 +9,11 @@ function EditBookingForm(){
     const {bookingId} = useParams()
     const allBookings = useSelector(state=> state.booking)
     const specificBooking = allBookings[bookingId]
-    const [date, setDate] = useState(specificBooking.booking_date)
+    const [date, setDate] = useState(new Date(specificBooking.booking_date).toLocaleDateString())
     const [time_from, setTimeFrom] = useState(specificBooking.booking_time_from)
     const [time_to, setTimeTo] = useState(specificBooking.booking_time_to)
    
+    console.log(new Date(specificBooking.booking_date).toLocaleDateString())
     const handleSubmit =(e)=>{
         e.preventDefault()
         const payload ={
@@ -35,15 +36,14 @@ function EditBookingForm(){
     
         />
 
-        <label>Time:</label>
+        <label>Time From:</label>
         <input
         type = 'time'
         value={time_from}
         onChange={(e)=>setTimeFrom(e.target.value)}
         />
 
-
-        <label>Time:</label>
+        <label>Time To:</label>
         <input
         type = 'time'
         value={time_to}

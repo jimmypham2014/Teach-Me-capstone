@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { getSingleService,deleteService, getAllServices } from "../../../store/service";
+import CreateBookingForm from "../../Forms/CreateBookingForm";
 import EditServiceForm from "../../Forms/EditServiceForm";
 
 function ServiceDetailPage(){
@@ -13,7 +14,7 @@ function ServiceDetailPage(){
     const [open, setOpen] = useState(false)
 
 
-
+   console.log(service)
 
     useEffect(()=>{
         dispatch(getSingleService(serviceId))
@@ -42,21 +43,23 @@ function ServiceDetailPage(){
         {service&&(
             <div>
         
-
             {service.title}
             {service.subject}
-
-
             
             </div>
 
         )}
-       <NavLink to ={`/services/${service.id}/bookings`}>Booking</NavLink>
+        
         {sessionUser && service.tutor && service.tutor === sessionUser.user.username ? 
             <div>
             <button onClick={editService}>Edit</button>
              <button onClick={removeService}>Delete</button> 
             </div>: null}
+
+
+            <div>
+            <CreateBookingForm serviceId ={service.id}/>
+            </div>
 
         </div>
     )

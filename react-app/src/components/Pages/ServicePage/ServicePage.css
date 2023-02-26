@@ -1,11 +1,16 @@
 .service_detail{
-
+  border: 1px solid black;
+  color: black;
+  font-style: none;
+  text-decoration: none;
+  width: 15rem;
 
 }
 
 .service_container{
    display: flex;
-    flex-direction: column;
+  flex-direction: column;
+  text-decoration: none;
 }
 
 .service_page_container{
@@ -14,4 +19,11 @@
     column-gap: 10px;
   row-gap: 15px;
   justify-content: center;
+}
+
+.favorite_price{
+  display: flex;
+  width: 10rem;
+  align-items: center;
+  justify-content: space-between
 }

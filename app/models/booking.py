@@ -15,7 +15,7 @@ class Booking(db.Model):
     booking_date = db.Column(db.Date)
     booking_time_to = db.Column(db.Time)
     booking_time_from = db.Column(db.Time)
-    service_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('services.id')), nullable = True)
+    service_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('services.id')), nullable = False)
     student_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')),nullable = False)
 
     service = db.relationship('Service', back_populates='booking')
@@ -32,7 +32,7 @@ class Booking(db.Model):
             'booking_time_from': str(self.booking_time_from),
             'student_id': self.student_id,
             'student': self.student.username,
-    
+            'service_id': self.service_id,
     
         }
 

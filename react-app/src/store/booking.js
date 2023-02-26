@@ -32,10 +32,10 @@ export const getAllBookings = () => async(dispatch)=>{
 }
 
 
-export const add_booking =(booking) => async(dispatch)=>{
-    console.log(booking)
-    console.log(typeof booking.timeFrom)
-    const res = await fetch('/api/bookings/',{
+export const add_booking =(serviceId,booking) => async(dispatch)=>{
+    console.log(booking,'hello')
+    console.log(serviceId)
+    const res = await fetch(`/api/services/${serviceId}/bookings/`,{
         method: 'POST',
         headers:{
             "Content-Type": "application/json",
@@ -65,7 +65,8 @@ export const remove_booking =(bookingId) => async(dispatch) =>{
 }
 
 export const edit_booking =(bookingId,booking) => async(dispatch) =>{
-    const res = await fetch(`'/api/bookings${bookingId}`,{
+    console.log(booking, 'hello')
+    const res = await fetch(`/api/bookings/${bookingId}`,{
         method: 'PUT',
         headers:{
             "Content-Type": "application/json"
@@ -74,6 +75,7 @@ export const edit_booking =(bookingId,booking) => async(dispatch) =>{
     })
     if(res.ok){
         const bookingData = await res.json()
+        console.log(bookingData,'thunk')
         dispatch(addBooking(bookingData))
         return bookingData
     }

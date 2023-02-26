@@ -17,6 +17,7 @@ import EditBookingForm from "./components/Forms/EditBookingForm";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  
 
 
   useEffect(() => {
@@ -26,6 +27,8 @@ function App() {
   useEffect(()=>{
     dispatch(getAllServices())
 },[dispatch])
+
+
 
 
 
@@ -59,12 +62,12 @@ function App() {
           <CreateBookingForm/>
           </Route>
 
-          <Route path= "/bookings">
+          <Route exact path= "/bookings">
           <Bookings/>
           </Route>
 
           <Route path = "/bookings/:bookingId/editform">
-          <EditBookingForm/>
+             <EditBookingForm/>
           </Route>
 
 

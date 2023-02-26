@@ -1,13 +1,39 @@
 
-
-.fc-col_header{
-    width: 30px;
-}
-
 .booking_container{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
+    width: 60rem;
+    height: 100%;
+    margin-top: 5%;
 
+    justify-content: center;
+}
+
+.booking_details img{
+    width: 20px;
+}
+
+.booking_details button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.booking_details button:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
+}
+.booking_info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid black;
+    width: 100%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin-bottom: 10%;
+}
+
+.booking_details{
+    margin: 20px;
+    width: 15rem;
 }

@@ -4,21 +4,26 @@ import { add_booking } from "../../../store/booking";
 import {allTimes} from '../../utils/allTimes'
 
 
-function CreateBookingForm(){
+function CreateBookingForm({serviceId}){
+    console.log(serviceId,'form')
     const dispatch = useDispatch()
     const [date, setDate] = useState('')
     const [time_from, setTimeFrom] = useState('')
     const [time_to, setTimeTo] = useState('')
+    const [service_id, setServiceId] = useState(serviceId)
+  
 
     const handleSubmit =(e)=>{
         e.preventDefault()
         const payload ={
             date,
             time_from,
-            time_to
+            time_to,
+            service_id
+            
         }
-        console.log(payload)
-        dispatch(add_booking(payload))
+        console.log(payload, 'payloaddd')
+        dispatch(add_booking(service_id,payload))
     }
 
 
