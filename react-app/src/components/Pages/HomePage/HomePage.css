@@ -1,0 +1,57 @@
+.home_page_icon img{
+    width: 10px;
+}
+
+.home_page_header{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+.home_page_login{
+    display: flex;
+    width: 20rem;
+    justify-content: space-evenly;
+    
+}
+
+.home_page_login button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif
+}
+
+.join{
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.join button:hover{
+    background-color:white;
+    color: black;
+    
+}
+
+#background_img{
+    animation: changeBg 1s infinite; width:90rem; height:48rem; 
+    position: absolute;
+    margin: -30px -20px 0 -9px;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: animateSectionBackground infinite 30s;
+    object-fit: cover;
+
+  }
+  
+  @keyframes animateSectionBackground {
+    00%,100% { background-image: url(../../../assets/images/image1.jpg); }
+    25% { background-image: url(../../../assets/images/image2.jpg); }
+    50% { background-image: url(../../../assets/images/image4.jpg); }
+    75% { background-image: url(../../../assets/images/image5.jpg); }
+
+   
+  }

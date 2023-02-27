@@ -3,6 +3,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+tutor = db.Table()
+
+    
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -19,7 +22,6 @@ class User(db.Model, UserMixin):
     description = db.Column(db.String(500), nullable = True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profileImg = db.Column(db.String(512))
-    
     services = db.relationship('Service', back_populates='tutor')
 
     bookings = db.relationship('Booking', back_populates = 'student')

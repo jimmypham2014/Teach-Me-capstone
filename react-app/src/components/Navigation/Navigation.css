@@ -1,12 +1,13 @@
 
-
+.prof{
+  position: relative;
+}
 
 .profile-dropdown {
   position: absolute;
   list-style: none;
   background-color: white;
-  right: 100px;
-  top:60px;
+  right: -30px;
   box-sizing: 0 5px 25px rgba(0,0,0,0.1);
   border-radius: 15px;
   padding: 10px 20px;
@@ -49,6 +50,7 @@
 }
 
 .nav_container{
+  
   display: flex;
   justify-content: space-between;
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, useParams } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -13,12 +13,12 @@ import { getAllServices } from "./store/service";
 import CreateBookingForm from "./components/Forms/CreateBookingForm";
 import Bookings from "./components/Pages/BookingPage";
 import EditBookingForm from "./components/Forms/EditBookingForm";
+import HomePage from "./components/Pages/HomePage";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  
-
+  const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -35,7 +35,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {!! currentUser&& <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -46,8 +46,7 @@ function App() {
           </Route>
 
           <Route exact path ='/'>
-          <CreateServiceForm/>
-          <ServicePage/>
+              { currentUser ?<ServicePage/> : <HomePage/>}
           </Route>
 
           <Route exact path= '/services/:serviceId'>
