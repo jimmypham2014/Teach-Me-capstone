@@ -48,6 +48,11 @@ export const add_booking =(serviceId,booking) => async(dispatch)=>{
         dispatch(addBooking(data))
         return data
     }
+    else{
+       const errors = await res.json()
+
+       return errors
+    }
 
 }
 

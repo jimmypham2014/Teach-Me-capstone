@@ -4,7 +4,8 @@
     width: 60rem;
     height: 100%;
     margin-top: 5%;
-
+    position: absolute;
+    margin-left: 3rem;
     justify-content: center;
 }
 

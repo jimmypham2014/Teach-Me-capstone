@@ -32,6 +32,7 @@ function CreateServiceForm(){
         <label>Title
         <input
         type = 'text'
+        required
         value={title}
         required
         onChange={(e) =>setTitle(e.target.value)}
@@ -40,6 +41,7 @@ function CreateServiceForm(){
         <label>Subject
         <input
         type = 'text'
+        required
         value={subject}
         required
         onChange={(e) =>setSubject(e.target.value)}
@@ -48,6 +50,7 @@ function CreateServiceForm(){
         <label>description
         <input
         type = 'text'
+        required
         value={description}
         required
         onChange={(e) =>setDescription(e.target.value)}
@@ -56,6 +59,7 @@ function CreateServiceForm(){
         <label>Subject Level
         <input
         type = 'text'
+        required
         value={subjectLevel}
         required
         onChange={(e) =>setSubjectLevel(e.target.value)}
@@ -65,6 +69,7 @@ function CreateServiceForm(){
         <label>Price
         <input
         type = 'number'
+        required
         value={price}
         required
         onChange={(e) =>setPrice(e.target.value)}

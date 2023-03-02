@@ -15,7 +15,7 @@ export const StyleWrapper = styled.div`
 
  .fc{
      width: 180%;
-     height: 900%;
+     height: 800%;
      margin-left:auto;
      margin-right:auto;
      margin-top:auto;

@@ -1,0 +1,12 @@
+.prof button{
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+  
+}
+.prof button img{
+    width: 3rem;
+    border-radius: 30px;
+    cursor: pointer;
+}
+

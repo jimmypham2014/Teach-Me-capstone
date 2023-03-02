@@ -13,7 +13,7 @@ function CreateBookingForm({serviceId}){
     const [service_id, setServiceId] = useState(serviceId)
   
 
-    const handleSubmit =(e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault()
         const payload ={
             date,
@@ -22,8 +22,14 @@ function CreateBookingForm({serviceId}){
             service_id
             
         }
-        console.log(payload, 'payloaddd')
-        dispatch(add_booking(service_id,payload))
+    
+        const data = await dispatch(add_booking(service_id,payload))
+        console.log(data,'DATAAAA')
+
+        if(data.errors){
+            console.log(data.errors)
+        }
+
     }
 
 
@@ -33,6 +39,7 @@ function CreateBookingForm({serviceId}){
         <label>Date:</label>
         <input
         type = 'date'
+        required
         value={date}
         onChange={(e)=>setDate(e.target.value)}
     
@@ -41,6 +48,7 @@ function CreateBookingForm({serviceId}){
         <label>Time:</label>
         <input
         type = 'time'
+        required
         value={time_from}
         onChange={(e)=>setTimeFrom(e.target.value)}
         />
@@ -49,6 +57,7 @@ function CreateBookingForm({serviceId}){
         <label>Time:</label>
         <input
         type = 'time'
+        required
         value={time_to}
         onChange={(e)=>setTimeTo(e.target.value)}
         />

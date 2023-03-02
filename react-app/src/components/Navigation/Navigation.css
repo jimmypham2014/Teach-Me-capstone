@@ -4,6 +4,7 @@
 }
 
 .profile-dropdown {
+  z-index: 2;
   position: absolute;
   list-style: none;
   background-color: white;
@@ -13,6 +14,8 @@
   padding: 10px 20px;
   transition: 0.5s;
   border: 1px solid lightgray;
+  width: 10rem;
+  color: gray;
   
 }
 
@@ -27,6 +30,11 @@
   width: 20px;
   border: 1px solid;
   border-color: lightgray transparent transparent lightgray;
+  margin-right: 7%;
+}
+.profile-dropdown  button{
+  color: gray;
+  
 }
 
 
@@ -39,6 +47,7 @@
   padding-left: 15px;
   text-decoration: none;
   transition: 0.5s;
+  color: gray;
 }
 
 .hidden {
@@ -86,6 +95,8 @@
 .right_side_container{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 20rem;
 }
 
 .right_side_container img{

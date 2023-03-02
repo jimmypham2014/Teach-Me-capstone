@@ -36,9 +36,9 @@
 }
 
 #background_img{
-    animation: changeBg 1s infinite; width:90rem; height:48rem; 
+    animation: changeBg 3s infinite; min-height: 100%; min-width: 100%; 
     position: absolute;
-    margin: -30px -20px 0 -9px;
+    margin: -30px 0 0 -80px;
     z-index: -1;
     background-repeat: no-repeat;
     background-size: cover;

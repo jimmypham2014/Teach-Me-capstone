@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import './ProfileButton.css'
 import { useHistory } from "react-router-dom";
+import defaultProf from '../../icons/default_prof.png'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const currentUser = useSelector(state =>state.session)
   const ulRef = useRef();
   const history = useHistory()
 
@@ -41,16 +43,23 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
+  const hostAService = ()=>{
+    history.push('/services')
+  }
+
   return (
     <div className='prof'>
       <button onClick={openMenu} > 
-        <i className="fas fa-user-circle" />
+       {currentUser.profileImg ? currentUser.profileImg  : <img src={defaultProf}/>}
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <li> 
+            <button onClick={hostAService}>Host a service</button>
+            </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

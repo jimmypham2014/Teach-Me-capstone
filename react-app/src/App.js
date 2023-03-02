@@ -49,6 +49,12 @@ function App() {
               { currentUser ?<ServicePage/> : <HomePage/>}
           </Route>
 
+          <Route exact path= '/services'>
+          <CreateServiceForm/>
+          </Route>
+
+
+
           <Route exact path= '/services/:serviceId'>
           <ServiceDetailPage/>
           </Route>
