@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
-import "./SignupForm.css";
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
@@ -10,7 +9,9 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [is_student, setStudent] = useState(true)
+	const [is_student, setStudent] = useState(false)
+    const [credentials,setCredentials] = useState('')
+    const [education, setEducation] = useState('')
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [errors, setErrors] = useState([]);
@@ -66,6 +67,24 @@ function SignupFormModal() {
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+				</label>
+                <label>
+					Education
+					<input
+						type="text"
+						value={education}
+						onChange={(e) => setEducation(e.target.value)}
+						required
+					/>
+				</label>
+                <label>
+					Credentials
+					<input
+						type="text"
+						value={credentials}
+						onChange={(e) => setCredentials(e.target.value)}
 						required
 					/>
 				</label>

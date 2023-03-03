@@ -3,9 +3,28 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-tutor = db.Table()
 
-    
+# userTutors = db.Table(
+#     "userTutors",
+#     db.Model.metadata,
+#     db.Column('users',db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')),primary_key = True),
+#     db.Column('tutors',db.Integer,db.ForeignKey(add_prefix_for_prod('tutors.id')),primary_key=True)
+# )
+
+class UserTutor(db.Model):
+    __tablename__ = 'usertutors'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column('users',db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    tutor_id = db.Column('tutors',db.Integer,db.ForeignKey(add_prefix_for_prod('tutors.id')))
+
+    user = db.relationship("User", back_populates ='are_tutors')
+    tutor = db.relationship("Tutor", back_populates ='are_users')
+# )
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -23,9 +42,13 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     profileImg = db.Column(db.String(512))
     services = db.relationship('Service', back_populates='tutor')
-
     bookings = db.relationship('Booking', back_populates = 'student')
+    
+    are_tutors = db.relationship("UserTutor",back_populates='user')
+
+
   
+
 
     @property
     def password(self):
@@ -39,6 +62,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+
         return {
             'id': self.id,
             'firstName': self.firstName,
@@ -47,3 +71,35 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'profileImg': self.profileImg
         }
+
+
+class Tutor(db.Model):
+    __tablename__ = 'tutors'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+
+    id = db.Column(db.Integer, primary_key=True)
+    education = db.Column(db.String(400),nullable = False)
+    credentials = db.Column(db.String(400), nullable = False)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'), nullable = False)
+
+
+    are_users = db.relationship('UserTutor',back_populates = 'tutor')
+
+
+    # tutor_user = db.relationship(
+    #     "userTutors",
+    #     secondary = "userTutors",
+    #     back_populates = 'user_tutor'
+    # )
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'education':self.education,
+            'credentials': self.credentials
+        }
+ 
