@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
-import { signUp } from "../../store/session";
+import { useHistory } from "react-router-dom";
+import { signUp, tutorSignUp } from "../../../store/session";
 
-function SignupFormModal() {
+
+function TutorSignUp() {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
@@ -15,22 +16,21 @@ function SignupFormModal() {
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [errors, setErrors] = useState([]);
-	const { closeModal } = useModal();
+	const history = useHistory()
 
 	const handleSubmit = async (e) => {
+console.log(is_student)
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(firstName, lastName, is_student,username, email, password));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
+            
+			await dispatch(tutorSignUp(firstName, lastName, is_student, credentials, education, username, email, password));
+	
 		} else {
 			setErrors([
 				"Confirm Password field must be the same as the Password field",
 			]);
 		}
+		history.push('/')
 	};
 
 	return (
@@ -124,4 +124,4 @@ function SignupFormModal() {
 	);
 }
 
-export default SignupFormModal;
+export default TutorSignUp;

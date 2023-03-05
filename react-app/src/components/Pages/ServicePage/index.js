@@ -5,24 +5,20 @@ import { deleteService, getAllServices } from "../../../store/service";
 import EditServiceForm from "../../Forms/EditServiceForm";
 import './ServicePage.css'
 import heart from '../../../icons/favorite.png'
+import { getAllTutors } from "../../../store/tutor";
 
 function ServicePage(){
 
     const services = useSelector(state => Object.values(state.service))
+    const users = useSelector(state => Object.values(state.otherUsers))
     const dispatch = useDispatch()
-    const history = useHistory()
-    const {serviceId} = useParams()
 
 
+    console.log(users)
     useEffect(()=>{
         dispatch(getAllServices())
+        dispatch(getAllTutors())
     },[dispatch])
-
-    
-
-    useEffect(()=>{
-        dispatch(deleteService())
-    })
 
 
     return (
@@ -33,15 +29,46 @@ function ServicePage(){
                 <Link key={service.id} to={`/services/${service.id}`} className="service_container">
                     <div className="service_detail"> 
 
-                        <div>
-                        
-                        <h1>{service.title}</h1>
-                            {service.subject}
+                        <div id='details'>
+
+                            <div className='service_image'>
+                                <img src={service.image}/>
                             
+                            </div>
+
+                        
+                            <div id='subject_info'>
+                                <div>
+                                Subject: {service.subject}
+                                </div>
+                                <div>
+                                Subject Level: {service.subject_level}
+                                </div>
+                            </div>
+                           
+                             
                         </div>
 
-                        <div>{service.tutor}</div>
-                        <div>{service.description}</div>
+                        <div className='tutor_info'>
+                        {users.map(user=>{
+                            if(service.tutor === user.id){
+                                return(
+                                    <div id='details'> 
+                                        <div id='image'>
+                                        <img src={user.profileImg}/> 
+                                        </div>  
+                                        <div id='username'>
+                                        {user.username}
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        })}
+                        
+                        </div>
+                        <div id='title'>
+                            {service.title}
+                        </div>
 
 
                         <div className='favorite_price'>

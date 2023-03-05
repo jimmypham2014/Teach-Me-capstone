@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import icon from '../../../icons/fiverr.png'
 import LoginFormModal from '../../LoginFormModal'
 
@@ -10,6 +11,7 @@ import './HomePage.css'
 function HomePage(){
     const dispatch = useDispatch();
     const ulRef = useRef();
+    const history =useHistory()
     const [showMenu, setShowMenu] = useState(false);
 
 
@@ -43,7 +45,7 @@ function HomePage(){
 
             <div>
 
-            <button>Become a Tutor</button>
+            <button onClick={()=>history.push('/tutorsignup')}>Become a Tutor</button>
         
             </div>
 

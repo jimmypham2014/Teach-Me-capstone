@@ -3,11 +3,15 @@ import thunk from 'redux-thunk';
 import session from './session'
 import serviceReducer from './service';
 import bookingReducer from './booking'
+import tutorReducer from './tutor';
+import otherUsersReducer from './user';
 
 const rootReducer = combineReducers({
   session,
   service:serviceReducer,
-  booking:bookingReducer
+  booking:bookingReducer,
+  tutors: tutorReducer,
+  otherUsers: otherUsersReducer
 });
 
 

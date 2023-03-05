@@ -8,6 +8,7 @@ class ServiceForm(FlaskForm):
     subject = StringField('Subject', validators = [DataRequired()])
     description = StringField('Description', validators =[DataRequired()])
     subject_level = StringField('Subject Level')
+    image = StringField('Images')
     price = IntegerField('Price', validators =[DataRequired()])
     
     

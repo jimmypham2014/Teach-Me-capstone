@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db,Tutor, UserTutor
 from app.forms import LoginForm
-from app.forms import SignUpForm
+from app.forms import SignUpForm, TutorSignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
@@ -75,6 +75,57 @@ def sign_up():
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@auth_routes.route('/tutorsignup', methods=['POST'])
+def tutor_sign_up():
+    """
+    Creates a new user and logs them in
+    """
+    form = TutorSignUpForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data)
+    if form.validate_on_submit():
+        is_student = form.data['is_student']
+
+        user = User(
+            firstName = form.data['firstName'],
+            lastName = form.data['lastName'],
+            is_student = is_student,
+            username=form.data['username'],
+            email=form.data['email'],
+            password=form.data['password']
+        )
+
+        db.session.add(user)
+        db.session.commit()
+        
+
+        if is_student == False:
+            tutor = Tutor(
+            user_id = user.id,
+            education = form.data['education'],
+            credentials = form.data['credentials']
+            )
+
+        
+        
+       
+        db.session.add(tutor)
+        db.session.commit()
+
+        userTutor = UserTutor(
+            user_id = user.id,
+            tutor_id = tutor.id
+        )
+
+        db.session.add(userTutor)
+        db.session.commit()
+        
+
+        login_user(user)
+        return user.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 
 @auth_routes.route('/unauthorized')

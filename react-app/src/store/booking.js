@@ -21,7 +21,7 @@ const removeBooking = (bookingId)=>({
 })
 
 export const getAllBookings = () => async(dispatch)=>{
-    const res = await fetch('/api/bookings')
+    const res = await fetch('/api/bookings/')
     console.log(res)
     if(res.ok){
         const bookings = await res.json();

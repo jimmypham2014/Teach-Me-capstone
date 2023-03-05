@@ -1,0 +1,33 @@
+.single_service_container{
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2rem 2rem 2rem;
+    border: 3px solid rgba(255, 171, 157, 0.5);
+}
+
+.tutor_info{
+    display: flex;
+    align-items: center;
+    padding: 10px 10px 10px 10px;
+}
+
+.tutor_info #image{
+    margin-right: 2%;
+}
+
+.single_service_image img{
+    width: 45rem;
+}
+
+.about_me_container img{
+    width: 8rem;
+}
+
+.about_me_container{
+ 
+display: flex;
+align-items: center;
+}
+#about_me_image{
+    width: 10rem;
+}

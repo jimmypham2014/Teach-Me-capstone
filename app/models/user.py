@@ -67,6 +67,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'firstName': self.firstName,
             'lastName': self.lastName,
+            'is_student': self.is_student,
             'username': self.username,
             'email': self.email,
             'profileImg': self.profileImg
@@ -100,6 +101,7 @@ class Tutor(db.Model):
         return {
             'id': self.id,
             'education':self.education,
+            'user_id': self.user_id,
             'credentials': self.credentials
         }
  

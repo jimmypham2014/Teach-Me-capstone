@@ -19,11 +19,38 @@
     column-gap: 10px;
   row-gap: 15px;
   justify-content: center;
+  
 }
 
 .favorite_price{
   display: flex;
   width: 10rem;
   align-items: center;
-  justify-content: space-between
+  padding: 5px 5px 5px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.service_image img{
+  width: 15rem;
+  height: 10rem;
+}
+
+.tutor_info img{
+  width: 2rem;
+}
+
+.tutor_info #details{
+  display: flex;
+  align-items: center;
+  width: 120px;
+  padding: 14px 5px 5px;
+}
+
+#subject_info{
+  padding: 14px 5px 5px;
+}
+
+#title{
+  padding: 10px 5px 5px;
 }

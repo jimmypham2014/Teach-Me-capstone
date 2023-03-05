@@ -31,8 +31,7 @@ class Booking(db.Model):
             'booking_time_to': str(self.booking_time_to),
             'booking_time_from': str(self.booking_time_from),
             'student_id': self.student_id,
-            'student': self.student.username,
-            'service_id': self.service_id,
+            'service_id': self.service_id
     
         }
 
