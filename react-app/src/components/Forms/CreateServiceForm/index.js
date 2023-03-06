@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux"
 import { addService } from "../../../store/service";
+import './CreateServiceForm.css'
 
 function CreateServiceForm(){
     const dispatch = useDispatch()
     const [title, setTitle] = useState("")
     const [subject,setSubject] = useState("")
     const [description, setDescription] = useState("")
-    const [subjectLevel, setSubjectLevel] = useState("")
+    const [subject_level, setSubjectLevel] = useState("")
+    const [image, setImage] =useState("")
     const [price, setPrice] = useState("")
 
 
@@ -17,8 +19,9 @@ function CreateServiceForm(){
         const payload= {
             title,
             subject,
+            image,
             description,
-            subjectLevel,
+            subject_level,
             price
         }
         await dispatch(addService(payload))
@@ -36,6 +39,15 @@ function CreateServiceForm(){
         value={title}
         required
         onChange={(e) =>setTitle(e.target.value)}
+        />
+        </label>
+        <label>Image
+        <input
+        type = 'text'
+        required
+        value={image}
+        required
+        onChange={(e) =>setImage(e.target.value)}
         />
         </label>
         <label>Subject
@@ -60,7 +72,7 @@ function CreateServiceForm(){
         <input
         type = 'text'
         required
-        value={subjectLevel}
+        value={subject_level}
         required
         onChange={(e) =>setSubjectLevel(e.target.value)}
         />

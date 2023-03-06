@@ -9,18 +9,17 @@ import './BookingPage.css'
 import styled from '@emotion/styled'
 import edit from '../../../icons/edit.png'
 import cancel from '../.././/../icons/cancel.png'
+import calendar from '../../../icons/calendar.png'
 
 export const StyleWrapper = styled.div`
 
 
  .fc{
-     width: 180%;
-     height: 800%;
-     margin-left:auto;
-     margin-right:auto;
-     margin-top:auto;
+     width: 140%;
+     height: 800%
      border:1px solid black;
      border-radius: 10px;
+     margin-left: 10rem;
      box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
  }
@@ -31,9 +30,10 @@ export const StyleWrapper = styled.div`
   }
   .fc-title{
     font-size: .9em;
+  }
 
-.fc-event{
-    font-size: 1px;
+.fc-event-title{
+    font-size: 10px;
     
 }
 }
@@ -45,9 +45,9 @@ function Bookings(){
     const bookings = useSelector(state =>Object.values(state.booking))
     const services = useSelector(state =>Object.values(state.service))
 
-    console.log(services)
+    console.log(services.map(service=>service.title),'hello')
     
-    console.log(bookings.map(book=> new Date(book.booking_date).toUTCString()))
+   
 
 const formatTime =(bookTime)=>{
 
@@ -89,35 +89,48 @@ const formatUTCDate = (date) =>{
         <div className='booking_container'>
             <div className = 'booking_details'>
         
-            <h1>My Bookings:</h1>
+            <h1>Upcoming Bookings</h1>
             {bookings.map(book=>{
-                        console.log(formatUTCDate(book.booking_date), 'hello2')
-            return(
-            <div className='booking_info'>
+                return (
+
+                <div className='booking_info'>
+
+                <div id='image'>
+                {services.map(service =>service.id === book.service_id ? <img src={service.image}/>:null)}
+                </div>
+
+
                 <div id='name'>
-                    {services.map(service =>service.id === book.service_id ? service.title:null)}
-                </div>
-            <div>
-            Date: {formatDate(book.booking_date)}
-            </div>
+                        <div>
+                        {services.map(service =>service.id === book.service_id ? service.title:null)}
+                        </div>
+                        
+                        <div>
+                        <img src={calendar}/> {formatDate(book.booking_date)}
+                        </div>
+                        
+                        <div>
+                        Time From: {formatTime(book.booking_time_from)}
+                        Time To: {formatTime(book.booking_time_to)}
 
-             <div>
-             <div>
-             Time From: {formatTime(book.booking_time_from)}
-             </div>
-             Time To: {formatTime(book.booking_time_to)}
-             </div>
+                        </div>
 
-                <div>
-            <button onClick={()=> dispatch(remove_booking(book.id))}><img src={cancel}/></button>
-            <button onClick={()=>history.push(`/bookings/${book.id}/editform`)}><img src={edit}/></button>
+                        <div>
+                        <button onClick={()=> dispatch(remove_booking(book.id))}><img src={cancel}/></button>
+                           <button onClick={()=>history.push(`/bookings/${book.id}/editform`)}><img src={edit}/></button>
+                       </div>
+                        
                 </div>
+
+
+
+               
           
 
             </div>
             
             )
-        })}
+                })}
             </div>
 
         
@@ -135,7 +148,7 @@ const formatUTCDate = (date) =>{
         weekends ={true}
         events={ bookings.map(book=>{
             return{
-                title: `${services.map(service =>service.id === book.service_id ? service.title:null)}`,
+                title: `${services.map(service => service.id === book.service_id ? `${service.title}`:null)}`,
                 start: formatUTCDate(book.booking_date) +'T'+book.booking_time_from ,
                 end: formatUTCDate(book.booking_date)+'T'+book.booking_time_to,
             }

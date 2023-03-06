@@ -12,6 +12,7 @@ function CreateBookingForm({serviceId}){
     const [time_from, setTimeFrom] = useState('')
     const [time_to, setTimeTo] = useState('')
     const [service_id, setServiceId] = useState(serviceId)
+    const [errors, setErrors] = useState([])
   
 
     const handleSubmit = async (e)=>{
@@ -28,10 +29,11 @@ function CreateBookingForm({serviceId}){
         console.log(data,'DATAAAA')
 
         if(data.errors){
-            console.log(data.errors)
+            setErrors(data.errors)
         }
 
     }
+    console.log(errors)
 
 
     return(
@@ -45,6 +47,14 @@ function CreateBookingForm({serviceId}){
         <span></span>
         <div>
         <form onSubmit={handleSubmit}>
+        
+        {errors ?
+            <div className='errors'>
+            {errors}
+            </div>
+            :
+            null
+       }
 
         <div id='form_detail'>
         <label>Date:</label>

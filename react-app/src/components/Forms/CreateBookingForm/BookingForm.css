@@ -9,7 +9,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 18.3rem;
-    height:  10rem;
+    height:  14rem;
     border: 5px solid rgba(255, 171, 157, 0.5);
     padding:14px 14px 14px 14px;
 }
@@ -96,3 +96,8 @@
   .cta:active {
     transform: scale(0.96);
   }
+
+.errors{
+    margin: 10px 10px 10px 10px;
+    color: red;
+}

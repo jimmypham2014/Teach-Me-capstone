@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signUp, tutorSignUp } from "../../../store/session";
+import './TutorSignUpPage.css'
 
 
 function TutorSignUp() {
@@ -34,60 +35,83 @@ console.log(is_student)
 	};
 
 	return (
-		<>
-			<h1>Sign Up</h1>
+		<div className='sign_up_container'>
+
+			<div>
+			<h1>Personal Info</h1>
+			<h5>Tell us a bit about yourself. This information will appear on your public profile, so that potential students can get to know you better.</h5>
+			</div>
+
 			<form onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
-				<label>
-					First Name
-					<input
+				<div className='full_name' id='detail_container'>
+				<label className='detail'> Full Name </label>
+					<div className='first'>
+						<input
 						type="text"
 						value={firstName}
+						placeholder='First Name'
 						onChange={(e) => setFirstName(e.target.value)}
 						required
-					/>
-				</label>
-				<label>
-					Last Name
-					<input
+						/>
+						<input
 						type="text"
 						value={lastName}
+						placeholder='Last Name'
 						onChange={(e) => setLastName(e.target.value)}
 						required
-					/>
-				</label>
+							/>
+						
+					</div>
+				
+				</div>
 
-				<label>
-					Email
-					<input
+				<div className='email_container' >
+
+				<label className='detail'>Email</label>
+					<div>
+						<input
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
-					/>
-				</label>
-                <label>
-					Education
+						/>
+					</div>
+		
+				</div>
+
+				<div >
+                <label>Education</label>
+					<div>
 					<input
 						type="text"
 						value={education}
 						onChange={(e) => setEducation(e.target.value)}
 						required
 					/>
-				</label>
-                <label>
-					Credentials
+					</div>
+			
+				</div>
+
+
+				<div id='detail_container'>
+                <label>Credentials</label>
+					<div>
 					<input
 						type="text"
 						value={credentials}
 						onChange={(e) => setCredentials(e.target.value)}
 						required
 					/>
-				</label>
+					</div>
+				
+				</div>
+
+				<div>
 				<label>
 					Username
 					<input
@@ -97,6 +121,10 @@ console.log(is_student)
 						required
 					/>
 				</label>
+
+				</div>
+
+				<div>
 				<label>
 					Password
 					<input
@@ -106,6 +134,9 @@ console.log(is_student)
 						required
 					/>
 				</label>
+				</div>
+
+				<div>
 				<label>
 					Confirm Password
 					<input
@@ -116,11 +147,15 @@ console.log(is_student)
 					/>
 				</label>
 
+				</div>
+
 
 
 				<button type="submit">Sign Up</button>
 			</form>
-		</>
+
+
+			</div>
 	);
 }
 

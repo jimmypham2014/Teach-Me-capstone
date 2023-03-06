@@ -13,7 +13,8 @@ function EditServiceForm(){
     const [title, setTitle] = useState(specificService.title)
     const [subject, setSubject] = useState(specificService.subject)
     const [description, setDescription] = useState(specificService.description)
-    const [subject_level, setSubject_Level] = useState(specificService.subjectLevel)
+    const [subject_level, setSubject_Level] = useState(specificService.subject_level)
+    const [image, setImage] = useState(specificService.image)
     const [price, setPrice] = useState(specificService.price)
 
    if(!specificService) return null
@@ -29,6 +30,7 @@ function EditServiceForm(){
             subject,
             description,
             price,
+            image,
             subject_level
             
         }
@@ -53,7 +55,6 @@ function EditServiceForm(){
 
 
              />
-            
             </label>
             <label>
             Subject
@@ -66,6 +67,16 @@ function EditServiceForm(){
              />
             
             </label>
+
+            <label>
+            Image
+             <input
+             type ='text'
+             value={image}
+             onChange={(e)=>setImage(e.target.value)}
+             />
+            </label>
+
             <label>
             Description
              <input

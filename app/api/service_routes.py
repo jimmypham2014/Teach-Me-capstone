@@ -28,7 +28,10 @@ def add_service():
         data = form.data
         new_service = Service(tutor_id=current_user.get_id(),
                               title = data['title'],
+                              image = data['image'],
+                              subject_level=data['subject_level'],
                               subject = data['subject'],
+                              price = data['price'],
                               description = data['description'])
    
         form.populate_obj(new_service)
@@ -139,13 +142,13 @@ def add_booking(service_id):
 
                 data_dates = DateTimeRange(str(date_time_from).replace(' ','T'),str(date_time_to).replace(' ','T'))
                 if data_dates.is_intersection(received_dates):
-                    return {'errors':'There is a conflict'},409
+                    return {'errors':'Someone already booked this time, please book another time'},409
 
         if datetime.datetime.now() > date_time_from:
             return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
         elif date_time_from > date_time_to:
             return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
-        elif time_from.minute < time_to.minute:
+        elif time_from.minute > time_to.minute:
                 return {'errors':'Your booking time must be 1 hour minimum'},406
                 
         else: 
