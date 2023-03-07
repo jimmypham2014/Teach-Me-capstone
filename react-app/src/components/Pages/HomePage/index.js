@@ -7,6 +7,7 @@ import LoginFormModal from '../../LoginFormModal'
 import OpenModalButton from '../../OpenModalButton'
 import SignupFormModal from '../../SignupFormModal'
 import './HomePage.css'
+import globalIcon from '../../../icons/Color logo - no background.png'
 
 function HomePage(){
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function HomePage(){
         <div className= 'home_page_header'>
 
             <div className= 'home_page_icon'>
-                Icon
+                <img src={globalIcon}/>
             </div>
 
 
@@ -69,7 +70,7 @@ function HomePage(){
             </div>
         </div>
 
-            <div>  Welcome to      </div>
+            
 
 
         </div>
