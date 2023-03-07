@@ -19,8 +19,8 @@ def seed():
         db.session.execute(f"TRUNCATE table {SCHEMA}.bookings RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.services RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.tutors RESTART IDENTITY CASCADE;")
-        db.session.execute(f"TRUNCATE table {SCHEMA}.userTutors RESTART IDENTITY CASCADE;")
-        
+        db.session.execute(f"TRUNCATE table {SCHEMA}.usertutors RESTART IDENTITY CASCADE;")
+
         
         db.session.commit()
         # Before seeding in production, you want to run the seed undo 
