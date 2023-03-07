@@ -84,7 +84,7 @@ class Tutor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     education = db.Column(db.String(400),nullable = False)
     credentials = db.Column(db.String(400), nullable = False)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id'), nullable = False)
+    user_id = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod('users.id')), nullable = False)
 
 
     are_users = db.relationship('UserTutor',back_populates = 'tutor')
