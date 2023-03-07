@@ -20,7 +20,6 @@ function TutorSignUp() {
 	const history = useHistory()
 
 	const handleSubmit = async (e) => {
-console.log(is_student)
 		e.preventDefault();
 		if (password === confirmPassword) {
             
@@ -48,32 +47,45 @@ console.log(is_student)
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
-				<div className='full_name' id='detail_container'>
-				<label className='detail'> Full Name </label>
-					<div className='first'>
-						<input
-						type="text"
-						value={firstName}
-						placeholder='First Name'
-						onChange={(e) => setFirstName(e.target.value)}
-						required
-						/>
-						<input
-						type="text"
-						value={lastName}
-						placeholder='Last Name'
-						onChange={(e) => setLastName(e.target.value)}
-						required
+
+				<div className ='full_name' id='detail_container'>
+
+					<label className='detail'> Full Name </label>
+
+						<div className='first_last'>
+							<div>
+							<input
+							type="text"
+							value={firstName}
+							placeholder='First Name'
+							onChange={(e) => setFirstName(e.target.value)}
+							required
 							/>
+							</div>
+
+							<div>
+							<input
+							type="text"
+							value={lastName}
+							placeholder='Last Name'
+							onChange={(e) => setLastName(e.target.value)}
+							required
+							/>
+							</div>
 						
 					</div>
+
+					<div></div>
 				
 				</div>
 
-				<div className='email_container' >
+				<div className='email_container' id='detail_container' >
 
-				<label className='detail'>Email</label>
-					<div>
+					<div className='email'>
+						Email
+					</div>
+					
+					<div className='email_input'>
 						<input
 						type="text"
 						value={email}
@@ -84,7 +96,9 @@ console.log(is_student)
 		
 				</div>
 
-				<div >
+
+
+				<div id='detail_container' >
                 <label>Education</label>
 					<div>
 					<input
@@ -99,7 +113,7 @@ console.log(is_student)
 
 
 				<div id='detail_container'>
-                <label>Credentials</label>
+                <div>Credentials</div>
 					<div>
 					<input
 						type="text"
@@ -108,44 +122,40 @@ console.log(is_student)
 						required
 					/>
 					</div>
-				
 				</div>
 
-				<div>
-				<label>
-					Username
+				<div id='detail_container'>
+				<div>Username</div>
 					<input
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
 					/>
-				</label>
+				
 
 				</div>
 
-				<div>
-				<label>
-					Password
+				<div id='detail_container'>
+				<div>Password</div>
 					<input
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
 					/>
-				</label>
+				
 				</div>
 
-				<div>
-				<label>
-					Confirm Password
+				<div id='detail_container'>
+				<div>Confirm Password</div>
 					<input
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
 					/>
-				</label>
+				
 
 				</div>
 

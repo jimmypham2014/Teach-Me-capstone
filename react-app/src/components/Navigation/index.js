@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-import logo from '../../icons/fiverr.png'
+import logo from '../../icons/Black logo - no background.png'
 import favorite from '../../icons/favorite.png'
 import message from '../../icons/messages.png'
 

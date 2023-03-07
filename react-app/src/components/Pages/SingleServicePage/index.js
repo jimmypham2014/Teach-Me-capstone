@@ -18,7 +18,7 @@ function ServiceDetailPage(){
 
 
 
-   console.log(service)
+
 
     useEffect(()=>{
         dispatch(getSingleService(serviceId))
@@ -43,9 +43,6 @@ function ServiceDetailPage(){
 
     const specificTutor = tutors.filter(tutor => service.tutor === tutor.user_id)
     const specificUser = users.filter(user => user.id === service.tutor)
-    console.log(specificUser)
-
-    console.log(specificTutor)
 
 
     return(

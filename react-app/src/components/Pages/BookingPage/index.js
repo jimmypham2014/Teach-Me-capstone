@@ -45,7 +45,7 @@ function Bookings(){
     const bookings = useSelector(state =>Object.values(state.booking))
     const services = useSelector(state =>Object.values(state.service))
 
-    console.log(services.map(service=>service.title),'hello')
+ 
     
    
 
@@ -102,7 +102,7 @@ const formatUTCDate = (date) =>{
 
                 <div id='name'>
                         <div>
-                        {services.map(service =>service.id === book.service_id ? service.title:null)}
+                        {services.map(service =>service.id === book.service_id ? (service.title):null)}
                         </div>
                         
                         <div>
@@ -110,14 +110,19 @@ const formatUTCDate = (date) =>{
                         </div>
                         
                         <div>
-                        Time From: {formatTime(book.booking_time_from)}
-                        Time To: {formatTime(book.booking_time_to)}
+                            <div>
+                                AT: {formatTime(book.booking_time_from)}
+                            </div>
+                            <div>
+                            TO: {formatTime(book.booking_time_to)}
+                            
+                            </div>
 
                         </div>
 
                         <div>
                         <button onClick={()=> dispatch(remove_booking(book.id))}><img src={cancel}/></button>
-                           <button onClick={()=>history.push(`/bookings/${book.id}/editform`)}><img src={edit}/></button>
+                        <button onClick={()=>history.push(`/bookings/${book.id}/editform`)}><img src={edit}/></button>
                        </div>
                         
                 </div>

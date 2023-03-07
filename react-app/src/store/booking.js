@@ -22,7 +22,6 @@ const removeBooking = (bookingId)=>({
 
 export const getAllBookings = () => async(dispatch)=>{
     const res = await fetch('/api/bookings/')
-    console.log(res)
     if(res.ok){
         const bookings = await res.json();
         
@@ -33,8 +32,7 @@ export const getAllBookings = () => async(dispatch)=>{
 
 
 export const add_booking =(serviceId,booking) => async(dispatch)=>{
-    console.log(booking,'hello')
-    console.log(serviceId)
+
     const res = await fetch(`/api/services/${serviceId}/bookings/`,{
         method: 'POST',
         headers:{
@@ -44,7 +42,6 @@ export const add_booking =(serviceId,booking) => async(dispatch)=>{
     })
     if(res.ok){
         const data = await res.json()
-        console.log(data,'HELLOLOLOLOLOLOL')
         dispatch(addBooking(data))
         return data
     }
@@ -70,7 +67,7 @@ export const remove_booking =(bookingId) => async(dispatch) =>{
 }
 
 export const edit_booking =(bookingId,booking) => async(dispatch) =>{
-    console.log(booking, 'hello')
+  
     const res = await fetch(`/api/bookings/${bookingId}`,{
         method: 'PUT',
         headers:{
@@ -80,7 +77,6 @@ export const edit_booking =(bookingId,booking) => async(dispatch) =>{
     })
     if(res.ok){
         const bookingData = await res.json()
-        console.log(bookingData,'thunk')
         dispatch(addBooking(bookingData))
         return bookingData
     }

@@ -23,7 +23,7 @@ def load_service():
 def add_service():
     form = ServiceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, 'backend')
+
     if form.validate_on_submit():
         data = form.data
         new_service = Service(tutor_id=current_user.get_id(),
@@ -45,7 +45,6 @@ def add_service():
 def edit_service(id):
     form = ServiceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
     if form.validate_on_submit():
         data = form.data
         service = Service.query.get(id)
@@ -78,7 +77,6 @@ def get_single_service(id):
 def add_booking(service_id):
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, 'backenddd')
     date = form.data["date"]
     time_to = form.data["time_to"]
     time_from =form.data["time_from"]
@@ -92,7 +90,7 @@ def add_booking(service_id):
     date_time_to = datetime.datetime.strptime(f'{date}-{time_to}','%Y-%m-%d-%H:%M:%S')
     received_dates = DateTimeRange(f'{date}T{time_from}', f'{date}T{time_to}')
 
-    print(received_dates,'------------------------Received')
+
 
 
  
@@ -108,10 +106,7 @@ def add_booking(service_id):
     # valid_time = True
     # valid_booking_time = False
 
-    # print(current_time.hour ,'Current hour')
-    # print(time_to.hour, 'TIME TO HOUR')
-    # print(date)
-    # print(today)
+
 
     # # if date == today, the hour === time from hour -> 
     # if date == today:
@@ -158,10 +153,9 @@ def add_booking(service_id):
                                     booking_time_from = time_from,
                                     booking_time_to= time_to,
                                     )                 
-            print(new_booking)
+            
             form.populate_obj(new_booking)
             db.session.add(new_booking)
             db.session.commit()
             return new_booking.to_dict()
-    print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)},401

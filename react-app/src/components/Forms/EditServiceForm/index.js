@@ -34,7 +34,7 @@ function EditServiceForm(){
             subject_level
             
         }
-        console.log(payload,'edit form')
+        
         dispatch(editService(serviceId,payload))
         history.push(`/services/${serviceId}`)
 

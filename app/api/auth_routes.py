@@ -83,7 +83,7 @@ def tutor_sign_up():
     """
     form = TutorSignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
+
     if form.validate_on_submit():
         is_student = form.data['is_student']
 

@@ -6,7 +6,7 @@ import './BookingForm.css'
 
 
 function CreateBookingForm({serviceId}){
-    console.log(serviceId,'form')
+
     const dispatch = useDispatch()
     const [date, setDate] = useState('')
     const [time_from, setTimeFrom] = useState('')
@@ -26,14 +26,14 @@ function CreateBookingForm({serviceId}){
         }
     
         const data = await dispatch(add_booking(service_id,payload))
-        console.log(data,'DATAAAA')
+  
 
         if(data.errors){
             setErrors(data.errors)
         }
 
     }
-    console.log(errors)
+
 
 
     return(

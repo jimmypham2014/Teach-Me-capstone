@@ -13,7 +13,6 @@ function EditBookingForm(){
     const [time_from, setTimeFrom] = useState(specificBooking.booking_time_from)
     const [time_to, setTimeTo] = useState(specificBooking.booking_time_to)
    
-    console.log(new Date(specificBooking.booking_date).toLocaleDateString())
     const handleSubmit =(e)=>{
         e.preventDefault()
         const payload ={
@@ -21,7 +20,7 @@ function EditBookingForm(){
             time_from,
             time_to
         }
-        console.log(payload)
+    
         dispatch(edit_booking(bookingId,payload))
     }
 

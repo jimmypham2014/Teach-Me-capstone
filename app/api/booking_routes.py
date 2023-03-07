@@ -19,7 +19,6 @@ def getBookings():
 @booking_routes.route('/<int:id>', methods =['DELETE'])
 def delete_booking(id):
     booking = Booking.query.get(id)
-    print(booking)
     db.session.delete(booking)
     db.session.commit()
     return jsonify(message="Sucessfully removed Service")
@@ -29,7 +28,6 @@ def delete_booking(id):
 def edit_booking(id):
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data, 'put --->backend')
     date = form.data["date"]
     time_to = form.data["time_to"]
     time_from =form.data["time_from"]

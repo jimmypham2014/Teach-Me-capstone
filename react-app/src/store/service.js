@@ -35,7 +35,6 @@ export const getAllServices = () => async (dispatch)=>{
 
 
 export const addService = (service) => async(dispatch)=>{
-    console.log(service)
     const res = await fetch("/api/services/",{
     method: "POST",
     headers:{
@@ -69,7 +68,6 @@ export const editService =(serviceId, serviceData) => async(dispatch)=>{
     })
     if(res.ok){
         const serviceData = await res.json()
-        console.log(serviceData)
         dispatch(add_service(serviceData))
         return serviceData
     }

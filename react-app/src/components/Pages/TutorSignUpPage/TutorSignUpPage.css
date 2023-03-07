@@ -1,10 +1,23 @@
-#detail_container{
+
+
+.sign_up_container input{
+    box-sizing: border-box;
+    width: 20%;
+    padding: 8px 12px;
+    border: 1px solid #c5c6c9;
+    border-radius: 4px;
+    box-shadow: none;
+    font: inherit;
+    color: #404145;
+}
+
+
+.sign_up_container{
     display: flex;
-    width: 100%;
-    padding: 35px 0 60px;
     flex-direction: column;
-    min-height: 60px;
-    align-content: stretch;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+
+}
+
+#detail_container{
+   padding:14px 14px 14px 14px
 }

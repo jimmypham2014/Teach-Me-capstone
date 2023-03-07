@@ -13,8 +13,6 @@ function ServicePage(){
     const users = useSelector(state => Object.values(state.otherUsers))
     const dispatch = useDispatch()
 
-
-    console.log(users)
     useEffect(()=>{
         dispatch(getAllServices())
         dispatch(getAllTutors())
@@ -54,7 +52,7 @@ function ServicePage(){
                             if(service.tutor === user.id){
                                 return(
                                     <div id='details'> 
-                                        <div id='image'>
+                                        <div id='prof_image'>
                                         <img src={user.profileImg}/> 
                                         </div>  
                                         <div id='username'>

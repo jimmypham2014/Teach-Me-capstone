@@ -11,7 +11,6 @@ export const getAllTutors= () => async (dispatch)=>{
     
     if(res.ok){
         const tutors= await res.json();
-        console.log(Object.values(tutors))
          dispatch(loadTutors(tutors))
     }
 

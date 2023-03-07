@@ -69,7 +69,6 @@ export const logout = () => async (dispatch) => {
 
 
 export const tutorSignUp = (firstName, lastName, is_student, credentials, education, username, email, password) => async (dispatch) =>{
-	console.log(is_student)
 	const response = await fetch("/api/auth/tutorsignup", {
 		method: "POST",
 		headers: {
