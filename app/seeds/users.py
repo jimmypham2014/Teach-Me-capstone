@@ -23,9 +23,9 @@ def seed_users():
 
 
 
-    tutor1 = Tutor(education = 'University of California, Los Angeles', credentials ='BS Degree in Mathematics', user_id = 1)
-    tutor2 = Tutor(education = 'University of California, Berkeley', credentials ='BS Degree in Science', user_id = 2)
-    tutor3 = Tutor(education = 'University of California, San Diego', credentials ='BS Degree in Literature', user_id = 3)
+    tutor1 = Tutor(education = 'University of California, Los Angeles', credentials ='BS Degree in Mathematics', user_id = demo.id)
+    tutor2 = Tutor(education = 'University of California, Berkeley', credentials ='BS Degree in Science', user_id = marnie.id)
+    tutor3 = Tutor(education = 'University of California, San Diego', credentials ='BS Degree in Literature', user_id = bobbie.id)
 
 
     db.session.add(service1) 
