@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { login } from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import './LoginForm.css';
+import { login } from "../../store/session";
+import './LoginForm.css'
 
-function LoginFormPage() {
-  const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+const LoginForm = () => {
+  const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
-  if (sessionUser) return <Redirect to="/" />;
-
-  const handleSubmit = async (e) => {
+  const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
@@ -21,37 +19,57 @@ function LoginFormPage() {
     }
   };
 
-  return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
-    </>
-  );
-}
+  const updateEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
-export default LoginFormPage;
+  const updatePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  if (user) {
+    return <Redirect to="/" />;
+  }
+
+  return (
+    <div className="signup_container">
+      <div className="signup_header">
+        <h1>Login</h1>
+        <form onSubmit={onLogin}>
+          <div>
+            {errors.map((error, ind) => (
+              <div className="errors" key={ind}>
+                {error}
+              </div>
+            ))}
+          </div>
+          <div id="form_detail">
+            <label htmlFor="email">Email</label>
+            <input
+              name="email"
+              type="text"
+              placeholder="Email"
+              value={email}
+              required={true}
+              onChange={updateEmail}
+            />
+          </div>
+          <div id="form_detail">
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              required={true}
+              onChange={updatePassword}
+            />
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default LoginForm;

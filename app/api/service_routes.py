@@ -24,6 +24,7 @@ def add_service():
     form = ServiceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+
     if form.validate_on_submit():
         data = form.data
         new_service = Service(tutor_id=current_user.get_id(),
@@ -39,6 +40,8 @@ def add_service():
         db.session.commit()
         return new_service.to_dict()
     
+    return {'errors': validation_errors_to_error_messages(form.errors)},401
+    
 
 @service_routes.route('/<int:id>', methods=["PUT","PATCH"])
 @login_required
@@ -53,7 +56,9 @@ def edit_service(id):
             
         db.session.commit()
         return service.to_dict()
-    
+
+    return {'errors': validation_errors_to_error_messages(form.errors)},401
+
     
 @service_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
@@ -127,6 +132,10 @@ def add_booking(service_id):
 
 
     if form.validate_on_submit():
+
+        if time_from.hour > time_to.hour:
+            return {'errors':'Invalid Booking Time'},406
+
         
         datas = Booking.query.all()
 
@@ -145,6 +154,7 @@ def add_booking(service_id):
             return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
         elif time_from.minute > time_to.minute:
                 return {'errors':'Your booking time must be 1 hour minimum'},406
+        
                 
         else: 
             new_booking = Booking(student_id = current_user.get_id(),

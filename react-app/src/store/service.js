@@ -70,6 +70,9 @@ export const editService =(serviceId, serviceData) => async(dispatch)=>{
         const serviceData = await res.json()
         dispatch(add_service(serviceData))
         return serviceData
+    }else{
+        const error = await res.json()
+        return error
     }
 
 }

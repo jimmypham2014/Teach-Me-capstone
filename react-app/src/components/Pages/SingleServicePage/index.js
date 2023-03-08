@@ -79,9 +79,9 @@ function ServiceDetailPage(){
                  )}
         
                     {sessionUser && service.tutor && service.tutor === sessionUser.user.id ? 
-                    <div>
-                        <button onClick={editService}>Edit</button>
-                        <button onClick={removeService}>Delete</button> 
+                    <div className='modify_btn'>
+                        <button  onClick={editService}>Edit</button>
+                        <button  onClick={removeService}>Delete</button> 
                     </div>: null}
 
 

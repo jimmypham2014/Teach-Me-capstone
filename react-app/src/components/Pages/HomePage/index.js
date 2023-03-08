@@ -7,13 +7,24 @@ import LoginFormModal from '../../LoginFormModal'
 import OpenModalButton from '../../OpenModalButton'
 import SignupFormModal from '../../SignupFormModal'
 import './HomePage.css'
-import globalIcon from '../../../icons/Color logo - no background.png'
+import globalIcon from '../../../icons/Black logo - no background.png'
+import {login} from '../../../store/session'
 
 function HomePage(){
     const dispatch = useDispatch();
     const ulRef = useRef();
     const history =useHistory()
     const [showMenu, setShowMenu] = useState(false);
+
+    const demo = async (e) => {
+      e.preventDefault();
+      const user = {
+        email: "demo@aa.io",
+        password: "password",
+      };
+      setShowMenu(false);
+      dispatch(login(user.email, user.password));
+    };
 
 
     useEffect(() => {
@@ -65,9 +76,20 @@ function HomePage(){
             />
             
             </div>
+            <div>
+            <button onClick={demo}>Log in as Demo</button>
+            </div>
+            
 
               
             </div>
+        </div>
+
+
+        <div className='homepage_title'>
+            <h1 className='title'>Welcome to Teach-Me!</h1>
+            <h3 className='sub_title'>Become a tutor to post your own services!</h3>
+            <button className='become_a_tutor' onClick={()=>history.push('/tutorsignup')} ><span>Become A TUTOR</span> </button>
         </div>
 
             

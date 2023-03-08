@@ -6,6 +6,7 @@ import EditServiceForm from "../../Forms/EditServiceForm";
 import './ServicePage.css'
 import heart from '../../../icons/favorite.png'
 import { getAllTutors } from "../../../store/tutor";
+import banner from '../../../assets/images/banner_img.jpg'
 
 function ServicePage(){
 
@@ -18,10 +19,22 @@ function ServicePage(){
         dispatch(getAllTutors())
     },[dispatch])
 
+    //  <button className='banner_btn'><span>View All Services</span> </button> add this later one
 
     return (
+        <div className='service_containers'>
+        <div className='service_banner'>
+            <img src={banner}/>
+            <div className='banner_info'>
+            <h1 className ='banner_title_1'>Introducing TEACH</h1>
+            <h3 className ='banner_title_2'>Learning Starts Here</h3>
+          
+            </div>
+        </div>
 
         <div className ='service_page_container'>
+        
+
         {services.map((service)=>{
             return (
                 <Link key={service.id} to={`/services/${service.id}`} className="service_container">
@@ -71,10 +84,6 @@ function ServicePage(){
 
                         <div className='favorite_price'>
                                 <div>
-                                <img src={heart}/>
-                                </div>
-
-                                <div>
                                     <h5>My rate is ${service.price}/hr</h5>
                                 </div>
                         
@@ -86,6 +95,7 @@ function ServicePage(){
                 </Link>
             )
         })}
+        </div>
         </div>
     )
 

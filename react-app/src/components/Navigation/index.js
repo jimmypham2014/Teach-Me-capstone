@@ -18,23 +18,12 @@ function Navigation({ isLoaded }){
 				<NavLink exact to="/" className='logo'><img src={logo}/></NavLink>
 				</div>
 
-				<div className='search_middle'>
-				 <input
-				 type="text"
-				 placeholder ='What do you need help today?'
-				 />
-				
-				</div>
+			
 			
 			{isLoaded && (
 
 				<div className ='right_side_container'>
-					<div>
-					<img src={message}/>
-					</div>
-					<div>
-					<img src={favorite}/>
-					</div>
+				
 
 					<NavLink to='/bookings'>
 					Bookings

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux"
+import { useHistory } from "react-router-dom";
 import { add_booking } from "../../../store/booking";
 import {allTimes} from '../../utils/allTimes'
 import './BookingForm.css'
@@ -13,6 +14,7 @@ function CreateBookingForm({serviceId}){
     const [time_to, setTimeTo] = useState('')
     const [service_id, setServiceId] = useState(serviceId)
     const [errors, setErrors] = useState([])
+    const history =useHistory()
   
 
     const handleSubmit = async (e)=>{
@@ -30,6 +32,8 @@ function CreateBookingForm({serviceId}){
 
         if(data.errors){
             setErrors(data.errors)
+        }else{
+            history.push('/bookings')
         }
 
     }

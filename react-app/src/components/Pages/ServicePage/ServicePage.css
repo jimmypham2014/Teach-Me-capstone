@@ -11,6 +11,7 @@
    display: flex;
   flex-direction: column;
   text-decoration: none;
+
 }
 
 .service_page_container{
@@ -23,12 +24,9 @@
 }
 
 .favorite_price{
-  display: flex;
-  width: 10rem;
-  align-items: center;
+ 
   padding: 5px 5px 5px;
-  width: 100%;
-  justify-content: space-around;
+
 }
 
 .service_image img{
@@ -55,4 +53,100 @@
 }
 #prof_image{
   padding: 5px 5px 5px 5px;
+}
+
+.service_banner img{
+  margin-top: 1%;
+  width: 90rem;
+  height: 30rem;
+  object-fit: cover;
+}
+.service_banner{
+  position: relative;
+}
+
+.banner_title_1{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 100px;
+  font-size: 80px;
+}
+
+.banner_title_2{
+  position: absolute;
+  bottom: 12rem;
+  font-style: normal
+}
+.banner_info{
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.banner_info h1{
+  color: white;
+
+}
+.banner_info h3{
+  color: white;
+
+}
+
+.service_banner button{
+  position: absolute;
+  bottom: 7rem;
+  color: black;
+}
+
+
+
+.banner_btn {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.banner_btn span {
+  position: relative; 
+  z-index: 1;
+  color: white
+
+}
+
+
+
+.banner_btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: white;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.banner_btn:hover:after {
+  
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+.banner_btn:hover >span{
+  color: black;
 }

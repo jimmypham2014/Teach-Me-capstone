@@ -13,15 +13,16 @@ function EditServiceForm(){
     const [title, setTitle] = useState(specificService.title)
     const [subject, setSubject] = useState(specificService.subject)
     const [description, setDescription] = useState(specificService.description)
-    const [subject_level, setSubject_Level] = useState(specificService.subject_level)
+    const [subject_level, setSubjectLevel] = useState(specificService.subject_level)
     const [image, setImage] = useState(specificService.image)
     const [price, setPrice] = useState(specificService.price)
+    const [errors, setErrors] =useState('')
 
    if(!specificService) return null
 
   
 
-    const handleSubmit=(e)=>{
+    const handleSubmit= async (e)=>{
 
         e.preventDefault()
 
@@ -35,8 +36,13 @@ function EditServiceForm(){
             
         }
         
-        dispatch(editService(serviceId,payload))
-        history.push(`/services/${serviceId}`)
+       const data = await dispatch(editService(serviceId,payload))
+        
+       if(data.errors){
+        setErrors(data.errors)
+    }   else{
+        history.push('/')
+    }
 
     }
 
@@ -44,70 +50,116 @@ function EditServiceForm(){
 
 
     return (
-        <div>
+        <div className='create_service_container'>
+
+        <div className='create_service_info'>
+        <div className='errors'>
+        {errors && (
+            <div>
+            {errors}
+            </div>
+        )}
+        </div>
         <form onSubmit={handleSubmit}>
-            <label>
-            Title
-             <input
-             type ='text'
-             value={title}
-             onChange={(e)=>setTitle(e.target.value)}
 
 
-             />
-            </label>
-            <label>
-            Subject
-             <input
-             type ='text'
-             value={subject}
-             onChange={(e)=>setSubject(e.target.value)}
+        <div className='title_container'>
+        
+        <label>Title</label>
+        <div>
+       
+        <input
+        type = 'text'
+        required
+        value={title}
+        required
+        onChange={(e) =>setTitle(e.target.value)}
+        />
+        </div>
+
+        </div>
 
 
-             />
-            
-            </label>
 
-            <label>
-            Image
-             <input
-             type ='text'
-             value={image}
-             onChange={(e)=>setImage(e.target.value)}
-             />
-            </label>
+        <div className='image_container'>
+        <label>Image </label>
+        <div>
+       
+        <input
+        type = 'text'
+        required
+        value={image}
+        required
+        onChange={(e) =>setImage(e.target.value)}
+        />
+        </div>
 
-            <label>
-            Description
-             <input
-             type ='text'
-             value={description}
-             onChange={(e)=>setDescription(e.target.value)}
-             />
-            </label>
+        </div>
+        
+        <div className='subject_container'>
+        <label>What subject are you tutoring?</label>
 
-            <label>Subject Level
-            <input
-            type = 'text'
-            value={subject_level}
-            required
-            onChange={(e) =>setSubject_Level(e.target.value)}
-            />
-            </label>
-    
-            <label>Price
-            <input
-            type = 'number'
-            value={price}
-            required
-            onChange={(e) =>setPrice(e.target.value)}
-            />
-            </label>
+        <div>
+        <input
+        type = 'text'
+        required
+        value={subject}
+        required
+        onChange={(e) =>setSubject(e.target.value)}
+        />
+        </div>
+        
+        </div>
+
+        <div className='description_container'>
+        <label>Provide a description of your service </label>
+        <div>
+       
+        <input
+        type = 'text'
+        required
+        value={description}
+        required
+        onChange={(e) =>setDescription(e.target.value)}
+        />
+        </div>
+        </div>
+
+        <div className='subject_lvl_container'>
+        <label>What is the subject grade level? </label>
+        <div>
+        <input
+        type = 'text'
+        required
+        value={subject_level}
+        required
+        onChange={(e) =>setSubjectLevel(e.target.value)}
+        />
+        </div>
+        
+        </div>
+
+        <div className='price_container'>
+        <label>How much would you like to charge per hour? </label>
+        <div>
+        <input
+        type = 'number'
+        required
+        value={price}
+        required
+        onChange={(e) =>setPrice(e.target.value)}
+        />
+        /hr
+        </div>
+        </div>
     
         
-        <button type="submit">Submit</button>
+        
+        <button type="submit" className='btn'><span>Submit</span></button>
         </form>
+        
 
+            </div>
         </div>
 
     )

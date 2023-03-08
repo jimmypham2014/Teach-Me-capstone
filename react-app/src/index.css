@@ -1,10 +1,18 @@
-* {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+* {
+    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+    color: black
 }
 body{
-    margin:2rem 7rem 2rem 7em;
-
+    margin:2rem 15rem 2rem 15em;
+    background-color: white;
+    z-index: 3;
    
+}
+button{
+    color: black;
 }
   

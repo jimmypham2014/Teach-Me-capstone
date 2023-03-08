@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField 
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, Email, ValidationError, URL
 from app.models import User
 
 class ServiceForm(FlaskForm):
@@ -8,7 +8,7 @@ class ServiceForm(FlaskForm):
     subject = StringField('Subject', validators = [DataRequired()])
     description = StringField('Description', validators =[DataRequired()])
     subject_level = StringField('Subject Level')
-    image = StringField('Images')
+    image = StringField('Images', validators=[DataRequired(),URL(message='This is not a valid image URL link')])
     price = IntegerField('Price', validators =[DataRequired()])
     
     

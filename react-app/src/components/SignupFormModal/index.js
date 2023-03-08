@@ -1,108 +1,146 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
 
-function SignupFormModal() {
-	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [is_student, setStudent] = useState(true)
-	const [firstName, setFirstName] = useState('')
-	const [lastName, setLastName] = useState('')
-	const [errors, setErrors] = useState([]);
-	const { closeModal } = useModal();
+const SignupFormPage = () => {
+  const [errors, setErrors] = useState([]);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
+  const [is_student, setStudent] = useState(true)
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(firstName, lastName, is_student,username, email, password));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
-		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
-		}
-	};
+  const onSignUp = async (e) => {
+    e.preventDefault();
+    if (password === repeatPassword) {
+      const data = await dispatch(
+        signUp(firstName, lastName, is_student,username,email, password)
+      );
+      if (data) {
+        setErrors(data);
+      } 
+    }
+  };
 
-	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
-				<label>
-					First Name
-					<input
-						type="text"
-						value={firstName}
-						onChange={(e) => setFirstName(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Last Name
-					<input
-						type="text"
-						value={lastName}
-						onChange={(e) => setLastName(e.target.value)}
-						required
-					/>
-				</label>
+  const updateUsername = (e) => {
+    setUsername(e.target.value);
+  };
 
-				<label>
-					Email
-					<input
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Username
-					<input
-						type="text"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Confirm Password
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
-				</label>
+  const updateEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
+  const updatePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
+  const updateRepeatPassword = (e) => {
+    setRepeatPassword(e.target.value);
+  };
 
-				<button type="submit">Sign Up</button>
-			</form>
-		</>
-	);
-}
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
 
-export default SignupFormModal;
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
+  };
+
+  if (user) {
+    return <Redirect to="/" />;
+  }
+
+  return (
+    <div className="signup_container">
+      <div className="signup_header">
+        <h1>Ready to learn?</h1>
+        <h4>Find your favorite tutor</h4>
+      </div>
+
+      <form onSubmit={onSignUp}>
+        <div>
+          {errors.map((error, ind) => (
+            <div className="errors" key={ind}>
+              {error}
+            </div>
+          ))}
+        </div>
+        <div id="form_detail">
+          <label>User Name</label>
+          <input
+            type="text"
+            name="username"
+            onChange={updateUsername}
+            value={username}
+            required={true}
+            placeholder="User Name"
+          ></input>
+        </div>
+        <div id="form_detail">
+          <label>First Name</label>
+          <input
+            type="text"
+            name="firstname"
+            onChange={updateFirstName}
+            value={firstName}
+            required={true}
+            placeholder="First Name"
+          ></input>
+        </div>
+        <div id="form_detail">
+          <label>Last Name</label>
+          <input
+            type="text"
+            name="lastname"
+            onChange={updateLastName}
+            value={lastName}
+            required={true}
+            placeholder="Last Name"
+          ></input>
+        </div>
+        <div id="form_detail">
+          <label>Email</label>
+          <input
+            type="text"
+            name="email"
+            onChange={updateEmail}
+            value={email}
+            required={true}
+            placeholder="Email"
+          ></input>
+        </div>
+        <div id="form_detail">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            onChange={updatePassword}
+            value={password}
+            required={true}
+            placeholder="Create a password"
+          ></input>
+        </div>
+        <div id="form_detail">
+          <label>Repeat Password</label>
+          <input
+            type="password"
+            name="repeat_password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+            placeholder="Enter Your Password Again"
+          ></input>
+        </div>
+        <button className='sign_up_btn' type="submit"><span>Continue</span></button>
+      </form>
+    </div>
+  );
+};
+
+export default SignupFormPage;

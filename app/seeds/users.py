@@ -4,9 +4,9 @@ from app.models import db, User, Service, Booking,Tutor,environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        firstName ='Hoe', lastName = 'User',username='Demo', email='demo@aa.io', password='password', is_student = False, profileImg='https://cdn-icons-png.flaticon.com/512/2202/2202112.png')
+        firstName ='Demo', lastName = 'User',username='Demo', email='demo@aa.io', password='password', is_student = False, profileImg='https://cdn-icons-png.flaticon.com/512/2202/2202112.png')
     marnie = User(
-        firstName ='Marnie', lastName = 'Trash',username='marnie', email='marnie@aa.io', password='password', is_student = False, profileImg='https://cdn-icons-png.flaticon.com/512/201/201634.png')
+        firstName ='Marnie', lastName = 'Smith',username='marnie', email='marnie@aa.io', password='password', is_student = False, profileImg='https://cdn-icons-png.flaticon.com/512/201/201634.png')
     bobbie = User(
         firstName ='Bobbie', lastName = 'bob',username='bobbie', email='bobbie@aa.io', password='password',is_student = False, profileImg ='https://cdn-icons-png.flaticon.com/512/3011/3011270.png')
 

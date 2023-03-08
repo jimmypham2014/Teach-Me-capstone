@@ -161,10 +161,8 @@ function TutorSignUp() {
 
 
 
-				<button type="submit">Sign Up</button>
+				<button className='become_a_tutor_signup' type="submit"><span>Sign Up</span></button>
 			</form>
-
-
 			</div>
 	);
 }
