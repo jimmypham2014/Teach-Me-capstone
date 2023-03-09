@@ -18,6 +18,7 @@ import TutorSignUp from "./components/Pages/TutorSignUpPage";
 import { getAllTutors } from "./store/tutor";
 import ProfilePage from "./components/Pages/ProfilePage";
 import { getAllUsers } from "./store/user";
+import AllServicesBrowser from "./components/Pages/AllServicesBrowser";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,24 +55,36 @@ useEffect(()=>{
             <SignupFormPage />
           </Route>
 
+         
+
 
           <Route path='/tutorsignup'>
           <TutorSignUp/>
           </Route>
+          
 
-          <Route exact path ='/'>
+          <Route  exact path ='/'>
               { currentUser ?<ServicePage/> : <HomePage/>}
           </Route>
 
-          <Route exact path= '/services'>
+          <Route exact path= "/services">
+          <AllServicesBrowser/>
+        </Route>
+        
+
+         
+
+          <Route exact path= '/services/create_a_service'>
           <CreateServiceForm/>
           </Route>
 
+         
        
 ``
           <Route exact path= '/services/:serviceId'>
           <ServiceDetailPage/>
           </Route>
+          
 
           <Route path= "/services/:serviceId/editform">
           <EditServiceForm/>
@@ -81,17 +94,26 @@ useEffect(()=>{
           <CreateBookingForm/>
           </Route>
 
+          
+         
+
           <Route  exact path= "/bookings">
             <Bookings/>
           </Route>
+          
 
           <Route path = "/bookings/:bookingId/editform">
              <EditBookingForm/>
           </Route>
 
+         
+
           <Route exact path= '/:username'>
           <ProfilePage/>
           </Route>
+
+         
+
         </Switch>
       )}
     </>

@@ -7,38 +7,59 @@ import './ServicePage.css'
 import heart from '../../../icons/favorite.png'
 import { getAllTutors } from "../../../store/tutor";
 import banner from '../../../assets/images/banner_img.jpg'
+import {AiOutlineArrowLeft,AiOutlineArrowRight} from 'react-icons/ai'
 
 function ServicePage(){
 
     const services = useSelector(state => Object.values(state.service))
     const users = useSelector(state => Object.values(state.otherUsers))
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(()=>{
         dispatch(getAllServices())
         dispatch(getAllTutors())
     },[dispatch])
 
-    //  <button className='banner_btn'><span>View All Services</span> </button> add this later one
+
+    const scrollLeft=()=>{
+        document.getElementById('services_content').scrollLeft -=400
+    }
+    //  
+
+
+    const scrollRight=()=>{
+        document.getElementById('services_content').scrollLeft +=400
+    }
+
 
     return (
         <div className='service_containers'>
         <div className='service_banner'>
             <img src={banner}/>
             <div className='banner_info'>
-            <h1 className ='banner_title_1'>Introducing TEACH</h1>
+            <h1 className ='banner_title_1 text-center'>Introducing TEACH</h1>
             <h3 className ='banner_title_2'>Learning Starts Here</h3>
+            <button className='banner_btn' onClick={()=> history.push('/services')}><span>View All Services</span> </button> add this later one
           
             </div>
         </div>
-
-        <div className ='service_page_container'>
         
 
+        <div className='flex items-center'>
+
+        <div>
+            <button onClick={scrollLeft} className='p-2 m-2 rounded-full bg-gray-50 hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300'><AiOutlineArrowLeft/></button>
+        </div>
+       
+
+        <div id='services_content' className ='carousel p-4 flex items-center justify-start overflow-x-auto scroll-smooth scrollbar-hide m-4'>
+
+        
         {services.map((service)=>{
             return (
-                <Link key={service.id} to={`/services/${service.id}`} className="service_container">
-                    <div className="service_detail"> 
+                <Link key={service.id} to={`/services/${service.id}`} className="service_container my-1">
+                    <div className="service_detail p-2 m-2 transition ease-in-out delay-200 hover:-translate-y-1 hover:scale-110"> 
 
                         <div id='details'>
 
@@ -93,10 +114,22 @@ function ServicePage(){
                     </div>
                 
                 </Link>
+                
             )
+            
         })}
+        
         </div>
+
+        <div>
+            <button onClick={scrollRight} className='p-2 m-2 rounded-full bg-gray-50 hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300' ><AiOutlineArrowRight/></button>
         </div>
+        
+        </div>
+
+
+        </div>
+        
     )
 
 

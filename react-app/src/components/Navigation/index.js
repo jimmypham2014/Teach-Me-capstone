@@ -11,7 +11,7 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
 	return (
-		<div className='nav_container'>
+		<div className='flex items-center justify-between'>
 
 				<div className = 'icon'>
 			

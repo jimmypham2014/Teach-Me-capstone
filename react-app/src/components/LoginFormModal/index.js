@@ -64,7 +64,7 @@ const LoginForm = () => {
               required={true}
               onChange={updatePassword}
             />
-            <button className='log_in_btn' type="submit"><span>Login</span></button>
+            <button className='log_in_btn bg-black' type="submit"><span>Login</span></button>
           </div>
         </form>
       </div>

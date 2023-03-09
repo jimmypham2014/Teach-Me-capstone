@@ -161,7 +161,7 @@ function TutorSignUp() {
 
 
 
-				<button className='become_a_tutor_signup' type="submit"><span>Sign Up</span></button>
+				<button className='become_a_tutor_signup bg-black' type="submit"><span>Sign Up</span></button>
 			</form>
 			</div>
 	);

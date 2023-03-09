@@ -4,7 +4,7 @@
     width: 50rem;
     height: 100%;
     margin-top: 5%;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .booking_details img{
@@ -37,8 +37,7 @@
 
 .booking_details{
     margin: 20px;
-    width: 20rem;
-    height: 20rem;
+  
 }
 #name{
     display: flex;
@@ -52,5 +51,5 @@
 }
 
 .calendar{
-    margin-left: 2%;
+    margin-left: 7%;
 }

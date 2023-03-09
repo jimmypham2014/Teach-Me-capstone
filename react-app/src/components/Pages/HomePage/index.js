@@ -46,7 +46,7 @@ function HomePage(){
     return(
         <div className= 'home-page_container'>
         <div id='background_img'></div>
-        <div className= 'home_page_header'>
+        <div className= 'flex items-center justify-between'>
 
             <div className= 'home_page_icon'>
                 <img src={globalIcon}/>
@@ -68,7 +68,7 @@ function HomePage(){
               modalComponent={<LoginFormModal />}
             />
             </div>
-            <div className='join'>
+            <div className=''>
             <OpenModalButton
               buttonText="Join"
               onItemClick={closeMenu}
@@ -86,10 +86,10 @@ function HomePage(){
         </div>
 
 
-        <div className='homepage_title'>
-            <h1 className='title'>Welcome to Teach-Me!</h1>
-            <h3 className='sub_title'>Become a tutor to post your own services!</h3>
-            <button className='become_a_tutor' onClick={()=>history.push('/tutorsignup')} ><span>Become A TUTOR</span> </button>
+        <div className='homepage_title flex items-center justify-center h-screen'>
+            <h1 className='title font-bold text-center text-6xl'>Welcome to Teach-Me!</h1>
+            <h3 className='sub_title text-center text-2xl '>Become a tutor to post your own services!</h3>
+            <button className='become_a_tutor text-center top-1' onClick={()=>history.push('/tutorsignup')} ><span>Become A TUTOR</span> </button>
         </div>
 
             

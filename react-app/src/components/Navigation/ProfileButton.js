@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   const hostAService = ()=>{
-    history.push('/services')
+    history.push('/services/create_a_service')
   }
 
   return (

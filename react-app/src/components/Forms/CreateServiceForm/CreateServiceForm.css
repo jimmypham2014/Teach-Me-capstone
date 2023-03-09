@@ -29,15 +29,10 @@
     width: 100px;
 }
 .create_service_info{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  
     border: 1px solid #c5c6c9;
     border-radius: 4px;
     position: absolute;
-    top: 4rem;
-    left: 14rem;
     background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
     background-repeat: no-repeat;
     background-size: cover;

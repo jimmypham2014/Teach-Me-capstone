@@ -42,9 +42,9 @@ function CreateServiceForm(){
 
 
     return (
-        <div className='create_service_container'>
+        <div className='flex justify-center items-center'>
 
-        <div className='create_service_info'>
+        <div className='create_service_info flex justify-center top-11' >
         <div className='errors'>
         {errors && (
             <div>

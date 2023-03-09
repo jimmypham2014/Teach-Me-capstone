@@ -15,8 +15,8 @@ export const StyleWrapper = styled.div`
 
 
  .fc{
-     width: 140%;
-     height: 800%
+     width: 130%;
+     height: 700%
      border:1px solid black;
      border-radius: 10px;
      margin-left: 10rem;
@@ -36,6 +36,7 @@ export const StyleWrapper = styled.div`
     font-size: 10px;
     
 }
+
 }
 `
 
@@ -87,13 +88,13 @@ const formatUTCDate = (date) =>{
     },[])
     return(
         <div className='booking_container'>
-            <div className = 'booking_details'>
+            <div className = 'booking_details '>
         
             <h1>Upcoming Bookings</h1>
             {bookings.map(book=>{
                 return (
 
-                <div className='booking_info'>
+                <div className='booking_info w-80'>
 
                 <div id='image'>
                 {services.map(service =>service.id === book.service_id ? <img src={service.image}/>:null)}
@@ -142,7 +143,7 @@ const formatUTCDate = (date) =>{
         <div className='calendar'> 
         <StyleWrapper>
         <FullCalendar
-      
+        className='w-2'
         plugins={[ dayGridPlugin, timeGridPlugin ]}
         defaultView="dayGridMonth"
         headerToolbar={{
