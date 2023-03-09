@@ -42,9 +42,9 @@ function CreateServiceForm(){
 
 
     return (
-        <div className='flex justify-center items-center'>
+        <div className=''>
 
-        <div className='create_service_info flex justify-center top-11' >
+        <div className='create_service_info flex items-center justify-center h-screen' >
         <div className='errors'>
         {errors && (
             <div>
@@ -55,7 +55,7 @@ function CreateServiceForm(){
         <form onSubmit={handleSubmit}>
 
 
-        <div className='title_container'>
+        <div className='title_container p-4'>
         
         <label>Title</label>
         <div>
@@ -73,7 +73,7 @@ function CreateServiceForm(){
 
 
 
-        <div className='image_container'>
+        <div className='image_container p-4'>
         <label>Image </label>
         <div>
        
@@ -88,7 +88,7 @@ function CreateServiceForm(){
 
         </div>
         
-        <div className='subject_container'>
+        <div className='subject_container p-4'>
         <label>What subject are you tutoring?</label>
 
         <div>
@@ -103,7 +103,7 @@ function CreateServiceForm(){
         
         </div>
 
-        <div className='description_container'>
+        <div className='description_container p-4'>
         <label>Provide a description of your service </label>
         <div>
        
@@ -117,7 +117,7 @@ function CreateServiceForm(){
         </div>
         </div>
 
-        <div className='subject_lvl_container'>
+        <div className='subject_lvl_container p-4' >
         <label>What is the subject grade level? </label>
         <div>
         <input
@@ -131,7 +131,7 @@ function CreateServiceForm(){
         
         </div>
 
-        <div className='price_container'>
+        <div className='price_container p-4'>
         <label>How much would you like to charge per hour? </label>
         <div>
         <input
@@ -147,7 +147,7 @@ function CreateServiceForm(){
     
         
         
-        <button type="submit" className='btn'><span>Submit</span></button>
+        <button type="submit" className='btn bg-black'><span>Submit</span></button>
         </form>
         
 

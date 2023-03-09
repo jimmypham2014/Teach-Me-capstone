@@ -1,15 +1,13 @@
 .create_service_container{
    position: relative;
 
-
 }
 
 .create_service_container label{
     padding-left: 10px;
 }
 
-.create_service_container input{
-    margin: 10px 10px 10px 10px;
+.create_service_info input{
     height: 30px;
     box-sizing: border-box;
     border: 1px solid #c5c6c9;
@@ -17,26 +15,28 @@
     box-shadow: none;
     font: inherit;
     color: #404145;
+    border-radius: 10px;
 }
 
 .description_container input{
     padding: 0;
     width: 30rem;
     height: 10rem;
+    
 }
 
 .price_container input{
     width: 100px;
 }
-.create_service_info{
+.create_service_info form{
   
     border: 1px solid #c5c6c9;
     border-radius: 4px;
-    position: absolute;
-    background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
+    background-image: linear-gradient(to top, #f1f1f1 0%, #f0f0f0 100%);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    width: 40rem;
 
 }
 
@@ -72,7 +72,7 @@
     top: 0;
     height: 490%;
     width: 140%;
-    background: #78c7d2;
+    background: white;
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
     -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
@@ -83,4 +83,7 @@
       color: white;
     -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
     transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  }
+  .btn:hover >span{
+      color: black;
   }

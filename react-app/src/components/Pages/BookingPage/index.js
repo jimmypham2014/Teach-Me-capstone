@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { getAllBookings, remove_booking } from "../../../store/booking"
@@ -10,6 +10,8 @@ import styled from '@emotion/styled'
 import edit from '../../../icons/edit.png'
 import cancel from '../.././/../icons/cancel.png'
 import calendar from '../../../icons/calendar.png'
+import OpenModalButton from "../../OpenModalButton"
+import EditBookingForm from "../../Forms/EditBookingForm"
 
 export const StyleWrapper = styled.div`
 
@@ -21,6 +23,7 @@ export const StyleWrapper = styled.div`
      border-radius: 10px;
      margin-left: 10rem;
      box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+     z-index:-1;
 
  }
 
@@ -45,8 +48,12 @@ function Bookings(){
     const history = useHistory()
     const bookings = useSelector(state =>Object.values(state.booking))
     const services = useSelector(state =>Object.values(state.service))
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
 
- 
+
+
+ const closeMenu = () => setShowMenu(!showMenu);
     
    
 
@@ -101,13 +108,16 @@ const formatUTCDate = (date) =>{
                 </div>
 
 
-                <div id='name'>
+                <div id='name' className='flex items-center'>
                         <div>
                         {services.map(service =>service.id === book.service_id ? (service.title):null)}
                         </div>
                         
-                        <div>
-                        <img src={calendar}/> {formatDate(book.booking_date)}
+                        <div className='flex'>
+                        <div><img src={calendar}/> </div>
+                       <div>
+                       {formatDate(book.booking_date)}
+                       </div> 
                         </div>
                         
                         <div>
@@ -123,7 +133,13 @@ const formatUTCDate = (date) =>{
 
                         <div>
                         <button onClick={()=> dispatch(remove_booking(book.id))}><img src={cancel}/></button>
-                        <button onClick={()=>history.push(`/bookings/${book.id}/editform`)}><img src={edit}/></button>
+
+                        <OpenModalButton
+
+                        buttonText={<img src={edit}/>}
+                        onItemClick={closeMenu}
+                        modalComponent={<EditBookingForm bookId={book.id} closeMenu={closeMenu} setShowMenu ={setShowMenu} showMenu={showMenu}/>}
+                      />
                        </div>
                         
                 </div>

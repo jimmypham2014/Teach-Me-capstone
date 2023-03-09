@@ -5,14 +5,17 @@
 * {
     font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
     color: black
+
 }
 body{
     margin:2rem 15rem 2rem 15em;
     background-color: white;
     z-index: 3;
+    
    
 }
 button{
     color: black;
+
 }
   

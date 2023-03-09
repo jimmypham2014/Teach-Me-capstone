@@ -1,58 +1,94 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux"
-import { useParams } from "react-router-dom";
-import { add_booking, edit_booking } from "../../../store/booking";
+import { Redirect, useHistory } from "react-router-dom";
+import { edit_booking } from "../../../store/booking";
+import OpenModalButton from "../../OpenModalButton";
+import './EditBookingForm.css'
 
 
-function EditBookingForm(){
+function EditBookingForm({bookId, closeModal}){
     const dispatch = useDispatch()
-    const {bookingId} = useParams()
+
     const allBookings = useSelector(state=> state.booking)
-    const specificBooking = allBookings[bookingId]
+    const specificBooking = allBookings[bookId]
     const [date, setDate] = useState(new Date(specificBooking.booking_date).toLocaleDateString())
     const [time_from, setTimeFrom] = useState(specificBooking.booking_time_from)
     const [time_to, setTimeTo] = useState(specificBooking.booking_time_to)
-   
-    const handleSubmit =(e)=>{
+    const [errors, setErrors] = useState('')
+
+    
+
+
+
+
+
+    const handleSubmit = async (e)=>{
+
         e.preventDefault()
         const payload ={
             date,
             time_from,
             time_to
         }
+       
     
-        dispatch(edit_booking(bookingId,payload))
+        const data = await dispatch(edit_booking(bookId,payload))
+
+        if(data.errors){
+            setErrors(data.errors)
+        }
+        else{
+            closeModal()
+            
+        }
     }
+   
 
     return(
-        <div>
+        <>
+        <div className='errors bg-red-50 '>
+        {errors ? <div>{errors}</div>: null}
+        </div>
+
+       
+        <div className='edit_booking_container w-80 flex justify-center items-center p-3 rounded-lg'>
         <form onSubmit={handleSubmit}>
+
+        
         <label>Date:</label>
+
+        <div className=''>
         <input
         type = 'date'
         value={date}
         onChange={(e)=>setDate(e.target.value)}
     
         />
+        </div>
 
         <label>Time From:</label>
+        <div>
         <input
         type = 'time'
         value={time_from}
         onChange={(e)=>setTimeFrom(e.target.value)}
         />
 
+        </div>
+
         <label>Time To:</label>
+        <div>
         <input
         type = 'time'
         value={time_to}
         onChange={(e)=>setTimeTo(e.target.value)}
         />
+        </div>
         
-        
-        <button type='submit'>Submit</button>
+        <button className='submit_edit_booking_btn bg-black' type='submit'><span>Submit</span></button>
         </form>
         </div>
+        </>
     )
 }
 

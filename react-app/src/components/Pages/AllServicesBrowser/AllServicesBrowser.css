@@ -1,0 +1,12 @@
+.allServices_img img{
+    margin-top: 1%;
+    width: 90rem;
+    height: 25rem;
+    object-fit: cover;
+  }
+  .allServices_img{
+    position: relative;
+  }
+  .service_detail {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }

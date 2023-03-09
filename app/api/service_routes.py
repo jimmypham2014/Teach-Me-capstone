@@ -148,7 +148,7 @@ def add_booking(service_id):
                 if data_dates.is_intersection(received_dates):
                     return {'errors':'Someone already booked this time, please book another time'},409
 
-        if datetime.datetime.now() < date_time_from:
+        if datetime.datetime.now() > date_time_from:
             return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
         elif date_time_from > date_time_to:
             return {'errors':'Any booking for the past dates or time cannot be accomodated'},406

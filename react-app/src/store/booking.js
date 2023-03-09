@@ -80,6 +80,11 @@ export const edit_booking =(bookingId,booking) => async(dispatch) =>{
         dispatch(addBooking(bookingData))
         return bookingData
     }
+    else{
+        const errors = await res.json()
+ 
+        return errors
+     }
 
 }
 

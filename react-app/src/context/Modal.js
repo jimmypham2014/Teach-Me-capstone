@@ -29,12 +29,13 @@ export function ModalProvider({ children }) {
   };
 
   return (
-    <>
+    <div>
       <ModalContext.Provider value={contextValue}>
         {children}
       </ModalContext.Provider>
       <div ref={modalRef} />
-    </>
+      
+      </div>
   );
 }
 
@@ -44,12 +45,15 @@ export function Modal() {
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;
 
+  const c = React.cloneElement(modalContent,
+      {'closeModal':closeModal}
+    )
   // Render the following component to the div referenced by the modalRef
   return ReactDOM.createPortal(
     <div id="modal">
       <div id="modal-background" onClick={closeModal} />
       <div id="modal-content">
-        {modalContent}
+        {c}
       </div>
     </div>,
     modalRef.current
