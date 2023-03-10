@@ -49,7 +49,7 @@ function ServiceDetailPage(){
 
 
     return(
-        <div className='flex justify-center items-center py-5'>
+        <div className='2xl:flex 2xl:flex-row  xl:flex xl:flex-row justify-center items-center py-5 sm:flex-col md:flex-col'>
 
             <div className=''>
                 {service&&(
@@ -168,7 +168,7 @@ function ServiceDetailPage(){
 
              </div>
 
-             <div className='ml-[100px]'>
+             <div className='ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px]   md:flex md:flex-col md:items-center md:w-[100px]  lg:flex lg:flex-col lg:items-center lg:w-[400px] '>
                 <CreateBookingForm serviceId ={service.id}/>
              </div>
 

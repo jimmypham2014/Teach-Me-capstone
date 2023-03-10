@@ -41,7 +41,7 @@ function CreateBookingForm({serviceId}){
 
 
     return(
-        <div className='booking flex flex-col justify-center items-center border-2 w-[220px] h-[250px]'> 
+        <div className='booking flex flex-col justify-center items-center border-2 w-[220px] h-[250px] sm:w-[300px]'> 
 
         <div className='font-bold'>
             Book a session
@@ -104,7 +104,7 @@ function CreateBookingForm({serviceId}){
 
         
             
-        <button className='submit_edit_booking_btn bg-black' type='submit'><span>Book</span></button>
+        <button className='submit_edit_booking_btn bg-black ' type='submit'><span>Book</span></button>
            
         </form>
         </div>
