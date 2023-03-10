@@ -39,18 +39,29 @@ function ServicePage(){
             <img src={banner}/>
             <div className='banner_info'>
             <h1 className ='banner_title_1 text-center'>Introducing TEACH</h1>
-            <h3 className ='banner_title_2'>Learning Starts Here</h3>
-            <button className='banner_btn' onClick={()=> history.push('/services')}><span>View All Services</span> </button> add this later one
+            <h3 className ='banner_title_2'>Work Smarter, Not <span className='text-white line-through'>Harder</span> </h3>
+            <button className='banner_btn' onClick={()=> history.push('/services')}><span>View All Services</span> </button>
           
             </div>
         </div>
         
+        <div className='pt-8'>
+            <div className='flex justify-center '>
+            <h1 className='text-xl font-semibold'>Services</h1> 
+            </div>
+              
+        <div className='border'></div>
+
+        </div>
+
 
         <div className='flex items-center'>
 
         <div>
             <button onClick={scrollLeft} className='p-2 m-2 rounded-full bg-gray-50 hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300'><AiOutlineArrowLeft/></button>
         </div>
+
+        
        
 
         <div id='services_content' className ='carousel p-4 flex items-center justify-start overflow-x-auto scroll-smooth scrollbar-hide m-4'>

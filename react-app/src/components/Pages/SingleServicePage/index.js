@@ -5,6 +5,9 @@ import { getSingleService,deleteService, getAllServices } from "../../../store/s
 import CreateBookingForm from "../../Forms/CreateBookingForm";
 import EditServiceForm from "../../Forms/EditServiceForm";
 import './SingleServicePage.css'
+import {TbCategory} from 'react-icons/tb'
+import {FaUniversity} from 'react-icons/fa'
+import {IoMdSchool} from 'react-icons/io'
 
 function ServiceDetailPage(){
     const dispatch = useDispatch()
@@ -46,23 +49,28 @@ function ServiceDetailPage(){
 
 
     return(
-        <div className='single_service_container'>
+        <div className='flex justify-center items-center py-5'>
 
-            <div className='main'>
+            <div className=''>
                 {service&&(
-                    <div id='service_details'>
+                    <div id=''>
                         <div>
-                            <h1>{service.title}</h1>
+                            <h1 className='font-bold text-2xl'>{service.title}</h1>
                         </div>
-                         <div>
-                            {service.subject}
+                         <div className='flex items-center'>
+                           <TbCategory/>
+                           <div className='pl-2'>
+                           {service.subject}
+                           </div>
+                           
                         </div>
+                        <div className='border'></div>
 
-                        <div className='tutor_container'>
+                        <div className='flex'>
                             {specificUser.map(user=>{
                                 return(
-                                    <div className ='tutor_info'>
-                                        <div id='image'> <img src={user.profileImg}/></div>
+                                    <div className ='flex items-center justify-between'>
+                                        <div className='w-9 p-1'> <img src={user.profileImg}/></div>
                                         <div id='username'>{user.username}</div>
                                        
                                     </div>
@@ -71,7 +79,7 @@ function ServiceDetailPage(){
                         
                         </div>
 
-                        <div className='single_service_image'>
+                        <div className='single_service_image w-full '>
                             <img src={service.image}/>
                         </div>
             
@@ -85,19 +93,22 @@ function ServiceDetailPage(){
                     </div>: null}
 
 
-                    <div>
-                    <h4>About this service</h4>
-                       <p>{service.description}</p> 
+                    <div className='p-2'>
+                    <h4 className='font-bold text-xl'>About this service</h4>
+                       <p className='m-3'>{service.description}</p> 
                     </div>
 
+                    <div className='border'></div>
 
-                  <div>
-                  <h4>About The Tutor</h4>
+                    
+
+                  <div className='p-2'>
+                  <h4 className='font-bold text-xl'>About The Tutor</h4>
                         <div>
                     {specificUser.map(user=>{
                         return(
-                           <div className='about_me_container'>
-                                <div id='about_me_image'>
+                           <div className='flex items-center '>
+                                <div className='w-[100px] p-2'>
                                     <img src={user.profileImg}/>
                                 </div>
 
@@ -113,7 +124,7 @@ function ServiceDetailPage(){
                     </div>
 
                     <div>
-                        <h5> About me</h5>
+                        <h5 className='font-bold'> About me</h5>
                         <div>
                         {specificUser.map(user=>{
 
@@ -129,12 +140,19 @@ function ServiceDetailPage(){
                            return(
 
                             <div>
-                            <div>
-                            College: {tutor.education}
+                            <div className='flex items-center'>
+                            <FaUniversity/> 
+                            <div className='pl-2'>
+                            
+                            {tutor.education}
+                            </div>
 
                             </div>
-                            <div>
-                            Credentials: {tutor.credentials}
+                            <div className='flex items-center'>
+                                <IoMdSchool/> 
+                                <div className='pl-2'>
+                                {tutor.credentials}
+                                </div>
                             </div>
                               
                             </div>
@@ -150,7 +168,7 @@ function ServiceDetailPage(){
 
              </div>
 
-             <div className='create_booking_form'>
+             <div className='ml-[100px]'>
                 <CreateBookingForm serviceId ={service.id}/>
              </div>
 

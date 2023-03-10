@@ -11,40 +11,36 @@ const users = useSelector(state => Object.values(state.otherUsers))
 
 
 return (
-    <div className='allServices-container w-fit h-auto'>
+    <div className='allServices-container mx-auto py-13 '>
     
-        <div className='allServices_img'>
+        <div className='allServices_img p-1'>
             <img src={banner} className='w-2/4'/>
         </div>
     
 
-        <div className='grid grid-cols-4 p-7' >
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 gap-[54px] max-w-sm max-auto md:max-w-none md:mx-0' >
         {services.map(service=>{
 
             return (
-                <Link key={service.id} to={`/services/${service.id}`} className="service_container my-1">
-                    <div className="service_detail p-2 m-2 transition ease-in-out delay-200 hover:-translate-y-1 hover:scale-110"> 
+                <Link key={service.id} to={`/services/${service.id}`} className=" w-[200px] h-[340px] pt-8">
+                    <div className=" details border border-[#e4e4e] mb-4 relative overflow-hidden group tranistion hover:scal-125 rounded-t-lg "> 
 
-                        <div id='details'>
+                        <div  className='w-full h-full  flex justify-center items-center'>
 
-                            <div className='service_image'>
-                                <img src={service.image}/>
+                            <div className=' mx-auto flex justify-center items-center'>
                             
+                                <img className='max-h-[160x] h-[140px] group-hover:scale-110  transition duration-500 ease-in-out rounded-t-lg ' src={service.image}/>
                             </div>
-
                         
-                            <div id='subject_info'>
-                                <div>
-                                Subject: {service.subject}
-                                </div>
-                                <div>
-                                Subject Level: {service.subject_level}
-                                </div>
-                            </div>
-                           
-                             
                         </div>
 
+                        <div>
+                            <h2 className='font-semibold mb-1 pt-2 pl-2'>Subject: {service.subject}</h2>
+                            <h2 className='font-semibold mb-1 pl-2'>Subject-Level: {service.subject_level}</h2>
+                        </div>
+
+                        
+                
                         <div className='tutor_info'>
                         {users.map(user=>{
                             if(service.tutor === user.id){
@@ -62,18 +58,14 @@ return (
                         })}
                         
                         </div>
-                        <div id='title'>
-                            {service.title}
+
+                        <div>
+                        <h2 className='font-semibold mb-1 pl-2'>{service.title}</h2>
                         </div>
 
-
-                        <div className='favorite_price'>
-                                <div>
-                                    <h5>My rate is ${service.price}/hr</h5>
-                                </div>
-                        
+                        <div className='mb-1 pl-2'>
+                            My rate is ${service.price}/hr
                         </div>
-
 
                     </div>
                 

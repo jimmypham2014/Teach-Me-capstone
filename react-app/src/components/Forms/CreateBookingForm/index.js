@@ -41,12 +41,14 @@ function CreateBookingForm({serviceId}){
 
 
     return(
-        <div className='bookingForm_container'> 
+        <div className='booking flex flex-col justify-center items-center border-2 w-[220px] h-[250px]'> 
 
-        <div className='booking_form_title'>
+        <div className='font-bold'>
             Book a session
         
         </div>
+
+        
 
         <span></span>
         <div>
@@ -59,9 +61,11 @@ function CreateBookingForm({serviceId}){
             :
             null
        }
+       <div className='border'></div>
 
-        <div id='form_detail'>
-        <label>Date:</label>
+        <div className='flex flex-col items-center'>
+        <label>Pick a date</label>
+        <div >
         <input
         type = 'date'
         required
@@ -69,12 +73,13 @@ function CreateBookingForm({serviceId}){
         onChange={(e)=>setDate(e.target.value)}
         />
         </div>
+        </div>
 
 
        
         <div className='booking_time'>
             <div>
-        <label>From: </label>
+        <label>At: </label>
         <input
         type = 'time'
         required
@@ -98,17 +103,9 @@ function CreateBookingForm({serviceId}){
   
 
         
-            <div  className='booking_btn' id='form_detail'>
-            <button className='cta' type='submit'>
-            <span>Book Now!</span>
-            <svg width="13px" height="10px" viewBox="0 0 13 10">
-            <path d="M1,5 L11,5"></path>
-            <polyline points="8 1 12 5 8 9"></polyline>
-                </svg>
             
-            
-            </button>
-            </div>
+        <button className='submit_edit_booking_btn bg-black' type='submit'><span>Book</span></button>
+           
         </form>
         </div>
         
