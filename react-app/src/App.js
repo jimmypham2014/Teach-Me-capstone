@@ -67,12 +67,12 @@ useEffect(()=>{
               { currentUser ?<ServicePage/> : <HomePage/>}
           </Route>
 
+      
+
           <Route exact path= "/services">
           <AllServicesBrowser/>
-        </Route>
+          </Route>
         
-
-         
 
           <Route exact path= '/services/create_a_service'>
           <CreateServiceForm/>
@@ -112,6 +112,7 @@ useEffect(()=>{
           <ProfilePage/>
           </Route>
 
+          
          
 
         </Switch>

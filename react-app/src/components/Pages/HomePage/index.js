@@ -57,18 +57,18 @@ function HomePage(){
 
             <div>
 
-            <button onClick={()=>history.push('/tutorsignup')}>Become a Tutor</button>
+            <button className='button_style' onClick={()=>history.push('/tutorsignup')}>Become a Tutor</button>
         
             </div>
 
-            <div className = 'login'>
+            <div className='button_style'>
             <OpenModalButton
               buttonText="Sign In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
             </div>
-            <div className=''>
+            <div className='button_style'>
             <OpenModalButton
               buttonText="Join"
               onItemClick={closeMenu}
@@ -77,7 +77,7 @@ function HomePage(){
             
             </div>
             <div>
-            <button onClick={demo}>Log in as Demo</button>
+            <button className='button_style' onClick={demo}>Log in as Demo</button>
             </div>
             
 
@@ -89,7 +89,7 @@ function HomePage(){
         <div className='homepage_title flex items-center justify-center h-screen'>
             <h1 className='title font-bold text-center text-6xl'>Welcome to Teach-Me!</h1>
             <h3 className='sub_title text-center text-2xl '>Become a tutor to post your own services!</h3>
-            <button className='become_a_tutor text-center top-1' onClick={()=>history.push('/tutorsignup')} ><span>Become A TUTOR</span> </button>
+            <button className='become_a_tutor text-center top-1 xl:top-8 2xl:top-1' onClick={()=>history.push('/tutorsignup')} ><span>Become A TUTOR</span> </button>
         </div>
 
             
