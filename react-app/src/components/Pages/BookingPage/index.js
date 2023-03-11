@@ -156,7 +156,8 @@ const formatUTCDate = (date) =>{
             </div>
 
         
-     
+        <div className='calendar'>
+        
         <StyleWrapper>
         <FullCalendar
         className='w-2'
@@ -183,7 +184,7 @@ const formatUTCDate = (date) =>{
          />
 
          </StyleWrapper>
-
+         </div>
          
          </div>
 

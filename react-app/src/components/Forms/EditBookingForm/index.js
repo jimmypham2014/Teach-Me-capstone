@@ -52,7 +52,7 @@ function EditBookingForm({bookId, closeModal}){
         </div>
 
        
-        <div className='edit_booking_container w-80 flex justify-center items-center p-3 rounded-lg'>
+        <div className='edit_booking_container w-80 flex justify-center items-center p-3 rounded-lg z-2'>
         <form onSubmit={handleSubmit}>
 
         
