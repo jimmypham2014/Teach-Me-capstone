@@ -38,12 +38,18 @@ def edit_booking(id):
     date_time_to = datetime.datetime.strptime(f'{date}-{time_to}','%Y-%m-%d-%H:%M:%S')
     received_dates = DateTimeRange(f'{date}T{time_from}', f'{date}T{time_to}')
 
+    print(form.data)
+
+
 
 
 
     if form.validate_on_submit():
         data = form.data
         booking = Booking.query.get(id)
+
+        
+
 
         if time_from.hour > time_to.hour:
             return {'errors':'Invalid Booking Time'},406

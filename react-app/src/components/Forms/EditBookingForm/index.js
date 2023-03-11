@@ -20,7 +20,7 @@ function EditBookingForm({bookId, closeModal}){
 
 
 
-
+console.log(specificBooking.booking_time_from)
 
     const handleSubmit = async (e)=>{
 
@@ -31,7 +31,7 @@ function EditBookingForm({bookId, closeModal}){
             time_to
         }
        
-    
+        console.log(time_from, time_to)
         const data = await dispatch(edit_booking(bookId,payload))
 
         if(data.errors){

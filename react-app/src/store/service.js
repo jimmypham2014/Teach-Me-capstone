@@ -35,18 +35,30 @@ export const getAllServices = () => async (dispatch)=>{
 
 
 export const addService = (service) => async(dispatch)=>{
+    const{  title,subject,image,description,subject_level,price} = service
+
+    const formData = new FormData()
+    formData.append("title",title)
+    formData.append("subject",subject)
+    formData.append("subject_level",subject_level)
+    formData.append("description",description)
+    formData.append("price",price)
+
+
+    console.log(image)
+    if(image) formData.append("image", image)
+   
+
     const res = await fetch("/api/services/",{
     method: "POST",
-    headers:{
-        "Content-Type": "application/json",
-    },
-    body:JSON.stringify(service),
+    body: formData,
     
 })
 
+
 if(res.ok){
     const newData = await res.json();
-    
+     
     dispatch(add_service(newData))
     return newData
 } else{

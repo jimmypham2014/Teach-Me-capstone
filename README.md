@@ -2,6 +2,9 @@
 Description
 
 A tutoring service that allows students to get taught anywhere around the world. [https://teach-me-6um4.onrender.com/]
+
+About the project:
+
 ![Alt text](example.png)
 
 2. Install dependencies

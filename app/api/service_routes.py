@@ -5,6 +5,7 @@ from app.forms import ServiceForm, BookingForm
 import datetime
 from .auth_routes import validation_errors_to_error_messages
 from  datetimerange import DateTimeRange
+from ..aws import allow_file, get_unique_filename, upload_file_to_s3
 
 service_routes = Blueprint('services', __name__)
 
@@ -21,27 +22,64 @@ def load_service():
 @service_routes.route('/', methods=['POST'])
 @login_required
 def add_service():
+    
+
+    url =''
+    print(request.files['image'],'hellooooo')
+    if "image" in request.files:
+        imageFile = request.files['image']
+    else:
+        imageFile = ""
+
     form = ServiceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    if(imageFile):
+        if not allow_file(imageFile.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        imageFile.filename = get_unique_filename(imageFile.filename)
+        
+
+        upload = upload_file_to_s3(imageFile)
+        print(upload,'----------------sdfsdfdsdsfsdfsdf')
+
+        if "url" not in upload:
+            return {"errors": "failed to upload into s3"}, 400
+
+        url = upload['url']
+
+       
+
+    
+
+
+       
+ 
 
     if form.validate_on_submit():
         data = form.data
+        print(type(url),'****88888888888')
         new_service = Service(tutor_id=current_user.get_id(),
                               title = data['title'],
-                              image = data['image'],
                               subject_level=data['subject_level'],
                               subject = data['subject'],
                               price = data['price'],
-                              description = data['description'])
-   
-        form.populate_obj(new_service)
+                              description = data['description'],
+                              image = url
+                              )
+                              
+        
         db.session.add(new_service)
         db.session.commit()
         return new_service.to_dict()
     
     return {'errors': validation_errors_to_error_messages(form.errors)},401
     
+
+
+
+
 
 @service_routes.route('/<int:id>', methods=["PUT","PATCH"])
 @login_required

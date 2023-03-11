@@ -68,6 +68,7 @@ export const remove_booking =(bookingId) => async(dispatch) =>{
 
 export const edit_booking =(bookingId,booking) => async(dispatch) =>{
   
+    console.log(booking, 'thunk')
     const res = await fetch(`/api/bookings/${bookingId}`,{
         method: 'PUT',
         headers:{

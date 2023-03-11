@@ -40,6 +40,11 @@ function CreateServiceForm(){
         
     }
 
+    const updateImage = (e) =>{
+        const file = e.target.files[0]
+        setImage(file)
+    }
+
 
     return (
         <div className=''>
@@ -52,7 +57,7 @@ function CreateServiceForm(){
             </div>
         )}
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
 
 
         <div className='title_container p-4'>
@@ -78,11 +83,11 @@ function CreateServiceForm(){
         <div>
        
         <input
-        type = 'text'
+        type = 'file'
         required
-        value={image}
-        required
-        onChange={(e) =>setImage(e.target.value)}
+        accept='image/*'
+        name="image"
+        onChange={updateImage}
         />
         </div>
 
