@@ -23,9 +23,6 @@ def load_service():
 @login_required
 def add_service():
     
-
-    url =''
-    print(request.files['image'],'hellooooo')
     if "image" in request.files:
         imageFile = request.files['image']
     else:
@@ -42,7 +39,6 @@ def add_service():
         
 
         upload = upload_file_to_s3(imageFile)
-        print(upload,'----------------sdfsdfdsdsfsdfsdf')
 
         if "url" not in upload:
             return {"errors": "failed to upload into s3"}, 400
@@ -59,7 +55,6 @@ def add_service():
 
     if form.validate_on_submit():
         data = form.data
-        print(type(url),'****88888888888')
         new_service = Service(tutor_id=current_user.get_id(),
                               title = data['title'],
                               subject_level=data['subject_level'],

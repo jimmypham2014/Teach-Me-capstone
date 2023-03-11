@@ -38,7 +38,7 @@ function ServicePage(){
         <div className='service_banner'>
             <img src={banner}/>
             <div className='banner_info'>
-            <h1 className ='banner_title_1 text-center'>Introducing TEACH</h1>
+            <h1 className ='banner_title_1 text-center '>Introducing TEACH</h1>
             <h3 className ='banner_title_2'>Work Smarter, Not <span className='text-white line-through'>Harder</span> </h3>
             <button className='banner_btn' onClick={()=> history.push('/services')}><span>View All Services</span> </button>
           

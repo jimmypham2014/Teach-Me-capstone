@@ -33,11 +33,9 @@ function CreateServiceForm(){
         if(data.errors){
             setErrors(data.errors)
         }else{
-            history.push('/')
+            history.push('/services')
         }
        
-        
-        
     }
 
     const updateImage = (e) =>{

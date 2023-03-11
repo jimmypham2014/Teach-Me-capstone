@@ -45,7 +45,6 @@ export const addService = (service) => async(dispatch)=>{
     formData.append("price",price)
 
 
-    console.log(image)
     if(image) formData.append("image", image)
    
 
