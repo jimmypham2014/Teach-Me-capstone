@@ -12,18 +12,20 @@ function EditBookingForm({bookId, closeModal}){
     const allBookings = useSelector(state=> state.booking)
     const specificBooking = allBookings[bookId]
     const [date, setDate] = useState(new Date(specificBooking.booking_date).toLocaleDateString())
-    const [time_from, setTimeFrom] = useState(specificBooking.booking_time_from)
-    const [time_to, setTimeTo] = useState(specificBooking.booking_time_to)
+    const [time_from, setTimeFrom] = useState(specificBooking.booking_time_from.slice(0,5))
+    const [time_to, setTimeTo] = useState(specificBooking.booking_time_to.slice(0,5))
     const [errors, setErrors] = useState('')
 
+    console.log(time_from, time_to)
     
-
-
-
-
+    
     const handleSubmit = async (e)=>{
-
+        
+        
+        
+        console.log(time_from, time_to)
         e.preventDefault()
+
         const payload ={
             date,
             time_from,

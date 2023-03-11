@@ -18,4 +18,8 @@ button{
     color: black;
 
 }
+.footer{
+    border-bottom: 2px solid lightgray;
+    flex-grow: 1;
+}
   
