@@ -19,6 +19,7 @@ import { getAllTutors } from "./store/tutor";
 import ProfilePage from "./components/Pages/ProfilePage";
 import { getAllUsers } from "./store/user";
 import AllServicesBrowser from "./components/Pages/AllServicesBrowser";
+import About from "./components/Pages/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +73,10 @@ useEffect(()=>{
           <Route exact path= "/services">
           <AllServicesBrowser/>
           </Route>
+
+          <Route exact path= '/about'>
+          <About/>
+          </Route>
         
 
           <Route exact path= '/services/create_a_service'>
@@ -111,6 +116,9 @@ useEffect(()=>{
           <Route exact path= '/:username'>
           <ProfilePage/>
           </Route>
+
+         
+
 
           
          

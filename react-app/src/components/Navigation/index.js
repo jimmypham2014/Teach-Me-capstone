@@ -30,6 +30,10 @@ function Navigation({ isLoaded }){
 					
 					</NavLink>
 
+					<NavLink to='/about'>
+					About
+					</NavLink>
+
 
 					<div>
 					<ProfileButton user={sessionUser} />
