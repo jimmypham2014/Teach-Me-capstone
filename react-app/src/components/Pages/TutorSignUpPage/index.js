@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
 import { signUp, tutorSignUp } from "../../../store/session";
 import './TutorSignUpPage.css'
 
@@ -18,19 +18,31 @@ function TutorSignUp() {
 	const [lastName, setLastName] = useState('')
 	const [errors, setErrors] = useState([]);
 	const history = useHistory()
+	const user = useSelector(state => state.session.user )
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
             
-			await dispatch(tutorSignUp(firstName, lastName, is_student, credentials, education, username, email, password));
-	
-		} else {
+			 const data =await dispatch(tutorSignUp(firstName, lastName, is_student, credentials, education, username, email, password));
+			
+			if(data){
+				setErrors(data)
+			}else{
+				history.push('/')
+			}
+
+		} else  {
 			setErrors([
 				"Confirm Password field must be the same as the Password field",
 			]);
 		}
-		history.push('/')
+
+	
+		if (user) {
+			return <Redirect to='/' />;
+		  }
+	
 	};
 
 	return (
@@ -42,9 +54,9 @@ function TutorSignUp() {
 			</div>
 
 			<form onSubmit={handleSubmit}>
-				<ul>
+				<ul >
 					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
+						<li key={idx} className='text-red-500'>{error}</li>
 					))}
 				</ul>
 

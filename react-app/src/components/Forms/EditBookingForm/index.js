@@ -16,14 +16,14 @@ function EditBookingForm({bookId, closeModal}){
     const [time_to, setTimeTo] = useState(specificBooking.booking_time_to.slice(0,5))
     const [errors, setErrors] = useState('')
 
-    console.log(time_from, time_to)
+  
     
     
     const handleSubmit = async (e)=>{
         
         
         
-        console.log(time_from, time_to)
+    
         e.preventDefault()
 
         const payload ={
