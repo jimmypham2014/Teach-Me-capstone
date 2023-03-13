@@ -88,7 +88,7 @@ function HomePage(){
 
         <div className='homepage_title flex items-center justify-center h-screen'>
             <h1 className='title font-bold text-center text-6xl'>Welcome to Teach-Me!</h1>
-            <h3 className='sub_title text-center text-2xl xl:top-1/2 '>Become a tutor to post your own services!</h3>
+            <h3 className='sub_title text-center text-2xl xl:top-1/2 2xl:top-[450px] '>Become a tutor to post your own services!</h3>
             <button className='become_a_tutor text-center xl:top-[70px]  2xl:top-1' onClick={()=>history.push('/tutorsignup')} ><span>Become A TUTOR</span> </button>
         </div>
 

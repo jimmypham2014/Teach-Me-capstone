@@ -21,7 +21,7 @@ export const StyleWrapper = styled.div`
      height: 700%
      border:1px solid black;
      border-radius: 10px;
-     margin-left: 10rem;
+     margin-left: 5rem;
      box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
      z-index:-1;
 
@@ -38,6 +38,9 @@ export const StyleWrapper = styled.div`
 .fc-event-title{
     font-size: 10px;
     
+}
+.fc-event-time{
+    font-size: 10px;
 }
 
 }
@@ -171,7 +174,7 @@ const formatUTCDate = (date) =>{
         weekends ={true}
         events={ bookings.map(book=>{
             return{
-                title: `${services.map(service => service.id === book.service_id ? `${service.title}`:null)}`,
+                title: `${services.map(service => service.id === book.service_id ? `${service.title.replace(/,/g,'')}`:null)}`,
                 start: formatUTCDate(book.booking_date) +'T'+book.booking_time_from ,
                 end: formatUTCDate(book.booking_date)+'T'+book.booking_time_to,
             }

@@ -38,9 +38,10 @@
 }
 
 #background_img{
-    animation: changeBg 1s infinite; min-height: 70rem; min-width: 90rem; 
+    animation: changeBg 1s infinite; min-height: 70rem; width: 125rem; 
     position: absolute;
-    margin: -30px 0 0 -240px;
+    margin-left: -20rem ;
+    margin-top: -6rem;
     z-index: -1;
     background-repeat: no-repeat;
     background-size: cover;

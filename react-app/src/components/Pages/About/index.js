@@ -9,7 +9,7 @@ function About(){
         <div>
         <div className='relative -z-1 flex justify-center pt-3 items-center'>
 
-            <img className= 'xl:object-contain xl:w-[1000px] xl:h-[600px] sm:w-[500px] sm:h-[200px] sm:object-contain' src={about_image}/>
+            <img className= 'xl:object-cover xl:w-[1500px] xl:h-[900px] sm:w-[500px] sm:h-[200px] sm:object-contain' src={about_image}/>
 
 
             <div className='absolute z-1 top-[100px]'>
