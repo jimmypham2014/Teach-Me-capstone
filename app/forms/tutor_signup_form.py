@@ -25,7 +25,7 @@ class TutorSignUpForm(FlaskForm):
     lastName = StringField('Last Name')
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
+    email = StringField('email', validators=[DataRequired(), Email(), user_exists])
     education = StringField('education')
     credentials = StringField('credentials')
     is_student = BooleanField('Student?')
