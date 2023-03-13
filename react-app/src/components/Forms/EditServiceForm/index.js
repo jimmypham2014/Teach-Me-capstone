@@ -41,7 +41,7 @@ function EditServiceForm(){
        if(data.errors){
         setErrors(data.errors)
     }   else{
-        history.push('/')
+        history.push(`/services/${specificService.id}`)
     }
 
     }
@@ -155,7 +155,7 @@ function EditServiceForm(){
     
         
         
-        <button type="submit" className='btn'><span>Submit</span></button>
+        <button type="submit" className='btn bg-black'><span>Submit</span></button>
         </form>
         
 
