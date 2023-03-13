@@ -56,7 +56,7 @@ function ProfileButton({ user }) {
         {user ? (
           <>
             <li>{user.username}</li>
-            <li>{user.email}</li>
+            <li className='email'>{user.email}</li>
             
             { user.is_student === false ?
               
