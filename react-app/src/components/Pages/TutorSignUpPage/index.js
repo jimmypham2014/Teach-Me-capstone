@@ -34,7 +34,7 @@ function TutorSignUp() {
 	};
 
 	return (
-		<div className='sign_up_container'>
+		<div className='sign_up_container flex  flex-col justify-center '>
 
 			<div>
 			<h1>Personal Info</h1>
@@ -48,71 +48,75 @@ function TutorSignUp() {
 					))}
 				</ul>
 
-				<div className ='full_name' id='detail_container'>
+				<div className ='full_name ' id='detail_container'>
 
-					<label className='detail'> Full Name </label>
+					<div className='detail '> Full Name </div>
 
-						<div className='first_last'>
-							<div>
+						<div className='first_last flex w-[800px] flex-end'>
+							
 							<input
 							type="text"
 							value={firstName}
 							placeholder='First Name'
 							onChange={(e) => setFirstName(e.target.value)}
 							required
-							/>
-							</div>
 
-							<div>
+							className= 'w-[3000px]'
+							/>
+						
+
+							
 							<input
 							type="text"
 							value={lastName}
 							placeholder='Last Name'
 							onChange={(e) => setLastName(e.target.value)}
 							required
+							className= 'w-[3000px]'
 							/>
-							</div>
+					
 						
 					</div>
 
-					<div></div>
 				
 				</div>
 
-				<div className='email_container' id='detail_container' >
+				<div className='email_container w-[1500px]' id='detail_container' >
 
 					<div className='email'>
 						Email
 					</div>
 					
-					<div className='email_input'>
+					
 						<input
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
+						
 						/>
-					</div>
+					
 		
 				</div>
 
 
 
-				<div id='detail_container' >
-                <label>Education</label>
+				<div id='detail_container w-[1500px] ' id='detail_container'>
+                <div>Education</div>
 					<div>
 					<input
 						type="text"
 						value={education}
 						onChange={(e) => setEducation(e.target.value)}
 						required
+						
 					/>
 					</div>
 			
 				</div>
 
 
-				<div id='detail_container'>
+				<div id='detail_container w-[1500px] ' id='detail_container'>
                 <div>Credentials</div>
 					<div>
 					<input
@@ -120,34 +124,37 @@ function TutorSignUp() {
 						value={credentials}
 						onChange={(e) => setCredentials(e.target.value)}
 						required
+						
 					/>
 					</div>
 				</div>
 
-				<div id='detail_container'>
+				<div id='detail_container w-[1500px] ' id='detail_container'>
 				<div>Username</div>
 					<input
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
+						
 					/>
 				
 
 				</div>
 
-				<div id='detail_container'>
+				<div id='detail_container w-[1500px]'  id='detail_container'>
 				<div>Password</div>
 					<input
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
+						className= 'w-[4000px]'
 					/>
 				
 				</div>
 
-				<div id='detail_container'>
+				<div id='detail_container' id='detail_container'>
 				<div>Confirm Password</div>
 					<input
 						type="password"
