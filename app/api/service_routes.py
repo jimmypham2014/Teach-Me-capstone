@@ -132,33 +132,22 @@ def add_booking(service_id):
 
 
  
-    # if datetime.datetime.now() > date_time_from:
-    #     return jsonify(message='Any booking for the past dates or time cannot be accomodated'),406
-    # if date_time_from > date_time_to:
-    #     return jsonify(message='Any booking for the past dates or time cannot be accomodated'), 406
-
+  
+    print(date, 'dateeeeee')
 
     today = date.today()
 
+    print(today, 'todayyy')
+
+    if today > date:
+        return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
+
+
     current_time  = datetime.datetime.now()
-    # valid_time = True
-    # valid_booking_time = False
 
 
+    print(current_time, 'current timeee')
 
-    # # if date == today, the hour === time from hour -> 
-    # if date == today:
-    #     if current_time.hour == time_from.hour:
-    #         if current_time.minute > time_from.minute:
-    #             valid_time = False
-    #     elif current_time.hour > time_from.hour:
-    #         valid_time = False
-
-    # # cannot book a date before today's date
-    # if today > date:
-    #     valid_time = False
-
-    #valdiate time from and time to
 
     if(time_from.hour <= time_to.hour):
         valid_booking_time = False
@@ -169,6 +158,7 @@ def add_booking(service_id):
         if time_from.hour > time_to.hour:
             return {'errors':'Invalid Booking Time'},406
 
+        
         
         datas = Booking.query.all()
 
@@ -182,7 +172,7 @@ def add_booking(service_id):
                     return {'errors':'Someone already booked this time, please book another time'},409
 
         if datetime.datetime.now() > date_time_from:
-            return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
+            return {'errors':'Any booking for the past dates or time cadfdfnnot be accomodated'},406
         elif date_time_from > date_time_to:
             return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
         elif time_from.minute > time_to.minute:

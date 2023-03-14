@@ -39,16 +39,18 @@ def edit_booking(id):
     received_dates = DateTimeRange(f'{date}T{time_from}', f'{date}T{time_to}')
 
 
+    today = date.today()
 
+    if today > date:
+        return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
 
-
-
+ 
 
     if form.validate_on_submit():
         data = form.data
         booking = Booking.query.get(id)
 
-        
+    
 
 
         if time_from.hour > time_to.hour:
@@ -66,9 +68,9 @@ def edit_booking(id):
                     return {'errors':'Someone already booked this time, please book another time'},409
 
         if datetime.datetime.now() > date_time_from:
-            return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
+            return {'errors':'Any booking for the past dates or time cannot bdasdsae accomodated'},406
         elif date_time_from > date_time_to:
-            return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
+            return {'errors':'Any booking for the past dates or time cannot bffe accomodated'},406
         elif time_from.minute > time_to.minute:
                 return {'errors':'Your booking time must be 1 hour minimum'},406
 

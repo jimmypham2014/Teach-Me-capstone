@@ -63,6 +63,7 @@ function EditBookingForm({bookId, closeModal}){
         type = 'date'
         value={date}
         onChange={(e)=>setDate(e.target.value)}
+        required
     
         />
         </div>
