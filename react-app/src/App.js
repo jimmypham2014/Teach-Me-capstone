@@ -74,7 +74,9 @@ useEffect(()=>{
           <AllServicesBrowser/>
           </Route>
 
-        
+          <Route exact path= '/about'>
+          <About/>
+          </Route>
         
 
           <Route exact path= '/services/create_a_service'>
