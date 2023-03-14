@@ -11,7 +11,7 @@ import defaultProf from '../../icons/default_prof.png'
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const currentUser = useSelector(state =>state.session)
+  const currentUser = useSelector(state =>state.session.user)
   const ulRef = useRef();
   const history = useHistory()
 
@@ -46,11 +46,12 @@ function ProfileButton({ user }) {
   const hostAService = ()=>{
     history.push('/services/create_a_service')
   }
+  console.log(currentUser.username)
 
   return (
     <div className='prof'>
       <button onClick={openMenu} > 
-       {currentUser.profileImg ? currentUser.profileImg  : <img src={defaultProf}/>}
+       {currentUser.profileImg ? <img src={currentUser.profileImg }/> : <img src={defaultProf}/>}
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -63,7 +64,6 @@ function ProfileButton({ user }) {
               <li>
               <button onClick={hostAService}>Host a service</button>
               </li>
-              
               :null} 
             
           

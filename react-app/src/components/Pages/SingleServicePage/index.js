@@ -47,6 +47,8 @@ function ServiceDetailPage(){
     const specificTutor = tutors.filter(tutor => service.tutor === tutor.user_id)
     const specificUser = users.filter(user => user.id === service.tutor)
 
+    console.log(specificUser)
+
 
     return(
         <div className='2xl:flex 2xl:flex-row  xl:flex xl:flex-row justify-center items-center py-5 sm:flex-col md:flex-col'>
@@ -70,7 +72,11 @@ function ServiceDetailPage(){
                             {specificUser.map(user=>{
                                 return(
                                     <div className ='flex items-center justify-between'>
-                                        <div className='w-9 p-1'> <img src={user.profileImg}/></div>
+                                        <div className='w-9 p-1'> 
+                                        {user.profileImg &&(
+                                        <img src={user.profileImg}/>
+                                        )}
+                                        </div>
                                         <div id='username'>{user.username}</div>
                                        
                                     </div>
@@ -109,7 +115,9 @@ function ServiceDetailPage(){
                         return(
                            <div className='flex items-center '>
                                 <div className='w-[100px] p-2'>
+                                    {user.profileImg &&(
                                     <img src={user.profileImg}/>
+                                    )}
                                 </div>
 
                                 <div className ='about_me_details'>

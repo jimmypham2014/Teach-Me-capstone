@@ -90,13 +90,6 @@ class Tutor(db.Model):
     are_users = db.relationship('UserTutor',back_populates = 'tutor')
 
 
-    # tutor_user = db.relationship(
-    #     "userTutors",
-    #     secondary = "userTutors",
-    #     back_populates = 'user_tutor'
-    # )
-
-
     def to_dict(self):
         return {
             'id': self.id,

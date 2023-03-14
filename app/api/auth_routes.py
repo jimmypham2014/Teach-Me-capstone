@@ -71,6 +71,7 @@ def sign_up():
             is_student = form.data['is_student'],
             username=form.data['username'],
             email=form.data['email'],
+            profileImg ="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Download-Image.png",
             password=form.data['password']
         )
         db.session.add(user)
@@ -99,6 +100,7 @@ def tutor_sign_up():
             is_student = is_student,
             username=username,
             email=email,
+            profileImg = "https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Download-Image.png",
             password=form.data['password']
         )
 
