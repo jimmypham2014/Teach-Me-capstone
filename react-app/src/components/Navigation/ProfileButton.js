@@ -56,7 +56,7 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
+            <li><button onClick={()=>history.push(`/${user.username}`)}>{user.username}</button></li>
             <li className='email'>{user.email}</li>
             
             { user.is_student === false ?

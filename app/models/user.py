@@ -43,7 +43,7 @@ class User(db.Model, UserMixin):
     profileImg = db.Column(db.String(512))
     services = db.relationship('Service', back_populates='tutor')
     bookings = db.relationship('Booking', back_populates = 'student')
-    
+
     are_tutors = db.relationship("UserTutor",back_populates='user')
 
 

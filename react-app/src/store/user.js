@@ -7,6 +7,9 @@ const loadOtherUsers = (users) => {
   };
 };
 
+
+
+
 export const getOneUserThunk = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}`);
 
@@ -25,6 +28,8 @@ export const getAllUsers =() =>async(dispatch)=>{
         dispatch(loadOtherUsers(users))
     }
 }
+
+
 
 
 const defaultState = {};

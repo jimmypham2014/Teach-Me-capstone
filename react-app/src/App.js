@@ -20,6 +20,7 @@ import ProfilePage from "./components/Pages/ProfilePage";
 import { getAllUsers } from "./store/user";
 import AllServicesBrowser from "./components/Pages/AllServicesBrowser";
 import About from "./components/Pages/About";
+import EditProfile from "./components/Forms/EditProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -117,7 +118,9 @@ useEffect(()=>{
           <ProfilePage/>
           </Route>
 
-         
+          <Route exact path= '/:username/edit'>
+          <EditProfile/>
+          </Route>
 
 
           

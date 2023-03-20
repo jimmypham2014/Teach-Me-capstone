@@ -23,7 +23,8 @@ function HomePage(){
         password: "password",
       };
       setShowMenu(false);
-      dispatch(login(user.email, user.password));
+      await dispatch(login(user.email, user.password));
+      history.push('/')
     };
 
 

@@ -104,6 +104,31 @@ export const tutorSignUp = (firstName, lastName, is_student, credentials, educat
 };
 
 
+export const editProfile = (userId, data) =>async(dispatch)=>{
+	console.log(data)
+
+	  const res = await fetch(`/api/users/${userId}`,{
+	  method: "PUT",
+	  body: data,
+	})
+  
+  
+	if(res.ok){
+		const newData = await res.json();
+		 
+		dispatch(setUser(newData))
+		return res
+	} else if (res.status < 500) {
+		const data = await res.json();
+		if (data.errors) {
+		  return data;
+		}
+	  } else {
+		return ["An error occurred. Please try again."];
+	  }
+	};
+
+
 
 export const signUp = (firstName, lastName, is_student, username, email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/signup", {

@@ -45,13 +45,6 @@ def add_service():
 
         url = upload['url']
 
-       
-
-    
-
-
-       
- 
 
     if form.validate_on_submit():
         data = form.data
@@ -71,9 +64,6 @@ def add_service():
     
     return {'errors': validation_errors_to_error_messages(form.errors)},401
     
-
-
-
 
 
 @service_routes.route('/<int:id>', methods=["PUT","PATCH"])
