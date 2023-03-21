@@ -22,6 +22,8 @@ def load_service():
 @service_routes.route('/', methods=['POST'])
 @login_required
 def add_service():
+
+    print(request.files)
     
     if "image" in request.files:
         imageFile = request.files['image']
@@ -47,7 +49,9 @@ def add_service():
 
 
     if form.validate_on_submit():
+        
         data = form.data
+        print(data)
         new_service = Service(tutor_id=current_user.get_id(),
                               title = data['title'],
                               subject_level=data['subject_level'],

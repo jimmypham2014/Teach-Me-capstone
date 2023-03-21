@@ -105,7 +105,7 @@ export const tutorSignUp = (firstName, lastName, is_student, credentials, educat
 
 
 export const editProfile = (userId, data) =>async(dispatch)=>{
-	console.log(data)
+	console.log(data,'THUNKKK')
 
 	  const res = await fetch(`/api/users/${userId}`,{
 	  method: "PUT",
@@ -115,7 +115,7 @@ export const editProfile = (userId, data) =>async(dispatch)=>{
   
 	if(res.ok){
 		const newData = await res.json();
-		 
+		 console.log(newData)
 		dispatch(setUser(newData))
 		return res
 	} else if (res.status < 500) {

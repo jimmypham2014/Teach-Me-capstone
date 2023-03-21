@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { editProfile } from '../../../store/session'
 
-function EditProfile(){
+function EditProfile({userId, closeModal}){
     const currentUser = useSelector(state=>state.session.user)
     const [firstName, setFirstName] = useState(currentUser.firstName)
     const [lastName, setLastName] = useState(currentUser.lastName)
@@ -12,23 +12,27 @@ function EditProfile(){
     const dispatch = useDispatch()
 
 
-console.log(firstName)
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
-
+        console.log(firstName)
         const data = new FormData()
         data.append('firstName', firstName)
         data.append('lastName',lastName)
         data.append('description',description)
         data.append('profileImg',profileImg)
+        
+        console.log(data.values())
+        for (const value of data.values()) {
+            console.log(value,'Data FORM');
+          }
 
-        console.log(data)
-
-        const res = await dispatch(editProfile(currentUser.id, data))
+        const res = await dispatch(editProfile(userId, data))
 
         if(res.errors){
             setErrors(res.errors)
+        }else{
+            closeModal()
         }
 
     } 

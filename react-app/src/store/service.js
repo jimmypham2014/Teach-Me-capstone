@@ -36,7 +36,7 @@ export const getAllServices = () => async (dispatch)=>{
 
 export const addService = (service) => async(dispatch)=>{
     const{  title,subject,image,description,subject_level,price} = service
- console.log(service)
+
     const formData = new FormData()
     formData.append("title",title)
     formData.append("subject",subject)
@@ -46,8 +46,8 @@ export const addService = (service) => async(dispatch)=>{
 
 
     if(image) formData.append("image", image)
-   
 
+   
     const res = await fetch("/api/services/",{
     method: "POST",
     body: formData,

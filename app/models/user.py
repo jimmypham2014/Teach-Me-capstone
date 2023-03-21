@@ -70,7 +70,8 @@ class User(db.Model, UserMixin):
             'is_student': self.is_student,
             'username': self.username,
             'email': self.email,
-            'profileImg': self.profileImg
+            'profileImg': self.profileImg,
+            'description': self.description
         }
 
 

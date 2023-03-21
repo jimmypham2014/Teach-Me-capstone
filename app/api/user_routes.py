@@ -33,6 +33,9 @@ def edit_profile(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
+    print(request.files,'*****')
+    print(request.form['firstName'])
+    
     if "profileImg" in request.files:
         image = request.files['profileImg']
     else:
@@ -40,7 +43,7 @@ def edit_profile(id):
 
     form = EditProfileForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
+   
     if(image):
         if not allow_file(image.filename):
             return {"errors": "file type not permitted"}, 400
@@ -54,18 +57,24 @@ def edit_profile(id):
 
         url = upload['url']
     else:
-        url = current_user.profile_picture
+        url = current_user.profileImg
 
     if form.validate_on_submit():
         data =form.data
-        user= User.query.get(id)
+        user = User.query.get(id)
+        print(data.items(),'hellooooo')
+       
         for key, val in data.items():
             setattr(user, key, val)
+
+        user.firstName = request.form['firstName']
+        user.lastName = request.form['lastName']
+        user.description = request.form['description']
 
         if url:
             user.profileImg = url
     
-            db.session.commit()
-            return user.to_dict()
+        db.session.commit()
+        return user.to_dict()
        
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
