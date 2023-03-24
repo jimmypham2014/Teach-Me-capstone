@@ -6,12 +6,14 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
+from .api.message_routes import message_routes
 from .api.auth_routes import auth_routes
 from .api.service_routes import service_routes
 from .api.booking_routes import booking_routes
 from .api.tutor_routes import tutor_routes
 from .seeds import seed_commands
 from .config import Config
+from .socket import socketio
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -34,8 +36,10 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(service_routes, url_prefix ='/api/services')
 app.register_blueprint(booking_routes, url_prefix ='/api/bookings')
 app.register_blueprint(tutor_routes, url_prefix ='/api/tutors')
+app.register_blueprint(message_routes, url_prefix ='/api/messages')
 db.init_app(app)
 Migrate(app, db)
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -95,3 +99,6 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+if __name__ == '__main__':
+    socketio.run(app)

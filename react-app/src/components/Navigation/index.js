@@ -34,6 +34,11 @@ function Navigation({ isLoaded }){
 					About
 					</NavLink>
 
+					<NavLink to ='/messages'>
+					Messages
+					
+					</NavLink>
+
 
 					<div>
 					<ProfileButton user={sessionUser} />

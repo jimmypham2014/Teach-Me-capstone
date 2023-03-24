@@ -8,6 +8,7 @@ import './SingleServicePage.css'
 import {TbCategory} from 'react-icons/tb'
 import {FaUniversity} from 'react-icons/fa'
 import {IoMdSchool} from 'react-icons/io'
+import Chat from "../../Chat";
 
 function ServiceDetailPage(){
     const dispatch = useDispatch()
@@ -17,9 +18,24 @@ function ServiceDetailPage(){
     const history = useHistory()
     const tutors = useSelector(state=> Object.values(state.tutors))
     const users = useSelector(state => Object.values(state.otherUsers))
+    const [socketInstance, setSocketInstance] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [buttonStatus, setButtonStatus] = useState(false);
+    const allMessages = useSelector(state=>Object.values(state.messages))
+
+   
+
+    const handleClick = ()=>{
+        if (buttonStatus ===false){
+            setButtonStatus(true)
+            setLoading(true);
+        }else{
+            setButtonStatus(false)
+            
+        }
 
 
-
+    }
 
 
 
@@ -47,7 +63,12 @@ function ServiceDetailPage(){
     const specificTutor = tutors.filter(tutor => service.tutor === tutor.user_id)
     const specificUser = users.filter(user => user.id === service.tutor)
 
-    console.log(specificUser)
+    console.log(specificUser[0].id + sessionUser.user.id)
+
+    const specificMessagesinTheRoom = allMessages.filter(message=> message.roomId === String(specificUser[0].id +sessionUser.user.id))
+    console.log(specificMessagesinTheRoom ,'helloooo22')
+  
+    
 
 
     return(
@@ -171,7 +192,21 @@ function ServiceDetailPage(){
                     </div>
                   
                   </div>
-                
+
+                  
+                     {!buttonStatus ? (
+                         <button onClick={handleClick}>Contact Me</button>
+                     ): (
+                         <div>
+                        <button onClick={handleClick}>Leave</button> 
+                        
+                        <Chat userId = {specificUser[0].id} username= {specificUser[0].username}/>
+                        </div>
+                     )}  
+
+                 
+
+              
            
 
              </div>
@@ -179,6 +214,8 @@ function ServiceDetailPage(){
              <div className='ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px]   md:flex md:flex-col md:items-center md:w-[100px]  lg:flex lg:flex-col lg:items-center lg:w-[400px] '>
                 <CreateBookingForm serviceId ={service.id}/>
              </div>
+
+            
 
         </div>
     )

@@ -27,6 +27,10 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
+
+
+
+
 @user_routes.route('/<int:id>', methods=['PUT', 'PATCH'])
 @login_required
 def edit_profile(id):

@@ -21,6 +21,8 @@ import { getAllUsers } from "./store/user";
 import AllServicesBrowser from "./components/Pages/AllServicesBrowser";
 import About from "./components/Pages/About";
 import EditProfile from "./components/Forms/EditProfile";
+import { getAllMesssages } from "./store/messages";
+import Message from "./components/Message";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +40,7 @@ function App() {
 useEffect(()=>{
   dispatch(getAllTutors())
   dispatch(getAllUsers())
+  dispatch(getAllMesssages())
 },[dispatch])
 
 
@@ -77,6 +80,11 @@ useEffect(()=>{
 
           <Route exact path= '/about'>
           <About/>
+          </Route>
+
+          <Route exact path='/messages'>
+          <Message/>
+          
           </Route>
         
 

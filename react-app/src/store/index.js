@@ -5,13 +5,15 @@ import serviceReducer from './service';
 import bookingReducer from './booking'
 import tutorReducer from './tutor';
 import otherUsersReducer from './user';
+import messageReducer from './messages';
 
 const rootReducer = combineReducers({
   session,
   service:serviceReducer,
   booking:bookingReducer,
   tutors: tutorReducer,
-  otherUsers: otherUsersReducer
+  otherUsers: otherUsersReducer,
+  messages: messageReducer
 });
 
 
