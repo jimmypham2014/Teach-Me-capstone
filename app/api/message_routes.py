@@ -4,6 +4,7 @@ from app.models import User,db, Message
 
 message_routes = Blueprint('messages', __name__)
 
+
 @message_routes.route('/')
 def messages():
     """
@@ -11,3 +12,5 @@ def messages():
     """
     messages= Message.query.all()
     return jsonify([message.to_dict() for message in messages])
+
+

@@ -9,6 +9,7 @@ import {TbCategory} from 'react-icons/tb'
 import {FaUniversity} from 'react-icons/fa'
 import {IoMdSchool} from 'react-icons/io'
 import Chat from "../../Chat";
+import {AiOutlineCloseCircle} from 'react-icons/ai'
 
 function ServiceDetailPage(){
     const dispatch = useDispatch()
@@ -36,8 +37,6 @@ function ServiceDetailPage(){
 
 
     }
-
-
 
     useEffect(()=>{
         dispatch(getSingleService(serviceId))
@@ -68,7 +67,7 @@ function ServiceDetailPage(){
     const specificMessagesinTheRoom = allMessages.filter(message=> message.roomId === String(specificUser[0].id +sessionUser.user.id))
     console.log(specificMessagesinTheRoom ,'helloooo22')
   
-    
+
 
 
     return(
@@ -197,8 +196,10 @@ function ServiceDetailPage(){
                      {!buttonStatus ? (
                          <button onClick={handleClick}>Contact Me</button>
                      ): (
-                         <div>
-                        <button onClick={handleClick}>Leave</button> 
+                         <div className='border carousel '>
+                         <div className='flex justify-end border-solid border-b-2 border-black'>
+                        <button className='p-1 hover:bg-gray-100 hover:rounded-full flex justify-end ' onClick={handleClick}><AiOutlineCloseCircle /></button> 
+                        </div>
                         
                         <Chat userId = {specificUser[0].id} username= {specificUser[0].username}/>
                         </div>

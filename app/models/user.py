@@ -99,7 +99,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profileImg': self.profileImg,
-            'description': self.description
+            'description': self.description,
         }
 
 
@@ -125,5 +125,6 @@ class Tutor(db.Model):
             'education':self.education,
             'user_id': self.user_id,
             'credentials': self.credentials
+            
         }
  
