@@ -52,7 +52,7 @@ function ServicePage(){
             <h1 className='text-xl font-semibold'>Services</h1> 
             </div>
               
-        <div className='border'></div>
+        <div className='border border-1 border-black '></div>
 
         </div>
 

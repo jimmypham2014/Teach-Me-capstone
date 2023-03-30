@@ -22,11 +22,7 @@ function EditProfile({userId, closeModal}){
         data.append('description',description)
         data.append('profileImg',profileImg)
         
-        console.log(data.values())
-        for (const value of data.values()) {
-            console.log(value,'Data FORM');
-          }
-
+    
         const res = await dispatch(editProfile(userId, data))
 
         if(res.errors){

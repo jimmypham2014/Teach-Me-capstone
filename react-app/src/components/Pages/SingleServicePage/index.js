@@ -9,6 +9,23 @@ import {FaUniversity} from 'react-icons/fa'
 import {IoMdSchool} from 'react-icons/io'
 import Chat from "../../Chat";
 import {AiOutlineCloseCircle} from 'react-icons/ai'
+import styled from '@emotion/styled'
+
+
+export const StyleWrapper = styled.div`
+
+.chat-container {
+    width: 50rem;
+   
+    }
+    
+#scrollableDiv{
+    height: 200px;
+}
+
+}
+   
+`
 
 function ServiceDetailPage(){
     const dispatch = useDispatch()
@@ -18,9 +35,16 @@ function ServiceDetailPage(){
     const history = useHistory()
     const tutors = useSelector(state=> Object.values(state.tutors))
     const users = useSelector(state => Object.values(state.otherUsers))
-
+  
     const [loading, setLoading] = useState(true);
     const [buttonStatus, setButtonStatus] = useState(false);
+
+
+
+
+
+
+
  
     const handleClick = ()=>{
         if (buttonStatus ===false){
@@ -212,9 +236,11 @@ function ServiceDetailPage(){
                         </button> 
                         </div>
                         
-                        <div>
-                        
+                        <div className='h-[300px]'>
+                        <StyleWrapper>
                         <Chat userId = {specificUser[0].id} username= {specificUser[0].username}/>
+                        </StyleWrapper>
+    
                         </div>
                         </div>
 
@@ -224,12 +250,6 @@ function ServiceDetailPage(){
                  
                     }
                   
-
-                 
-
-              
-           
-
              </div>
 
              <div className='ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px]   md:flex md:flex-col md:items-center md:w-[100px]  lg:flex lg:flex-col lg:items-center lg:w-[400px] '>

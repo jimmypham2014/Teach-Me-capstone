@@ -19,7 +19,6 @@ export const Chat = ({userId, username}) => {
     const otherUsers =useSelector(state=> Object.values(state.otherUsers))
     const dispatch = useDispatch()
     const messagesEndRef = useRef(null)
-    const [trigger, setTrigger] =useState(false)
     const [showPicker, setShowPicker] = useState(false)
 
      console.log(messages, 'messagessss')
@@ -42,6 +41,9 @@ export const Chat = ({userId, username}) => {
    
    }
    `
+
+
+
  
     useEffect(() => {
         dispatch(getAllMesssages())
@@ -59,7 +61,7 @@ export const Chat = ({userId, username}) => {
         socket.on("receivedChat", (chat) => {
             console.log(messages)
             console.log(chat)
-            // setMessages(messages => [...messages, chat])
+
             setMessages(oldMessagesData => [...oldMessagesData, chat])
             console.log('Received Message')
 
@@ -69,17 +71,12 @@ export const Chat = ({userId, username}) => {
         socket.on('disconnect', ()=>{
             socket.emit('clinet disconnected')
         })
-        // if (messages.length){
-        //     setTimeout(()=>{
-        //         setTrigger(preTrigger => !preTrigger)
-        //     },1000)
-        // }
-        // when component unmounts, disconnect
+   
         return (() => {
             console.log('component unmounted')
             socket.disconnect()
         })
-    }, [messages,dispatch, trigger, userId])
+    }, [messages,dispatch,userId])
 
     const onEmojiClick =(emojiObject,event)=>{
         console.log('hi thereeeee')
@@ -114,9 +111,8 @@ useEffect(()=>{
   
     
     return (user && (
-        <div className='chat-container' >
+        <div className='chat-container'>
         <div
-        
         id="scrollableDiv"
         style={{
           height: 300,
@@ -214,7 +210,7 @@ useEffect(()=>{
                 }
 
                   
-                <button type="submit"><AiOutlineSend/></button>
+                <button  type="submit"><AiOutlineSend size={20} color='white' /></button>
                 </div>
               
 
