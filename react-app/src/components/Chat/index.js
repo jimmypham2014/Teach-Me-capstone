@@ -5,13 +5,12 @@ import { getAllMesssages } from "../../store/messages";
 import InfiniteScroll from "react-infinite-scroll-component"
 import './Chat.css'
 import {AiOutlineSend} from 'react-icons/ai'
-import data from '@emoji-mart/data'
 import EmojiPicker, {EmojiClickData} from 'emoji-picker-react';
 import smile from '../../icons/smile.png'
-
+import styled from '@emotion/styled'
 let socket;
 
-const Chat = ({userId, username}) => {
+export const Chat = ({userId, username}) => {
     const [chatInput, setChatInput] = useState("");
     const allMessages = useSelector(state=>Object.values(state.messages))
     const [page, setPage] = useState(1)
@@ -20,16 +19,31 @@ const Chat = ({userId, username}) => {
     const otherUsers =useSelector(state=> Object.values(state.otherUsers))
     const dispatch = useDispatch()
     const messagesEndRef = useRef(null)
+    const [trigger, setTrigger] =useState(false)
     const [showPicker, setShowPicker] = useState(false)
 
+     console.log(messages, 'messagessss')
+        console.log(userId, username)
 
     const specificMessagesinTheRoom = allMessages.filter(message=> message.roomId === String(userId+user.id))
 
-    const otherUserMessages = specificMessagesinTheRoom.filter(el => el.sender_id !== user.id && el.sender_id !== null )
-    console.log(otherUserMessages)
+
 
     const receiver = otherUsers.filter(user =>user.id === userId)
-    console.log(receiver)
+ 
+    const StyleWrapper = styled.div`
+
+.EmojiPickerReact.epr-main{
+    position: absolute;
+   bottom:3rem;
+   right:1rem;
+}
+    
+   
+   }
+   `
+
+
 
  
     useEffect(() => {
@@ -37,26 +51,38 @@ const Chat = ({userId, username}) => {
         // open socket connection
         // create websocket
         socket = io();
-        console.log(socket)
+        console.log(socket,' sSOCKKKKKKKKKKKKKETTTTTTT')
 
 
         socket.on('connect', ()=>{
             socket.emit('join',{username: username, room:userId + user.id})
            
         })
-              
+        
         socket.on("receivedChat", (chat) => {
             console.log(messages)
             console.log(chat)
             // setMessages(messages => [...messages, chat])
-            setMessages([...messages,chat])
+            setMessages(oldMessagesData => [...oldMessagesData, chat])
             console.log('Received Message')
+
+          
+           
         })
+        socket.on('disconnect', ()=>{
+            socket.emit('clinet disconnected')
+        })
+        // if (messages.length){
+        //     setTimeout(()=>{
+        //         setTrigger(preTrigger => !preTrigger)
+        //     },1000)
+        // }
         // when component unmounts, disconnect
         return (() => {
+            console.log('component unmounted')
             socket.disconnect()
         })
-    }, [messages])
+    }, [messages,dispatch, trigger, userId])
 
     const onEmojiClick =(emojiObject,event)=>{
         console.log('hi thereeeee')
@@ -71,8 +97,13 @@ const Chat = ({userId, username}) => {
 
     const sendChat = (e) => {
         e.preventDefault()
+        console.log(userId, userId + user.id , 'sendd chat')
         socket.emit("chat", { user: user.username, msg: chatInput, recipientId: userId, room:userId + user.id});
-       
+        setMessages(preMessages => {
+            console.log(preMessages,'helloooo')
+            return preMessages
+        })
+    
         setChatInput("")
     }
 
@@ -130,7 +161,7 @@ useEffect(()=>{
                             
 
                             <div className='flex items-center text-black'>
-                                 <img className='w-5 rounded-full m-1' src={receiver[0].profileImg}/>{receiver[0].username} : {message.body}  
+                                 <img className='w-5 rounded-full m-1' src={receiver[0]?.profileImg}/>{receiver[0]?.username} : {message.body}  
                             </div>
                             
                             <div className='text-xs'>
@@ -143,13 +174,8 @@ useEffect(()=>{
                         
 
                          
-                }
-
-                    
-
-                    
-
-                   
+                    }
+                
                         <div ref ={messagesEndRef}/>
 
                     </div>
@@ -159,26 +185,42 @@ useEffect(()=>{
     
             </div>
          
-            <form onSubmit={sendChat}>
+            <form onSubmit={sendChat} >
+
+                <div className='flex items-center justify-evenly'>
+                <div className ='w-5/6'>
                 <input
-                className='border w-5/6 h-[50px] rounded m-2'
+                className='border w-full h-[50px] rounded m-2'
                 placeholder=' Write your message here'
                 
                     value={chatInput}
                     onChange={updateChatInput}
                 />
+                </div>
+
+               <div className='flex items-center justify-around w-[100px] '>
                 <img
-                className='w-6'
+                className='w-6 h-6'
                     src={smile}
                     onClick={()=> setShowPicker(val => !val)}
                 />
-                {showPicker && <EmojiPicker
+                {showPicker && 
+                    <StyleWrapper>
+                    <EmojiPicker
                     disableAutoFocus={true} native
                     pickerStyle = {{width:'90%'}}
                     onEmojiClick={onEmojiClick}
-                    />}
-        
+                    position='absolute'
+                    />
+                    </StyleWrapper>
+                }
+
+                  
                 <button type="submit"><AiOutlineSend/></button>
+                </div>
+              
+
+                </div>
             </form>
         </div>
     )

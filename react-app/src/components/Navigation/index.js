@@ -6,6 +6,7 @@ import './Navigation.css';
 import logo from '../../icons/Black logo - no background.png'
 import favorite from '../../icons/favorite.png'
 import message from '../../icons/messages.png'
+import {AiOutlineMail} from 'react-icons/ai'
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
@@ -35,7 +36,7 @@ function Navigation({ isLoaded }){
 					</NavLink>
 
 					<NavLink to ='/messages'>
-					Messages
+					<AiOutlineMail size={30}/>
 					
 					</NavLink>
 

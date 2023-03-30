@@ -31,8 +31,8 @@ def on_join(data):
 
 @socketio.on("chat")
 def handle_chat(data):
-    print(request.sid)
     room = data['room']
+    print(room, '++++++++++++++')
     message = Message(sender_id = current_user.id,
                         body = data['msg'],
                         recipient_id = data['recipientId'],
@@ -50,8 +50,8 @@ def on_leave(data):
 
 @socketio.on('disconnect')
 def disconnect():
-    emit('user disconnected',
-        {}
+    emit('user disconnected'
+      
     )
 
 

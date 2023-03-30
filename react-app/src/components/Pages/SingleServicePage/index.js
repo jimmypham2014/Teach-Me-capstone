@@ -71,6 +71,7 @@ function ServiceDetailPage(){
 
 
     return(
+
         <div className='2xl:flex 2xl:flex-row  xl:flex xl:flex-row justify-center items-center py-5 sm:flex-col md:flex-col'>
 
             <div className=''>
@@ -196,13 +197,16 @@ function ServiceDetailPage(){
                      {!buttonStatus ? (
                          <button onClick={handleClick}>Contact Me</button>
                      ): (
-                         <div className='border carousel '>
+                       
+                         <div className='border carousel sticky bottom-0 z-2 bg-white right-5'>
                          <div className='flex justify-end border-solid border-b-2 border-black'>
                         <button className='p-1 hover:bg-gray-100 hover:rounded-full flex justify-end ' onClick={handleClick}><AiOutlineCloseCircle /></button> 
                         </div>
                         
                         <Chat userId = {specificUser[0].id} username= {specificUser[0].username}/>
                         </div>
+
+                      
                      )}  
 
                  
@@ -219,6 +223,7 @@ function ServiceDetailPage(){
             
 
         </div>
+        
     )
 }
 
