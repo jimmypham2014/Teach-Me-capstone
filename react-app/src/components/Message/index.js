@@ -1,9 +1,21 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Chat from '../Chat'
+import styled from '@emotion/styled'
 
 
+export const StyleWrapper = styled.div`
 
+.chat-container {
+    width: 50rem;
+    }
+    
+#scrollableDiv{
+    height: 600px;
+}
+
+}
+`
 
 function Message(){
 
@@ -14,7 +26,7 @@ function Message(){
     const [username, setUserName] = useState('')
     const [buttonStatus, setButtonStatus] = useState(false);
 
-    console.log(username)
+
 
 
      const handleClick = (userId, username)=>{
@@ -36,16 +48,16 @@ function Message(){
   
 
     return (
-        <div >
-        <div >
+        <div className ='flex justify-center w-full border border-red-200' >
+        <div className = 'border w-0'>
         {otherUsers.map(user=>{
                 return(
                     uniqueSenders.map(sender => user.id === sender? (
 
                     <div >
                  
-                      <div >
-                      <button  onClick={()=> handleClick(user.id, user.username)}>{user.username}</button>
+                      <div className='w-[700px]'>
+                      <button className='flex items-center border border-black w-[200px]' onClick={()=> handleClick(user.id, user.username)}> <img  className='w-[40px] m-2 rounded-full' src={user.profileImg}/>{user.username}</button>
                       </div>
                     
                     </div>
@@ -55,13 +67,17 @@ function Message(){
                     )
                     )
             })}
+            </div>
                 
-                <div className='flex'>
+                <div className='flex h-full '>
+                
+                <StyleWrapper>
                 <Chat userId = {userId} username = {username}/>
+                </StyleWrapper>
                 
                 </div> 
 
-                </div>
+              
             
         </div>
     )

@@ -42,9 +42,6 @@ export const Chat = ({userId, username}) => {
    
    }
    `
-
-
-
  
     useEffect(() => {
         dispatch(getAllMesssages())
@@ -117,8 +114,9 @@ useEffect(()=>{
   
     
     return (user && (
-        <div >
+        <div className='chat-container' >
         <div
+        
         id="scrollableDiv"
         style={{
           height: 300,

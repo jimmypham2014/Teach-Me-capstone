@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { getSingleService,deleteService, getAllServices } from "../../../store/service";
 import CreateBookingForm from "../../Forms/CreateBookingForm";
-import EditServiceForm from "../../Forms/EditServiceForm";
 import './SingleServicePage.css'
 import {TbCategory} from 'react-icons/tb'
 import {FaUniversity} from 'react-icons/fa'
@@ -19,13 +18,10 @@ function ServiceDetailPage(){
     const history = useHistory()
     const tutors = useSelector(state=> Object.values(state.tutors))
     const users = useSelector(state => Object.values(state.otherUsers))
-    const [socketInstance, setSocketInstance] = useState("");
+
     const [loading, setLoading] = useState(true);
     const [buttonStatus, setButtonStatus] = useState(false);
-    const allMessages = useSelector(state=>Object.values(state.messages))
-
-   
-
+ 
     const handleClick = ()=>{
         if (buttonStatus ===false){
             setButtonStatus(true)
@@ -62,10 +58,9 @@ function ServiceDetailPage(){
     const specificTutor = tutors.filter(tutor => service.tutor === tutor.user_id)
     const specificUser = users.filter(user => user.id === service.tutor)
 
-    console.log(specificUser[0].id + sessionUser.user.id)
+    
 
-    const specificMessagesinTheRoom = allMessages.filter(message=> message.roomId === String(specificUser[0].id +sessionUser.user.id))
-    console.log(specificMessagesinTheRoom ,'helloooo22')
+
   
 
 
@@ -193,21 +188,42 @@ function ServiceDetailPage(){
                   
                   </div>
 
-                  
-                     {!buttonStatus ? (
+                  {specificUser[0].id !== sessionUser.user.id && 
+                     (!buttonStatus ? (
+                         
+                        
                          <button onClick={handleClick}>Contact Me</button>
+
+
                      ): (
                        
                          <div className='border carousel sticky bottom-0 z-2 bg-white right-5'>
-                         <div className='flex justify-end border-solid border-b-2 border-black'>
-                        <button className='p-1 hover:bg-gray-100 hover:rounded-full flex justify-end ' onClick={handleClick}><AiOutlineCloseCircle /></button> 
+                         <div className='flex justify-between border-solid border-b-2 border-black'>
+                         <div className='flex items-center m-2'>
+                         <img  className ='w-9 rounded-full p-1' src= {specificUser[0].profileImg}/> 
+
+                         {specificUser[0].username}
+                         </div>
+                         
+                        <button className='p-1 hover:bg-gray-100 hover:rounded-full flex justify-end ' onClick={handleClick}>
+                        
+                        <AiOutlineCloseCircle />
+                        
+                        </button> 
                         </div>
+                        
+                        <div>
                         
                         <Chat userId = {specificUser[0].id} username= {specificUser[0].username}/>
                         </div>
+                        </div>
 
                       
-                     )}  
+                     )
+                    )
+                 
+                    }
+                  
 
                  
 
