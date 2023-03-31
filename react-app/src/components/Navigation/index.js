@@ -4,11 +4,17 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import logo from '../../icons/Black logo - no background.png'
+import notiIcon from '../../icons/icons8-exclamation-mark-48.png'
 
 import {AiOutlineMail} from 'react-icons/ai'
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
+
+    const allMessages = useSelector(state=>Object.values(state.messages))
+
+	const messages = allMessages.filter(message=> message.recipient_id === sessionUser.id)
+	console.log(messages)
 
 	return (
 		<div className='flex items-center justify-between'>
@@ -35,7 +41,13 @@ function Navigation({ isLoaded }){
 					</NavLink>
 
 					<NavLink to ='/messages'>
+
 					<AiOutlineMail size={30}/>
+					{messages.map(message=> message.messageHasRead === false &&
+						<div>
+							<img src={notiIcon}/>
+						</div>
+						)}
 					
 					</NavLink>
 

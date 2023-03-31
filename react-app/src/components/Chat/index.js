@@ -10,7 +10,7 @@ import smile from '../../icons/smile.png'
 import styled from '@emotion/styled'
 let socket;
 
-export const Chat = ({userId, username}) => {
+export const Chat = ({userId, username, setMostRecentMessage}) => {
     const [chatInput, setChatInput] = useState("");
     const allMessages = useSelector(state=>Object.values(state.messages))
     const [page, setPage] = useState(1)
@@ -36,6 +36,7 @@ export const Chat = ({userId, username}) => {
     position: absolute;
    bottom:3rem;
    right:1rem;
+
 }
     
    
@@ -60,8 +61,8 @@ export const Chat = ({userId, username}) => {
         
         socket.on("receivedChat", (chat) => {
             console.log(messages)
-            console.log(chat)
-
+            console.log(chat,'CHATTTTT')
+            setMostRecentMessage(chat)
             setMessages(oldMessagesData => [...oldMessagesData, chat])
             console.log('Received Message')
 
@@ -94,7 +95,7 @@ export const Chat = ({userId, username}) => {
         console.log(userId, userId + user.id , 'sendd chat')
         socket.emit("chat", { user: user.username, msg: chatInput, recipientId: userId, room:userId + user.id});
         setMessages(preMessages => {
-            console.log(preMessages,'helloooo')
+        
             return preMessages
         })
     
@@ -115,11 +116,13 @@ useEffect(()=>{
         <div
         id="scrollableDiv"
         style={{
-          height: 300,
+       
           overflow: 'auto',
           display: 'flex',
           flexDirection: 'column-reverse',
+        
         }}
+       className='border'
         >
                <InfiniteScroll
                dataLength = {specificMessagesinTheRoom.length}
@@ -127,6 +130,7 @@ useEffect(()=>{
                inverse={true} //
                hasMore={true}
                scrollableTarget="scrollableDiv"
+             
 
                >
                 {specificMessagesinTheRoom && specificMessagesinTheRoom.map((message, ind) => (
@@ -178,13 +182,14 @@ useEffect(()=>{
                 </InfiniteScroll>
     
             </div>
-         
+                    
+            <div className='border'>
             <form onSubmit={sendChat} >
 
                 <div className='flex items-center justify-evenly'>
-                <div className ='w-5/6'>
+                <div className='w-3/4' >
                 <input
-                className='border w-full h-[50px] rounded m-2'
+                className='border-none w-full h-[50px] rounded m-2'
                 placeholder=' Write your message here'
                 
                     value={chatInput}
@@ -194,7 +199,7 @@ useEffect(()=>{
 
                <div className='flex items-center justify-around w-[100px] '>
                 <img
-                className='w-6 h-6'
+                className='w-6 h-6 cursor-pointer'
                     src={smile}
                     onClick={()=> setShowPicker(val => !val)}
                 />
@@ -210,12 +215,13 @@ useEffect(()=>{
                 }
 
                   
-                <button  type="submit"><AiOutlineSend size={20} color='white' /></button>
+                <button className='border border-black rounded-full flex items-center justify-center w-9 h-9 hover:bg-gray-100' type="submit"><AiOutlineSend size={20} color='white' /></button>
                 </div>
               
 
                 </div>
             </form>
+            </div>
         </div>
     )
     )

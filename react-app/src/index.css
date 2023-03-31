@@ -12,7 +12,10 @@ body{
     background-color: white;
     z-index: 3;
     
-   
+}
+
+body, html,#root{
+    height: 100%;
 }
 button{
     color: black;

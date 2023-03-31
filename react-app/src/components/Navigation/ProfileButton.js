@@ -46,7 +46,7 @@ function ProfileButton({ user }) {
   const hostAService = ()=>{
     history.push('/services/create_a_service')
   }
-  console.log(currentUser.username)
+ 
 
   return (
     <div className='prof'>

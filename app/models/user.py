@@ -15,6 +15,7 @@ class Message(db.Model):
     recipient_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     body = db.Column(db.String(140))
     roomId = db.Column(db.String(400))
+    messageHasRead = db.Column(db.Boolean, default = False)
     timestamp = db.Column(db.DateTime, index=True, default = datetime.utcnow)
 
     def to_dict(self):
@@ -24,7 +25,8 @@ class Message(db.Model):
             'recipient_id':self.recipient_id,
             'body':self.body,
             'timestamp':self.timestamp,
-            'roomId':self.roomId
+            'roomId':self.roomId,
+            'messageHasRead': self.messageHasRead,
         }
 
 

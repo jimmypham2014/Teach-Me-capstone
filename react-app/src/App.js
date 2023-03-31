@@ -49,6 +49,7 @@ useEffect(()=>{
 
 
   return (
+  
     <>
       {!! currentUser&& <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
@@ -83,8 +84,8 @@ useEffect(()=>{
           </Route>
 
           <Route exact path='/messages'>
+         
           <Message/>
-          
           </Route>
         
 
@@ -137,7 +138,8 @@ useEffect(()=>{
         </Switch>
       )}
 
-    </>
+      </>
+    
   );
 }
 

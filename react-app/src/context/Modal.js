@@ -29,7 +29,7 @@ export function ModalProvider({ children }) {
   };
 
   return (
-    <div>
+    <div className='h-[70%]'>
       <ModalContext.Provider value={contextValue}>
         {children}
       </ModalContext.Provider>

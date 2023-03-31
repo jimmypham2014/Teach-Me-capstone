@@ -38,7 +38,7 @@ function EditProfile({userId, closeModal}){
     }
 
     return (
-        <div>
+        <div >
         <form onSubmit={handleSubmit}>
         <lable>Full Name</lable>
 
