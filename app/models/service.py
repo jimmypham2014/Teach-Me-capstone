@@ -19,6 +19,7 @@ class Service(db.Model, UserMixin):
     tutor_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable = False)
     image = db.Column(db.String(500))
     tutor = db.relationship('User', back_populates='services')
+    reviews = db.relationship('Review', back_populates ='service')
 
     booking = db.relationship('Booking', back_populates ='service')
      
