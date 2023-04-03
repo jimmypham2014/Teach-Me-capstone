@@ -48,7 +48,7 @@ function Message(){
 
 
     return (
-        <div className ='flex justify-center w-full mt-[100px]  h-full' >
+        <div className ='flex justify-center w-full mt-[50px]  h-full' >
         <div className = 'border '>
         {otherUsers.map(user=>{
                 return(
@@ -89,7 +89,7 @@ function Message(){
                     
                 </div>
 
-                <div className=' h-[70%]  '>     
+                <div className='  '>     
                 <StyleWrapper>              
                 <Chat userId = {userId} username = {username} setMostRecentMessage={setMostRecentMessage}/>
                 </StyleWrapper>     
