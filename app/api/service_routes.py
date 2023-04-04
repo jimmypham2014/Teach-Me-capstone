@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify,request
 from flask_login import login_required, current_user
-from app.models import User,Service, db, Booking
-from app.forms import ServiceForm, BookingForm
+from app.models import User,Service, db, Booking, Review
+from app.forms import ServiceForm, BookingForm, ReviewForm
 import datetime
 from .auth_routes import validation_errors_to_error_messages
 from  datetimerange import DateTimeRange
@@ -186,3 +186,59 @@ def add_booking(service_id):
             db.session.commit()
             return new_booking.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)},401
+
+
+
+
+
+
+@service_routes.route('/<int:service_id>', methods=['POST'])
+def add_review(service_id):
+     print(request.files)
+    
+    if "reviewImage" in request.files:
+        imageFile = request.files['reviewImage']
+    else:
+        imageFile = ""
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if(imageFile):
+        if not allow_file(imageFile.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        imageFile.filename = get_unique_filename(imageFile.filename)
+        
+
+        upload = upload_file_to_s3(imageFile)
+
+        if "url" not in upload:
+            return {"errors": "failed to upload into s3"}, 400
+
+        url = upload['url']
+
+        if form.validate_on_submit():
+        
+        data = form.data
+        print(data)
+        new_review= Review(
+                              comments = data['comments'],
+                              rating=data['rating'],
+                              reviewImage = url
+                              )
+                              
+        
+        db.session.add(new_review)
+        db.session.commit()
+        return new_review.to_dict()
+    
+    return {'errors': validation_errors_to_error_messages(form.errors)},401
+    
+        
+
+
+
+
+
+
