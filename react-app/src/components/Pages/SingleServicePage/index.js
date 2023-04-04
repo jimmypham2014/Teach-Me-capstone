@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { getSingleService,deleteService, getAllServices } from "../../../store/service";
@@ -10,6 +10,8 @@ import {IoMdSchool} from 'react-icons/io'
 import Chat from "../../Chat";
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import styled from '@emotion/styled'
+import CreateReviewForm from "../../Forms/CreateReviewForm";
+import { getAllReviews } from "../../../store/review";
 
 
 export const StyleWrapper = styled.div`
@@ -35,16 +37,21 @@ function ServiceDetailPage(){
     const history = useHistory()
     const tutors = useSelector(state=> Object.values(state.tutors))
     const users = useSelector(state => Object.values(state.otherUsers))
+    const reviews = useSelector(state=> Object.values(state.reviews))
+    const messagesEndRef = useRef(null)
   
     const [loading, setLoading] = useState(true);
     const [buttonStatus, setButtonStatus] = useState(false);
 
-
-
-
-
-
-
+    console.log(serviceId)
+    
+   const specificReviews = reviews.filter(review => String(review.service_id) === serviceId)
+    console.log(specificReviews)
+    
+    useEffect(()=>{
+        messagesEndRef.current?.scrollIntoView()
+    },[])
+    
  
     const handleClick = ()=>{
         if (buttonStatus ===false){
@@ -60,6 +67,7 @@ function ServiceDetailPage(){
 
     useEffect(()=>{
         dispatch(getSingleService(serviceId))
+        dispatch(getAllReviews())
 
     },[dispatch])
 
@@ -91,7 +99,7 @@ function ServiceDetailPage(){
 
     return(
 
-        <div className='2xl:flex 2xl:flex-row  xl:flex xl:flex-row justify-center items-center py-5 sm:flex-col md:flex-col'>
+        <div className='2xl:flex 2xl:flex-row  xl:flex xl:flex-row justify-center items-center py-5 sm:flex-col md:flex-col '>
 
             <div className=''>
                 {service&&(
@@ -211,14 +219,10 @@ function ServiceDetailPage(){
                     </div>
                   
                   </div>
-
+                    <div>
                   {specificUser[0].id !== sessionUser.user.id && 
                      (!buttonStatus ? (
-                         
-                        
                          <button onClick={handleClick}>Contact Me</button>
-
-
                      ): (
                        
                          <div className='border carousel sticky bottom-0 z-2 bg-white right-5'>
@@ -236,9 +240,9 @@ function ServiceDetailPage(){
                         </button> 
                         </div>
                         
-                        <div className='h-[300px]'>
+                        <div className='h-[400px]'>
                         <StyleWrapper>
-                        <Chat userId = {specificUser[0].id} username= {specificUser[0].username}/>
+                        <Chat userId = {specificUser[0]?.id} username= {specificUser[0]?.username} messagesEndRef={messagesEndRef}/>
                         </StyleWrapper>
     
                         </div>
@@ -249,12 +253,30 @@ function ServiceDetailPage(){
                     )
                  
                     }
-                  
-             </div>
+                    </div>
+                    {specificReviews.map(review=>{
+                        return(
+                        <div>
+                        {review.comments}
+                        
+                        </div>
+                        )
+                    })}
 
-             <div className='ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px]   md:flex md:flex-col md:items-center md:w-[100px]  lg:flex lg:flex-col lg:items-center lg:w-[400px] '>
+                    <div>
+                    <CreateReviewForm serviceId ={service.id}/>
+               
+                    </div>
+                  
+                </div>
+
+                <div className='ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px] md:flex md:flex-col md:items-center md:w-[100px]  lg:flex lg:flex-col lg:items-center lg:w-[400px] md:sticky md:top-0 '>
                 <CreateBookingForm serviceId ={service.id}/>
-             </div>
+                </div>
+
+
+
+          
 
             
 

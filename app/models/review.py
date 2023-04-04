@@ -23,5 +23,7 @@ class Review(db.Model):
             'id': self.id,
             'comments': self.comments,
             'rating': self.rating,
-            'reviewImage': self.reviewImage
+            'reviewImage': self.reviewImage,
+            'service_id': self.service_id,
+            'user_id': self.user_id,
         }

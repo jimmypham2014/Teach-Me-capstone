@@ -10,7 +10,7 @@ import smile from '../../icons/smile.png'
 import styled from '@emotion/styled'
 let socket;
 
-export const Chat = ({userId, username, setMostRecentMessage}) => {
+export const Chat = ({userId, username, messagesEndRef}) => {
     const [chatInput, setChatInput] = useState("");
     const allMessages = useSelector(state=>Object.values(state.messages))
     const [page, setPage] = useState(1)
@@ -18,11 +18,8 @@ export const Chat = ({userId, username, setMostRecentMessage}) => {
     const user = useSelector(state => state.session.user)
     const otherUsers =useSelector(state=> Object.values(state.otherUsers))
     const dispatch = useDispatch()
-    const messagesEndRef = useRef(null)
+    // const messagesEndRef = useRef(null)
     const [showPicker, setShowPicker] = useState(false)
-
-     console.log(messages, 'messagessss')
-        console.log(userId, username)
 
     const specificMessagesinTheRoom = allMessages.filter(message=> message.roomId === String(userId+user.id))
 
@@ -36,9 +33,8 @@ export const Chat = ({userId, username, setMostRecentMessage}) => {
     position: absolute;
    bottom:3rem;
    right:1rem;
+    }
 
-}
-    
    
    }
    `
@@ -60,9 +56,7 @@ export const Chat = ({userId, username, setMostRecentMessage}) => {
         })
         
         socket.on("receivedChat", (chat) => {
-            console.log(messages)
-            console.log(chat,'CHATTTTT')
-            setMostRecentMessage(chat)
+         
             setMessages(oldMessagesData => [...oldMessagesData, chat])
             console.log('Received Message')
 
@@ -103,9 +97,9 @@ export const Chat = ({userId, username, setMostRecentMessage}) => {
     }
 
 
-useEffect(()=>{
-    messagesEndRef.current?.scrollIntoView()
-},[messages])
+// useEffect(()=>{
+//     messagesEndRef.current?.scrollIntoView()
+// },[messages])
 
 
 
@@ -168,13 +162,17 @@ useEffect(()=>{
                            
                     
                          </div> 
+
+                            
                              </div>
                         
+                             
 
-                         
+                            
                     }
                 
-                        <div ref ={messagesEndRef}/>
+                    <div ref ={messagesEndRef}/>
+                        
 
                     </div>
                     

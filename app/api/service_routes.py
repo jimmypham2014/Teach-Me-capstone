@@ -22,9 +22,6 @@ def load_service():
 @service_routes.route('/', methods=['POST'])
 @login_required
 def add_service():
-
-    print(request.files)
-    
     if "image" in request.files:
         imageFile = request.files['image']
     else:
@@ -194,8 +191,6 @@ def add_booking(service_id):
 
 @service_routes.route('/<int:service_id>', methods=['POST'])
 def add_review(service_id):
-     print(request.files)
-    
     if "reviewImage" in request.files:
         imageFile = request.files['reviewImage']
     else:
@@ -218,11 +213,12 @@ def add_review(service_id):
 
         url = upload['url']
 
-        if form.validate_on_submit():
-        
+    if form.validate_on_submit():
         data = form.data
         print(data)
         new_review= Review(
+                                user_id = current_user.id,
+                                service_id = service_id,
                               comments = data['comments'],
                               rating=data['rating'],
                               reviewImage = url

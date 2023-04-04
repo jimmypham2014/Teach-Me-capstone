@@ -1,6 +1,6 @@
-const LOAD_REVIEW = 'services/LOAD_SERVICE'
-const ADD_REVIEW= 'services/ADD_SERVICE'
-const DELETE_SERVICE = 'services/DELETE_SERVICE'
+const LOAD_REVIEW = 'services/LOAD_REVIEW'
+const ADD_REVIEW= 'services/ADD_REVIEW'
+const DELETE_REVIEW = 'services/DELETE_REVIEW'
 
 
 
@@ -10,10 +10,20 @@ const loadReviews = (reviews)=>({
 
 })
 
-const add_reivew = (review) =>({
+const add_review = (review) =>({
     type:ADD_REVIEW,
     payload: review
 })
+
+export const getAllReviews = () => async (dispatch)=>{
+    const res = await fetch("/api/reviews");
+
+    if(res.ok){
+        const reviews = await res.json();
+        dispatch(loadReviews(reviews))
+    }
+
+}
 
 
 export const addReviews = (serviceId, service) => async(dispatch)=>{
@@ -22,7 +32,7 @@ export const addReviews = (serviceId, service) => async(dispatch)=>{
     const formData = new FormData()
     formData.append('comments', comments)
     formData.append('rating',rating)
-    }
+   
 
     if(reviewImage) formData.append("reviewImage", reviewImage)
 
@@ -32,3 +42,44 @@ export const addReviews = (serviceId, service) => async(dispatch)=>{
         body: formData,
         
     })
+
+    if(res.ok){
+        const newData = await res.json();
+        dispatch(add_review(newData))
+        return newData
+    } else{
+        const error = await res.json()
+        return error
+    }
+
+
+}
+
+
+const defaultState = {}
+
+const reviewReducer = (state= defaultState,action) =>{
+    let newState = {...state}
+    switch(action.type){
+        case LOAD_REVIEW:
+            action.payload.forEach(review=>{
+                newState[review.id] = review
+            })
+           
+            return newState
+        
+
+        case ADD_REVIEW:
+            newState[action.payload.id ]= action.payload
+            return newState
+        
+        case DELETE_REVIEW:
+            delete newState[action.reviewId]
+            return newState
+            
+     
+        default:
+        return state;
+}   
+}
+export default reviewReducer

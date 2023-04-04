@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux"
 import { Redirect, useHistory } from "react-router-dom";
-import { addService } from "../../../store/service";
+import { addReviews } from "../../../store/review";
 
-function CreateServiceForm(){
+
+function CreateReviewForm({serviceId}){
     const dispatch = useDispatch()
     const [comments, setComments] = useState("")
     const [reviewImage, setReviewImage] =useState("")
     const [rating, setRating] = useState(0)
+    const [errors, setErrors] = useState([])
     const history = useHistory()
 
 
@@ -19,13 +21,11 @@ function CreateServiceForm(){
             reviewImage,
             rating
         }
-        const data = await dispatch(addService(payload))
+        const data = await dispatch(addReviews(serviceId, payload))
         
      
         if(data.errors){
             setErrors(data.errors)
-        }else{
-            history.push('/services')
         }
        
     }
@@ -96,7 +96,7 @@ function CreateServiceForm(){
         required
         onChange={(e) =>setRating(e.target.value)}
         />
-        /hr
+  
         </div>
         </div>
     
@@ -112,4 +112,4 @@ function CreateServiceForm(){
     )
 }
 
-export default CreateServiceForm
+export default CreateReviewForm

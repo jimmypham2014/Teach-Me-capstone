@@ -6,6 +6,7 @@ import bookingReducer from './booking'
 import tutorReducer from './tutor';
 import otherUsersReducer from './user';
 import messageReducer from './messages';
+import reviewReducer from './review';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   booking:bookingReducer,
   tutors: tutorReducer,
   otherUsers: otherUsersReducer,
-  messages: messageReducer
+  messages: messageReducer,
+  reviews:reviewReducer
 });
 
 

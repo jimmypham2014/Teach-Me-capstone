@@ -43,12 +43,7 @@ function Navigation({ isLoaded }){
 					<NavLink to ='/messages'>
 
 					<AiOutlineMail size={30}/>
-					{messages.map(message=> message.messageHasRead === false &&
-						<div>
-							<img src={notiIcon}/>
-						</div>
-						)}
-					
+		
 					</NavLink>
 
 
