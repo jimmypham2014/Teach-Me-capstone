@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux"
 import { Redirect, useHistory } from "react-router-dom";
 import { addReviews } from "../../../store/review";
+import {Rate, Upload, Button} from 'antd'
 
 
 function CreateReviewForm({serviceId}){
@@ -30,16 +31,16 @@ function CreateReviewForm({serviceId}){
        
     }
 
-    const updateImage = (e) =>{
-        const file = e.target.files[0]
-        setReviewImage(file)
+    const updateImage = (file) =>{
+    
+        setReviewImage(file.file.originFileObj)
     }
 
 
     return (
-        <div className=''>
+        <div className='flex flex-row'>
 
-        <div className='create_service_info flex items-center justify-center h-screen' >
+        <div  className='flex'>
         <div className='errors'>
         {errors && (
             <div>
@@ -69,44 +70,35 @@ function CreateReviewForm({serviceId}){
 
 
         <div className='image_container p-4'>
-        <label>Image </label>
-        <div>
-       
-        <input
-        type = 'file'
-        required
-        accept='image/*'
-        name="image"
+    
+        <Upload
+        listType='picture'
+        accept=".png, .jpeg,.doc"
         onChange={updateImage}
-        />
+        onRemove={(e)=> console.log(e)}
+        >
+        <Button>Upload</Button></Upload>
         </div>
-
-        </div>
-        
         
     
 
         <div className='price_container p-4'>
         <label>Rating </label>
-        <div>
-        <input
-        type = 'number'
-        required
-        value={rating}
-        required
-        onChange={(e) =>setRating(e.target.value)}
+       
+        <Rate 
+        onChange={(e)=> setRating(e)}
+        tooltips={["Terrible","Bad", "Normal", "Good", "Excellent"]}
         />
-  
-        </div>
-        </div>
-    
         
+        </div>
         
         <button type="submit" className='btn bg-black'><span>Submit</span></button>
         </form>
         
 
             </div>
+
+            
         </div>
 
     )

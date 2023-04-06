@@ -12,12 +12,17 @@ import {AiOutlineCloseCircle} from 'react-icons/ai'
 import styled from '@emotion/styled'
 import CreateReviewForm from "../../Forms/CreateReviewForm";
 import { getAllReviews } from "../../../store/review";
+import {Rate} from 'antd'
 
 
 export const StyleWrapper = styled.div`
 
 .chat-container {
-    width: 50rem;
+    width: 40rem;
+    position: fixed;
+    bottom:0px;
+    right:200px;
+     background-color:white;
    
     }
     
@@ -43,7 +48,7 @@ function ServiceDetailPage(){
     const [loading, setLoading] = useState(true);
     const [buttonStatus, setButtonStatus] = useState(false);
 
-    console.log(serviceId)
+   
     
    const specificReviews = reviews.filter(review => String(review.service_id) === serviceId)
     console.log(specificReviews)
@@ -91,15 +96,16 @@ function ServiceDetailPage(){
     const specificUser = users.filter(user => user.id === service.tutor)
 
     
+   const allRatingNumbers = specificReviews.map( review => review.rating)
 
+   const averageRating = parseFloat(((allRatingNumbers.reduce((partialSum,a) => partialSum +a,0)) / specificReviews.length).toFixed(2))
 
-  
-
+   console.log( averageRating)
 
 
     return(
 
-        <div className='2xl:flex 2xl:flex-row  xl:flex xl:flex-row justify-center items-center py-5 sm:flex-col md:flex-col '>
+        <div className='2xl:flex 2xl:flex-row  xl:flex xl:flex-row justify-center py-5 sm:flex-col md:flex-col '>
 
             <div className=''>
                 {service&&(
@@ -219,13 +225,13 @@ function ServiceDetailPage(){
                     </div>
                   
                   </div>
-                    <div>
-                  {specificUser[0].id !== sessionUser.user.id && 
+                    <div className='absolute'>
+                  {specificUser[0]?.id !== sessionUser.user.id && 
                      (!buttonStatus ? (
-                         <button onClick={handleClick}>Contact Me</button>
+                         <button onClick={handleClick} className='relative left-[400px] bottom-[100px]'>Contact Me</button>
                      ): (
                        
-                         <div className='border carousel sticky bottom-0 z-2 bg-white right-5'>
+                         <div className='border carousel  z-2 bg-white  fixed bottom-[70px] right-[200px] w-[40em]'>
                          <div className='flex justify-between border-solid border-b-2 border-black'>
                          <div className='flex items-center m-2'>
                          <img  className ='w-9 rounded-full p-1' src= {specificUser[0].profileImg}/> 
@@ -240,7 +246,7 @@ function ServiceDetailPage(){
                         </button> 
                         </div>
                         
-                        <div className='h-[400px]'>
+                        <div className='h-[400px] '>
                         <StyleWrapper>
                         <Chat userId = {specificUser[0]?.id} username= {specificUser[0]?.username} messagesEndRef={messagesEndRef}/>
                         </StyleWrapper>
@@ -254,6 +260,13 @@ function ServiceDetailPage(){
                  
                     }
                     </div>
+
+
+                    <div className='border mt-3 '> </div>
+                    <div>
+                        <div className ='text-2xl text-bold '> Reviews</div>
+
+                        <div>{specificReviews.length} reviews for this service <Rate defaultValue={averageRating}   allowHalf disabled/> {averageRating}</div>
                     {specificReviews.map(review=>{
                         return(
                         <div>
@@ -267,18 +280,16 @@ function ServiceDetailPage(){
                     <CreateReviewForm serviceId ={service.id}/>
                
                     </div>
+
+
+                    </div>
                   
                 </div>
 
-                <div className='ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px] md:flex md:flex-col md:items-center md:w-[100px]  lg:flex lg:flex-col lg:items-center lg:w-[400px] md:sticky md:top-0 '>
+                <div className= 'z-0 bg-white ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px] md:flex md:flex-col  md:w-[50px]  lg:flex lg:flex-col lg:w-[300px] md:fixed md:top-[200px] md:right-[200px] '>
                 <CreateBookingForm serviceId ={service.id}/>
                 </div>
 
-
-
-          
-
-            
 
         </div>
         
