@@ -14,7 +14,8 @@ function Navigation({ isLoaded }){
     const allMessages = useSelector(state=>Object.values(state.messages))
 
 	const messages = allMessages.filter(message=> message.recipient_id === sessionUser.id)
-	console.log(messages)
+	
+	
 
 	return (
 		<div className='flex items-center justify-between'>

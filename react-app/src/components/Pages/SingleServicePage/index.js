@@ -43,9 +43,10 @@ function ServiceDetailPage(){
     const tutors = useSelector(state=> Object.values(state.tutors))
     const users = useSelector(state => Object.values(state.otherUsers))
     const reviews = useSelector(state=> Object.values(state.reviews))
+    const otherUsers = useSelector(state=> Object.values(state.otherUsers))
     const messagesEndRef = useRef(null)
   
-    const [loading, setLoading] = useState(true);
+    const [reviewButton, setReviewButton] = useState(false);
     const [buttonStatus, setButtonStatus] = useState(false);
 
    
@@ -61,12 +62,19 @@ function ServiceDetailPage(){
     const handleClick = ()=>{
         if (buttonStatus ===false){
             setButtonStatus(true)
-            setLoading(true);
         }else{
             setButtonStatus(false)
             
         }
+    }
 
+    const writeAReview = ()=>{
+        if (reviewButton ===false){
+            setReviewButton(true)
+        }else{
+            setReviewButton(false)
+            
+        }
 
     }
 
@@ -100,7 +108,13 @@ function ServiceDetailPage(){
 
    const averageRating = parseFloat(((allRatingNumbers.reduce((partialSum,a) => partialSum +a,0)) / specificReviews.length).toFixed(2))
 
-   console.log( averageRating)
+   const formatUTCDate = (date) =>{
+    let myDate = new Date(date)
+
+    return myDate.toLocaleString()
+}
+
+
 
 
     return(
@@ -266,25 +280,77 @@ function ServiceDetailPage(){
                     <div>
                         <div className ='text-2xl text-bold '> Reviews</div>
 
-                        <div>{specificReviews.length} reviews for this service <Rate defaultValue={averageRating}   allowHalf disabled/> {averageRating}</div>
+                        <div>{specificReviews.length} reviews for this service <Rate defaultValue={averageRating}   allowHalf disabled/> {averageRating ? averageRating : 0}</div>
                     {specificReviews.map(review=>{
                         return(
-                        <div>
-                        {review.comments}
+                        <div className='flex items-center m-4'>
+                           {otherUsers.map(user => user.id === review.user_id && 
+                            
+                                <div className=''>
+                                
+                                <div className='flex'>
+                                <img className='w-[40px] rounded-full' src={user.profileImg}/>
+
+                                <div className='m-2'> 
+                                {user.username}
+                                </div>
+
+                                </div>
+                                <div>
+                               
+
+                                <div className='m-2'>
+                                {review.comments}
+                                </div>
+
+                                <div>
+                                <img className='w-9' src={review.reviewImage}/>
+                                </div>
+
+                                 <div className='m-2'>
+                                 <Rate defaultValue={review.rating} disabled allowHalf/>
+
+                                 </div>
+
+                                {formatUTCDate(review.timestamp)}
+
+
+                                 </div>
+
+                                </div>)
+
+                            
+                           }
+
                         
-                        </div>
+                            </div>
                         )
                     })}
 
-                    <div>
-                    <CreateReviewForm serviceId ={service.id}/>
-               
-                    </div>
+                    {!reviewButton ? <button className='bg-black text-white' onClick={writeAReview}>write a review</button>
+                    
+                        :
+                        <div className='border'>
+                        <div className='flex justify-end'>
+                        <button className='p-1 hover:bg-gray-100 hover:rounded-full flex justify-end ' onClick={writeAReview}>
+                        <AiOutlineCloseCircle size={30}/>
+                        </button> 
+                        </div>
+                        <CreateReviewForm serviceId ={service.id}/>
 
+                       
+                        </div>
+                        
+
+                        }
+
+                    
 
                     </div>
                   
                 </div>
+
+        
 
                 <div className= 'z-0 bg-white ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px] md:flex md:flex-col  md:w-[50px]  lg:flex lg:flex-col lg:w-[300px] md:fixed md:top-[200px] md:right-[200px] '>
                 <CreateBookingForm serviceId ={service.id}/>

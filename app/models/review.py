@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 class Review(db.Model):
     __tablename__ ='reviews'
@@ -14,6 +15,7 @@ class Review(db.Model):
     rating = db.Column(db.Integer)
     service_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('services.id')), nullable = False)
     user_id = db.Column(db. Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable = False)
+    timestamp = db.Column(db.DateTime, index=True, default = datetime.utcnow)
 
     user = db.relationship('User', back_populates ='reviews')
     service =db.relationship('Service', back_populates ='reviews')
@@ -26,4 +28,5 @@ class Review(db.Model):
             'reviewImage': self.reviewImage,
             'service_id': self.service_id,
             'user_id': self.user_id,
+            "timestamp":self.timestamp
         }
