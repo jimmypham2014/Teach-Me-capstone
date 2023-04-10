@@ -11,3 +11,13 @@ def get_reviews():
     reviews = Review.query.all()
 
     return jsonify([review.to_dict() for review in reviews])
+
+
+
+@review_routes.route('<int:id>',methods=['DELETE'])
+@login_required
+def delete_review(id):
+    review = Review.query.get(id)
+    db.session.delete(review)
+    db.session.commit()
+    return "Succesfully removed"

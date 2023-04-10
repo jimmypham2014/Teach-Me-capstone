@@ -11,14 +11,14 @@ import Chat from "../../Chat";
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import styled from '@emotion/styled'
 import CreateReviewForm from "../../Forms/CreateReviewForm";
-import { getAllReviews } from "../../../store/review";
+import { deleteReview, getAllReviews } from "../../../store/review";
 import {Rate} from 'antd'
+import {AiOutlineMenu} from 'react-icons/ai'
 
 
 export const StyleWrapper = styled.div`
 
 .chat-container {
-    z-index: 1;
     width: 40rem;
     position: fixed;
     bottom:0px;
@@ -46,9 +46,34 @@ function ServiceDetailPage(){
     const reviews = useSelector(state=> Object.values(state.reviews))
     const otherUsers = useSelector(state=> Object.values(state.otherUsers))
     const messagesEndRef = useRef(null)
+    const ulRef = useRef();
+    const [showMenu, setShowMenu] = useState(false);
+    const [getReviewId, setGetReviewId] = useState(0)
   
     const [reviewButton, setReviewButton] = useState(false);
     const [buttonStatus, setButtonStatus] = useState(false);
+
+    const openMenu = () => {
+        if (showMenu) return;
+        setShowMenu(true);
+      };
+
+    useEffect(() => {
+        if (!showMenu) return;
+    
+        const closeMenu = (e) => {
+          if (!ulRef.current.contains(e.target)) {
+            setShowMenu(false);
+          }
+        };
+    
+        document.addEventListener("click", closeMenu);
+    
+        return () => document.removeEventListener("click", closeMenu);
+      }, [showMenu]);
+
+      const ulClassName = "review-dropdown" + (showMenu ? "" : " hidden");
+      
 
    
     
@@ -91,6 +116,11 @@ function ServiceDetailPage(){
         dispatch(deleteService(serviceId))
        history.push('/')
     }
+
+  
+
+  
+   
 
     if(!service){
         return null
@@ -261,7 +291,7 @@ function ServiceDetailPage(){
                         </button> 
                         </div>
                         
-                        <div className='h-[400px] z-1 '>
+                        <div className='h-[400px] z-2 '>
                         <StyleWrapper>
                         <Chat userId = {specificUser[0]?.id} username= {specificUser[0]?.username} messagesEndRef={messagesEndRef}/>
                         </StyleWrapper>
@@ -282,8 +312,12 @@ function ServiceDetailPage(){
                         <div className ='text-2xl text-bold '> Reviews</div>
 
                         <div>{specificReviews.length} reviews for this service <Rate defaultValue={averageRating}   allowHalf disabled/> {averageRating ? averageRating : 0}</div>
-                    {specificReviews.map(review=>{
+                        
+                        {specificReviews.map(review=>{
                         return(
+                            <div className='flex  '>
+
+                            
                         <div className='flex items-center m-4'>
                            {otherUsers.map(user => user.id === review.user_id && 
                             
@@ -300,8 +334,12 @@ function ServiceDetailPage(){
                                 <div>
                                
 
-                                <div className='m-2'>
-                                {review.comments}
+                                <div className='m-2 '>
+                               <div>{review.comments}</div>
+                                
+                               
+
+
                                 </div>
 
                                 <div>
@@ -309,7 +347,7 @@ function ServiceDetailPage(){
                                 </div>
 
                                  <div className='m-2'>
-                                 <Rate defaultValue={review.rating} disabled allowHalf/>
+                                 <Rate defaultValue={review.rating} disabled allowHalf   />
 
                                  </div>
 
@@ -324,6 +362,20 @@ function ServiceDetailPage(){
                            }
 
                         
+                            </div>
+
+                            <div className='m-8 relative'>
+                            <button onClick={openMenu}><AiOutlineMenu/></button>
+                            <ul className={ulClassName} ref={ulRef} >
+                                {sessionUser && (
+                                    <>
+                                    <li><button >Delete</button></li>
+                                    <li><button>Update</button></li>
+                                    </>
+                                )}
+                            </ul>
+                            
+                            </div>
                             </div>
                         )
                     })}

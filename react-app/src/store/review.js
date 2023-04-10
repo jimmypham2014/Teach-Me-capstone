@@ -15,6 +15,11 @@ const add_review = (review) =>({
     payload: review
 })
 
+const remove_review = (review) =>({
+    type: DELETE_REVIEW,
+    payload: review
+})
+
 export const getAllReviews = () => async (dispatch)=>{
     const res = await fetch("/api/reviews");
 
@@ -23,6 +28,18 @@ export const getAllReviews = () => async (dispatch)=>{
         dispatch(loadReviews(reviews))
     }
 
+}
+
+export const deleteReview = (reviewId)=> async(dispatch) =>{
+    const res = await fetch(`/api/reviews/${reviewId}`,{
+    method:"DELETE",
+    headers:{
+        "Content-Type": "application/json"
+    }
+    })
+    if(res.ok){
+        dispatch(remove_review(reviewId))
+    }
 }
 
 

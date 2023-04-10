@@ -112,23 +112,15 @@ def add_booking(service_id):
 
     service = Service.query.get_or_404(service_id)
 
-    # if date == '' or time_from == '' or time_to == '':
-    #     return jsonify(message='daste and time cannot be blank'),406
 
     date_time_from = datetime.datetime.strptime(f'{date}-{time_from}','%Y-%m-%d-%H:%M:%S')
     date_time_to = datetime.datetime.strptime(f'{date}-{time_to}','%Y-%m-%d-%H:%M:%S')
     received_dates = DateTimeRange(f'{date}T{time_from}', f'{date}T{time_to}')
 
 
-
-
- 
-  
-    print(date, 'dateeeeee')
-
     today = date.today()
 
-    print(today, 'todayyy')
+   
 
     if today > date:
         return {'errors':'Any booking for the past dates or time cannot be accomodated'},406

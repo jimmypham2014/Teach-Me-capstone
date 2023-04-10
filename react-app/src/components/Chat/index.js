@@ -106,7 +106,7 @@ export const Chat = ({userId, username, messagesEndRef}) => {
   
     
     return (user && (
-        <div className='chat-container'>
+        <div className='chat-container z-10'>
         <div
         id="scrollableDiv"
         style={{
@@ -181,8 +181,8 @@ export const Chat = ({userId, username, messagesEndRef}) => {
     
             </div>
                     
-            <div className='border'>
-            <form onSubmit={sendChat} >
+            <div className='border '>
+            <form onSubmit={sendChat} className='z-10'>
 
                 <div className='flex items-center justify-evenly'>
                 <div className='w-3/4' >
