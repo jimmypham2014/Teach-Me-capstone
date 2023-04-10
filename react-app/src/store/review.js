@@ -39,6 +39,10 @@ export const deleteReview = (reviewId)=> async(dispatch) =>{
     })
     if(res.ok){
         dispatch(remove_review(reviewId))
+        dispatch(getAllReviews())
+    }else{
+        const error = await res.json()
+        return error
     }
 }
 

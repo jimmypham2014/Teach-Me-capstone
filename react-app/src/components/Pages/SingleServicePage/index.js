@@ -48,7 +48,7 @@ function ServiceDetailPage(){
     const messagesEndRef = useRef(null)
     const ulRef = useRef();
     const [showMenu, setShowMenu] = useState(false);
-    const [getReviewId, setGetReviewId] = useState(0)
+    const [getReviewId, setGetReviewId] = useState()
   
     const [reviewButton, setReviewButton] = useState(false);
     const [buttonStatus, setButtonStatus] = useState(false);
@@ -112,12 +112,13 @@ function ServiceDetailPage(){
 
 
 
-    const removeService = ()=>{
-        dispatch(deleteService(serviceId))
-       history.push('/')
-    }
+   
 
   
+    const removeService = ()=>{
+        dispatch(deleteService(serviceId))
+        history.push('/')
+    }
 
   
    
@@ -168,9 +169,9 @@ function ServiceDetailPage(){
                         <div className='border'></div>
 
                         <div className='flex'>
-                            {specificUser.map(user=>{
+                            {specificUser.map((user,ind)=>{
                                 return(
-                                    <div className ='flex items-center justify-between'>
+                                    <div key={ind} className ='flex items-center justify-between'>
                                         <div className='w-9 p-1'> 
                                         {user.profileImg &&(
                                         <img src={user.profileImg}/>
@@ -313,12 +314,12 @@ function ServiceDetailPage(){
 
                         <div>{specificReviews.length} reviews for this service <Rate defaultValue={averageRating}   allowHalf disabled/> {averageRating ? averageRating : 0}</div>
                         
-                        {specificReviews.map(review=>{
+                        {specificReviews.map((review,ind)=>{
                         return(
                             <div className='flex  '>
 
                             
-                        <div className='flex items-center m-4'>
+                        <div key={ind} className='flex items-center m-4'>
                            {otherUsers.map(user => user.id === review.user_id && 
                             
                                 <div className=''>
@@ -369,7 +370,7 @@ function ServiceDetailPage(){
                             <ul className={ulClassName} ref={ulRef} >
                                 {sessionUser && (
                                     <>
-                                    <li><button >Delete</button></li>
+                                    <li><button onClick={()=> dispatch(deleteReview(review.id))}>Delete</button></li>
                                     <li><button>Update</button></li>
                                     </>
                                 )}
