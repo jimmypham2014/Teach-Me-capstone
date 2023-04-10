@@ -14,6 +14,7 @@ import CreateReviewForm from "../../Forms/CreateReviewForm";
 import { deleteReview, getAllReviews } from "../../../store/review";
 import {Rate} from 'antd'
 import {AiOutlineMenu} from 'react-icons/ai'
+import ModalImage, {Lightbox} from 'react-modal-image'
 
 
 export const StyleWrapper = styled.div`
@@ -29,6 +30,10 @@ export const StyleWrapper = styled.div`
     
 #scrollableDiv{
     height: 400px;
+}
+
+#react-modal-image-img{
+    width:100px;
 }
 
 }
@@ -48,7 +53,7 @@ function ServiceDetailPage(){
     const messagesEndRef = useRef(null)
     const ulRef = useRef();
     const [showMenu, setShowMenu] = useState(false);
-    const [getReviewId, setGetReviewId] = useState()
+    const [getAvgRating, setGetAvgRating] = useState(0)
   
     const [reviewButton, setReviewButton] = useState(false);
     const [buttonStatus, setButtonStatus] = useState(false);
@@ -57,6 +62,23 @@ function ServiceDetailPage(){
         if (showMenu) return;
         setShowMenu(true);
       };
+
+   
+
+      const ulClassName = "review-dropdown" + (showMenu ? "" : " hidden");
+      
+
+   
+    
+   const specificReviews = reviews.filter(review => String(review.service_id) === serviceId)
+    console.log(specificReviews)
+
+
+    const allRatingNumbers = specificReviews.map( review => review.rating)
+
+   const averageRating = parseFloat(((allRatingNumbers.reduce((partialSum,a) => partialSum +a,0)) / specificReviews.length).toFixed(2))
+    
+
 
     useEffect(() => {
         if (!showMenu) return;
@@ -71,18 +93,22 @@ function ServiceDetailPage(){
     
         return () => document.removeEventListener("click", closeMenu);
       }, [showMenu]);
-
-      const ulClassName = "review-dropdown" + (showMenu ? "" : " hidden");
-      
-
-   
     
-   const specificReviews = reviews.filter(review => String(review.service_id) === serviceId)
-    console.log(specificReviews)
     
-    useEffect(()=>{
+      useEffect(()=>{
         messagesEndRef.current?.scrollIntoView()
     },[])
+    
+
+
+
+
+        useEffect(()=>{
+            dispatch(getSingleService(serviceId))
+            dispatch(getAllReviews())
+            setGetAvgRating(averageRating)
+    
+        },[dispatch,averageRating, getAvgRating])
     
  
     const handleClick = ()=>{
@@ -103,12 +129,6 @@ function ServiceDetailPage(){
         }
 
     }
-
-    useEffect(()=>{
-        dispatch(getSingleService(serviceId))
-        dispatch(getAllReviews())
-
-    },[dispatch])
 
 
 
@@ -136,10 +156,9 @@ function ServiceDetailPage(){
     const specificUser = users.filter(user => user.id === service.tutor)
 
     
-   const allRatingNumbers = specificReviews.map( review => review.rating)
+   
 
-   const averageRating = parseFloat(((allRatingNumbers.reduce((partialSum,a) => partialSum +a,0)) / specificReviews.length).toFixed(2))
-
+    console.log(averageRating)
    const formatUTCDate = (date) =>{
     let myDate = new Date(date)
 
@@ -312,7 +331,7 @@ function ServiceDetailPage(){
                     <div>
                         <div className ='text-2xl text-bold '> Reviews</div>
 
-                        <div>{specificReviews.length} reviews for this service <Rate defaultValue={averageRating}   allowHalf disabled/> {averageRating ? averageRating : 0}</div>
+                        <div>{specificReviews.length} reviews for this service <Rate value={getAvgRating}   allowHalf disabled/> {averageRating ? averageRating : 0}</div>
                         
                         {specificReviews.map((review,ind)=>{
                         return(
@@ -337,14 +356,13 @@ function ServiceDetailPage(){
 
                                 <div className='m-2 '>
                                <div>{review.comments}</div>
-                                
-                               
-
-
                                 </div>
 
                                 <div>
-                                <img className='w-9' src={review.reviewImage}/>
+                                <StyleWrapper>
+                                   <ModalImage className='w-7' large={review.reviewImage} small={review.reviewImage}/>
+                                   </StyleWrapper>
+                              
                                 </div>
 
                                  <div className='m-2'>
@@ -366,7 +384,7 @@ function ServiceDetailPage(){
                             </div>
 
                             <div className='m-8 relative'>
-                            <button onClick={openMenu}><AiOutlineMenu/></button>
+                            <button className='ml-[250px]' onClick={openMenu}><AiOutlineMenu/></button>
                             <ul className={ulClassName} ref={ulRef} >
                                 {sessionUser && (
                                     <>

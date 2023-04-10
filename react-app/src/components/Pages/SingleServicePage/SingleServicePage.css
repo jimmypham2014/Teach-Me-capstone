@@ -21,6 +21,7 @@ height: 20px;
     flex-direction: column;
     align-items: center;
     z-index: 2;
+    left:200px;
     position: absolute;
     list-style: none;
     background-color: white;
@@ -36,3 +37,7 @@ height: 20px;
 .hidden {
     display: none;
   }
+
+.react-modal-image-img{
+    width: 100px;
+}
