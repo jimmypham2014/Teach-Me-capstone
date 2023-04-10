@@ -16,7 +16,7 @@ class Message(db.Model):
     body = db.Column(db.String(140))
     roomId = db.Column(db.String(400))
     messageHasRead = db.Column(db.Boolean, default = False)
-    timestamp = db.Column(db.DateTime, default=lambda: datetime.now(tz=timezone.utc))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow())
 
     def to_dict(self):
         return{

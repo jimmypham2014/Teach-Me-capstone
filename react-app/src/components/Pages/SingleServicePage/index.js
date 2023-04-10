@@ -18,6 +18,7 @@ import {Rate} from 'antd'
 export const StyleWrapper = styled.div`
 
 .chat-container {
+    z-index: 1;
     width: 40rem;
     position: fixed;
     bottom:0px;
@@ -242,7 +243,7 @@ function ServiceDetailPage(){
                     <div className='absolute'>
                   {specificUser[0]?.id !== sessionUser.user.id && 
                      (!buttonStatus ? (
-                         <button onClick={handleClick} className='relative left-[400px] bottom-[100px]'>Contact Me</button>
+                         <button onClick={handleClick} className='relative left-[400px] bottom-[100px] btn bg-black '><span>Contact Me</span></button>
                      ): (
                        
                          <div className='border carousel  z-2 bg-white  fixed bottom-[70px] right-[200px] w-[40em]'>
@@ -260,7 +261,7 @@ function ServiceDetailPage(){
                         </button> 
                         </div>
                         
-                        <div className='h-[400px] '>
+                        <div className='h-[400px] z-1 '>
                         <StyleWrapper>
                         <Chat userId = {specificUser[0]?.id} username= {specificUser[0]?.username} messagesEndRef={messagesEndRef}/>
                         </StyleWrapper>
@@ -291,8 +292,8 @@ function ServiceDetailPage(){
                                 <div className='flex'>
                                 <img className='w-[40px] rounded-full' src={user.profileImg}/>
 
-                                <div className='m-2'> 
-                                {user.username}
+                                <div className='m-2 text-xl'> 
+                                {user.username}:
                                 </div>
 
                                 </div>
@@ -327,13 +328,13 @@ function ServiceDetailPage(){
                         )
                     })}
 
-                    {!reviewButton ? <button className='bg-black text-white' onClick={writeAReview}>write a review</button>
+                    {!reviewButton ? <button className='btn bg-black z-0' onClick={writeAReview}><span>Write a review</span></button>
                     
                         :
                         <div className='border'>
                         <div className='flex justify-end'>
                         <button className='p-1 hover:bg-gray-100 hover:rounded-full flex justify-end ' onClick={writeAReview}>
-                        <AiOutlineCloseCircle size={30}/>
+                                                <AiOutlineCloseCircle size={30}/>
                         </button> 
                         </div>
                         <CreateReviewForm serviceId ={service.id}/>

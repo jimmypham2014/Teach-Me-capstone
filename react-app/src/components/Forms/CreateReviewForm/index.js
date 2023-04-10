@@ -28,6 +28,10 @@ function CreateReviewForm({serviceId}){
         if(data.errors){
             setErrors(data.errors)
         }
+
+        setComments('')
+        setReviewImage('')
+        setRating(0)
        
     }
 
@@ -57,9 +61,11 @@ function CreateReviewForm({serviceId}){
         <div>
        
         <input
+        className='w-[400px] h-[100px] border '
         type = 'text'
         required
         value={comments}
+        placeholder='Leave a review'
         required
         onChange={(e) =>setComments(e.target.value)}
         />
