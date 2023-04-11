@@ -33,7 +33,7 @@ export const StyleWrapper = styled.div`
 }
 
 #react-modal-image-img{
-    width:100px;
+    width:40rem;
 }
 
 }
@@ -342,7 +342,7 @@ function ServiceDetailPage(){
                            {otherUsers.map(user => user.id === review.user_id && 
                             
                                 <div className=''>
-                                
+                              
                                 <div className='flex'>
                                 <img className='w-[40px] rounded-full' src={user.profileImg}/>
 
@@ -352,15 +352,15 @@ function ServiceDetailPage(){
 
                                 </div>
                                 <div>
-                               
+                          
 
                                 <div className='m-2 '>
                                <div>{review.comments}</div>
                                 </div>
 
-                                <div>
+                                <div className=''>
                                 <StyleWrapper>
-                                   <ModalImage className='w-7' large={review.reviewImage} small={review.reviewImage}/>
+                                   <ModalImage className='w-8' large={review.reviewImage} small={review.reviewImage}/>
                                    </StyleWrapper>
                               
                                 </div>

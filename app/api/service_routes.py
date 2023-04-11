@@ -203,13 +203,14 @@ def add_review(service_id):
         upload = upload_file_to_s3(imageFile)
 
         if "url" not in upload:
-            return null
+            return ''
 
         url = upload['url']
+    else:
+        url = ''
 
     if form.validate_on_submit():
         data = form.data
-        print(data)
         new_review= Review(
                                 user_id = current_user.id,
                                 service_id = service_id,
