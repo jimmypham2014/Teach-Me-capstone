@@ -30,8 +30,9 @@ function EditProfile({userId, closeModal}){
         }else{
             closeModal()
         }
-
-    } 
+      }
+    
+    
     const updateImage = (e) =>{
         const file = e.target.files[0]
         setProfileImg(file)
