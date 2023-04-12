@@ -36,9 +36,10 @@ function ServicePage(){
     return (
         <div className='service_containers'>
         <div className='service_banner'>
-            <img src={banner}/>
+            <div className='flex items-center justify-center'> <img src={banner}/></div>
+           
             <div className='banner_info'>
-            <h1 className ='banner_title_1 text-center '>Introducing TEACH</h1>
+            <h1 className ='banner_title_1 text-center sm:top-4 md:top-[100px]'>Introducing TEACH</h1>
             <h3 className ='banner_title_2'>Work Smarter, Not <span className='text-white line-through'>Harder</span> </h3>
             <button className='banner_btn' onClick={()=> history.push('/services')}><span>View All Services</span> </button>
           
@@ -57,7 +58,7 @@ function ServicePage(){
         </div>
 
 
-        <div className='flex items-center'>
+        <div className='flex items-center justify-center'>
 
         <div>
             <button onClick={scrollLeft} className='p-2 m-2 rounded-full bg-gray-50 hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300'><AiOutlineArrowLeft/></button>

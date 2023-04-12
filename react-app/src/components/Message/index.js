@@ -49,7 +49,7 @@ function Message(){
 
     return (
         <div className ='flex justify-center w-full mt-[50px]  h-full' >
-        <div className = 'border '>
+        <div className = 'border h-[75%]'>
         {otherUsers.map(user=>{
                 return(
                     uniqueSenders.map(sender => user.id === sender? (
@@ -62,9 +62,7 @@ function Message(){
                       
                       <div className='focus:text-white'>{user.username}</div>
 
-                      {mostRecentMesage?.user === user?.username &&
-                        <div>{mostRecentMesage.msg}</div>
-                        }
+                    
 
                 
                       </button>
@@ -82,7 +80,7 @@ function Message(){
                     <div className='border flex h-8 items-center justify-center'> 
 
 
-                        <GoPerson size={20}/>
+                        <GoPerson size={20} style={{color:'black'}}/>
                         <div>
                             {username && username}
                         </div>

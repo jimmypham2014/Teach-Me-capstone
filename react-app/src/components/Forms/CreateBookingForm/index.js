@@ -41,7 +41,7 @@ function CreateBookingForm({serviceId}){
 
 
     return(
-        <div className='booking flex flex-col justify-center items-center border-2 w-[220px] h-[250px] sm:w-[300px]'> 
+        <div className='booking flex flex-col justify-center items-center border-2 w-[220px] h-[250px] sm:w-[300px] z-1 bg-white'> 
 
         <div className='font-bold'>
             Book a session
@@ -51,7 +51,7 @@ function CreateBookingForm({serviceId}){
         
 
         <span></span>
-        <div>
+        <div className='-z-1'>
         <form onSubmit={handleSubmit}>
         
         {errors ?

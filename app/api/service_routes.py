@@ -184,6 +184,19 @@ def add_booking(service_id):
 @service_routes.route('/<int:service_id>', methods=['POST'])
 def add_review(service_id):
 
+    service = Service.query.get(service_id)
+
+    reviews = Review.query.all()
+
+    for review in reviews:
+        if review.user_id == current_user.id:
+            return {'errors':'You have submitted a review, please update or delete your old review to make new one'},406
+
+    if service.tutor_id == current_user.id:
+        return {'errors':'Cannot review your own service'},406
+
+    
+
     print(request.files, 'hellooooo')
     if "reviewImage" in request.files:
         imageFile = request.files['reviewImage']

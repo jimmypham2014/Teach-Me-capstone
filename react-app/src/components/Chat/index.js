@@ -18,7 +18,7 @@ export const Chat = ({userId, username, messagesEndRef}) => {
     const user = useSelector(state => state.session.user)
     const otherUsers =useSelector(state=> Object.values(state.otherUsers))
     const dispatch = useDispatch()
-    // const messagesEndRef = useRef(null)
+    const messagesRef = useRef(null)
     const [showPicker, setShowPicker] = useState(false)
 
     const specificMessagesinTheRoom = allMessages.filter(message=> message.roomId === String(userId+user.id))
@@ -97,11 +97,14 @@ export const Chat = ({userId, username, messagesEndRef}) => {
     }
 
 
-// useEffect(()=>{
-//     messagesEndRef.current?.scrollIntoView()
-// },[messages])
+useEffect(()=>{
+    messagesRef.current?.scrollIntoView()
+},[messages])
 
-
+const formatUTCDate = (date) =>{
+    let myDate = new Date(date)
+    return myDate.toLocaleString('en-US')
+}
 
   
     
@@ -132,15 +135,15 @@ export const Chat = ({userId, username, messagesEndRef}) => {
                     
                     
                     {user.id === message.sender_id ? 
-                        <div className='flex justify-end'>
-                        <div className='from-me  m-2'> 
+                        <div className='flex justify-end bg-white z-10'>
+                        <div className='from-me  m-2 '> 
                             <div className='flex items-center text-white'>
                                <img className='w-5 rounded-full m-1' src={user.profileImg}/> {user.username} : {message.body}  
                             </div>
                             
 
                             <div className='text-xs text-white flex justify-end'>
-                            {message.timestamp}                   
+                            {formatUTCDate(message.timestamp)}                   
                             </div>
                     
                              </div>
@@ -157,7 +160,7 @@ export const Chat = ({userId, username, messagesEndRef}) => {
                             </div>
                             
                             <div className='text-xs'>
-                            {message.timestamp}                   
+                            {formatUTCDate(message.timestamp)}                   
                             </div>
                            
                     
@@ -172,6 +175,7 @@ export const Chat = ({userId, username, messagesEndRef}) => {
                     }
                 
                     <div ref ={messagesEndRef}/>
+                    <div ref= {messagesRef}/>
                         
 
                     </div>
@@ -213,7 +217,7 @@ export const Chat = ({userId, username, messagesEndRef}) => {
                 }
 
                   
-                <button className='border border-black rounded-full flex items-center justify-center w-9 h-9 hover:bg-gray-100' type="submit"><AiOutlineSend size={20} color='white' /></button>
+                <button className='border border-black rounded-full flex items-center justify-center w-9 h-9 hover:bg-gray-100' type="submit"><AiOutlineSend size={20} color='black' /></button>
                 </div>
               
 

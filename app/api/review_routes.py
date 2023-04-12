@@ -18,6 +18,10 @@ def get_reviews():
 @login_required
 def delete_review(id):
     review = Review.query.get(id)
+
+    if review.user_id != current_user.id:
+        return {'errors':'This is not your review'},406
+
     db.session.delete(review)
     db.session.commit()
-    return "Succesfully removed"
+    return "Succesfully removed" 

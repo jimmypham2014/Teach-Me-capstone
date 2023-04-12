@@ -1,21 +1,28 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux"
-import { Redirect, useHistory } from "react-router-dom";
+import { Button, Rate, Upload } from 'antd';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { addReviews } from "../../../store/review";
-import {Rate, Upload, Button} from 'antd'
 
 
-function CreateReviewForm({serviceId}){
+function CreateReviewForm({serviceId, handleClick}){
     const dispatch = useDispatch()
     const [comments, setComments] = useState("")
     const [reviewImage, setReviewImage] =useState("")
     const [rating, setRating] = useState(0)
     const [errors, setErrors] = useState([])
-    const history = useHistory()
+    const currentUser = useSelector(state =>state.session.user)
+    const allReviews = useSelector(state=> Object.values(state.reviews))
+    
 
+console.log(serviceId)
+    const specificReviews = allReviews.filter(review => review.service_id === serviceId)
+console.log(allReviews)
+    console.log(specificReviews)
 
     const handleSubmit = async (e)=>{
         e.preventDefault()
+     
 
         const payload= {
             comments,
@@ -44,7 +51,7 @@ function CreateReviewForm({serviceId}){
     return (
         <div className='flex flex-row'>
 
-        <div  className='flex'>
+        <div  className='flex flex-col'>
         <div className='errors'>
         {errors && (
             <div>
@@ -97,8 +104,10 @@ function CreateReviewForm({serviceId}){
         />
         
         </div>
+
+        <button type="submit" className='btn bg-black'><span>Submit</span></button> 
         
-        <button type="submit" className='btn bg-black'><span>Submit</span></button>
+                    
         </form>
         
 
