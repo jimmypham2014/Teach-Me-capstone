@@ -60,7 +60,7 @@ def run_migrations_offline():
         context.run_migrations()
 
 
-ef run_migrations_online():
+def run_migrations_online():
 
     def process_revision_directives(context, revision, directives):
         if getattr(config.cmd_opts, 'autogenerate', False):
