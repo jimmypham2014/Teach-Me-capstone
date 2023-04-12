@@ -9,8 +9,6 @@ class Booking(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    
-
     id = db.Column(db.Integer, primary_key=True)
     booking_date = db.Column(db.Date)
     booking_time_to = db.Column(db.Time)
