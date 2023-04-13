@@ -102,7 +102,7 @@ function ServicePage(){
                                     <div id='details'> 
                                         <div id='prof_image'>
                                         {user.profileImg&&(
-                                        <img src={user.profileImg}/> 
+                                        <img src={user?.profileImg }/> 
                                         )}
                                         </div>  
                                         <div id='username'>

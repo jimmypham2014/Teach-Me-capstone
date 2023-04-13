@@ -22,6 +22,7 @@ def load_service():
 @service_routes.route('/', methods=['POST'])
 @login_required
 def add_service():
+    
     if "image" in request.files:
         imageFile = request.files['image']
     else:
@@ -39,8 +40,7 @@ def add_service():
 
         upload = upload_file_to_s3(imageFile)
 
-        if "url" not in upload:
-            return {"errors": "failed to upload into s3"}, 400
+        
 
         url = upload['url']
 
