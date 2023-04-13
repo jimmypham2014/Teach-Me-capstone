@@ -28,7 +28,7 @@ function CreateBookingForm({serviceId}){
         }
     
         const data = await dispatch(add_booking(service_id,payload))
-        console.log(date)
+   
 
         if(data.errors){
             setErrors(data.errors)

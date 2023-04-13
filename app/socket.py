@@ -17,15 +17,13 @@ socketio = SocketIO(cors_allowed_origins="*")
 
 @socketio.on("connect")
 def connection():
-    print(request.sid)
+    pass
 
 
 @socketio.on('join')
 def on_join(data):
     username = data['username']
     room = data['room']
-    print(username)
-    print(room,'helloo')
     join_room(room)
     emit(username + ' has entered the room.', to=room)
 

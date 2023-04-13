@@ -15,10 +15,9 @@ function CreateReviewForm({serviceId, handleClick}){
     const allReviews = useSelector(state=> Object.values(state.reviews))
     
 
-console.log(serviceId)
+
     const specificReviews = allReviews.filter(review => review.service_id === serviceId)
-console.log(allReviews)
-    console.log(specificReviews)
+
 
     const handleSubmit = async (e)=>{
         e.preventDefault()

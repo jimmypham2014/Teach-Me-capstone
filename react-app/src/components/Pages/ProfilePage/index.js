@@ -10,7 +10,7 @@ function ProfilePage(){
     
     const closeMenu = () => setShowMenu(!showMenu);
 
-    console.log(currentUser.description)
+
     return(
     
     

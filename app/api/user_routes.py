@@ -37,8 +37,6 @@ def edit_profile(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
-    print(request.files,'*****')
-    print(request.form['firstName'])
     
     if "profileImg" in request.files:
         image = request.files['profileImg']
@@ -66,7 +64,6 @@ def edit_profile(id):
     if form.validate_on_submit():
         data =form.data
         user = User.query.get(id)
-        print(data.items(),'hellooooo')
        
         for key, val in data.items():
             setattr(user, key, val)

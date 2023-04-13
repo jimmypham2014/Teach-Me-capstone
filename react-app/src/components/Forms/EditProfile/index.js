@@ -15,7 +15,7 @@ function EditProfile({userId, closeModal}){
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
-        console.log(firstName)
+
         const data = new FormData()
         data.append('firstName', firstName)
         data.append('lastName',lastName)

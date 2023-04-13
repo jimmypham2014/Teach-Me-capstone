@@ -15,7 +15,6 @@ export const getAllMesssages = () => async (dispatch)=>{
 
     if(res.ok){
         const messages = await res.json();
-        console.log(messages, 'hellooo')
         dispatch(loadMessages(messages))
     }
 

@@ -47,6 +47,8 @@ def add_service():
 
         url = upload['url']
 
+        print(url, 'uuurlll')
+
     else:
         url = ''
 
@@ -54,7 +56,6 @@ def add_service():
     if form.validate_on_submit():
         
         data = form.data
-        print(data)
         new_service = Service(tutor_id=current_user.get_id(),
                               title = data['title'],
                               subject_level=data['subject_level'],
@@ -135,7 +136,6 @@ def add_booking(service_id):
     current_time  = datetime.datetime.now()
 
 
-    print(current_time, 'current timeee')
 
 
     if(time_from.hour <= time_to.hour):
@@ -202,8 +202,6 @@ def add_review(service_id):
         return {'errors':'Cannot review your own service'},406
 
     
-
-    print(request.files, 'hellooooo')
     if "reviewImage" in request.files:
         imageFile = request.files['reviewImage']
     else:

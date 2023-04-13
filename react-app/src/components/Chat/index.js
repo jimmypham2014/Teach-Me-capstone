@@ -47,19 +47,18 @@ export const Chat = ({userId, username, messagesEndRef}) => {
         // open socket connection
         // create websocket
         socket = io();
-        console.log(socket,' sSOCKKKKKKKKKKKKKETTTTTTT')
+    
 
 
         socket.on('connect', ()=>{
             socket.emit('join',{username: username, room:userId + user.id})
-           
+        
         })
         
         socket.on("receivedChat", (chat) => {
          
             setMessages(oldMessagesData => [...oldMessagesData, chat])
-            console.log('Received Message')
-
+       
           
            
         })
@@ -68,14 +67,13 @@ export const Chat = ({userId, username, messagesEndRef}) => {
         })
    
         return (() => {
-            console.log('component unmounted')
+        
             socket.disconnect()
         })
     }, [messages,dispatch,userId])
 
     const onEmojiClick =(emojiObject,event)=>{
-        console.log('hi thereeeee')
-        console.log(emojiObject.emoji)
+      
         setChatInput(prevInput => prevInput + emojiObject.emoji);
         setShowPicker(false)
     }
@@ -86,7 +84,7 @@ export const Chat = ({userId, username, messagesEndRef}) => {
 
     const sendChat = (e) => {
         e.preventDefault()
-        console.log(userId, userId + user.id , 'sendd chat')
+       
         socket.emit("chat", { user: user.username, msg: chatInput, recipientId: userId, room:userId + user.id});
         setMessages(preMessages => {
         

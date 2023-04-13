@@ -39,7 +39,6 @@ def edit_booking(id):
     received_dates = DateTimeRange(f'{date}T{time_from}', f'{date}T{time_to}')
 
 
-    print(date_time_from,'dateee')
     today = date.today()
 
     if today > date:
@@ -63,12 +62,11 @@ def edit_booking(id):
             for data in datas:
                 date_time_from_here = datetime.datetime.strptime(f'{data.booking_date}-{data.booking_time_from}','%Y-%m-%d-%H:%M:%S')
                 date_time_to_here = datetime.datetime.strptime(f'{data.booking_date}-{data.booking_time_to}','%Y-%m-%d-%H:%M:%S')
-                print(date_time_from, 'in ehreeee')
+              
                 data_dates = DateTimeRange(str(date_time_from_here).replace(' ','T'),str(date_time_to_here).replace(' ','T'))
                 if data_dates.is_intersection(received_dates):
                     return {'errors':'Someone already booked this time, please book another time'},409
 
-        print(date_time_from, 'helloooooooooo')
 
         if datetime.datetime.now() > date_time_from:
             return {'errors':'Any booking for the past dates or time cannot be accomodated'},406
