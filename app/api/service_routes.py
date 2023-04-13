@@ -42,7 +42,13 @@ def add_service():
 
         
 
+        if "url" not in upload:
+            return {"errors": "failed to upload into s3"}, 400
+
         url = upload['url']
+
+    else:
+        url = ''
 
 
     if form.validate_on_submit():
