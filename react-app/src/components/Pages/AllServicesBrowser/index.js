@@ -13,8 +13,8 @@ const users = useSelector(state => Object.values(state.otherUsers))
 return (
     <div className='allServices-container mx-auto py-13 '>
     
-        <div className='allServices_img p-1'>
-            <img src={banner} className='w-2/4'/>
+        <div className='allServices_img p-1 flex items-center justify-center cover'>
+            <img src={banner} className='w-2/4 object-fill'/>
         </div>
     
 
