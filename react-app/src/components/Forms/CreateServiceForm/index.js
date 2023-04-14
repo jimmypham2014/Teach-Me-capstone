@@ -15,7 +15,7 @@ function CreateServiceForm(){
     const [price, setPrice] = useState("")
     const history = useHistory()
 
-
+ console.log(subject_level)
     const handleSubmit = async (e)=>{
         e.preventDefault()
 
@@ -123,13 +123,14 @@ function CreateServiceForm(){
         <div className='subject_lvl_container p-4' >
         <label>What is the subject grade level? </label>
         <div>
-        <input
-        type = 'text'
-        required
-        value={subject_level}
-        required
-        onChange={(e) =>setSubjectLevel(e.target.value)}
-        />
+        <select value={subject_level} onChange={(e) =>setSubjectLevel(e.target.value)} >
+        <option value='Beginner'>Beginner</option>
+        <option value='Intermediate'>intermediate</option>
+        <option value='Intermediate Level 2'>Intermediate Lvl 2</option>
+         <option value='Advanced'>Advanced</option>
+        
+        </select>
+
         </div>
         
         </div>

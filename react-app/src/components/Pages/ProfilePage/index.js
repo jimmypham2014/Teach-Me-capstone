@@ -32,7 +32,7 @@ function ProfilePage(){
                     {currentUser.description}
                     </div>
 
-                   <div className='hover:bg-gray-200 rounded-full'> 
+                   <div className='hover:bg-gray-200 rounded-full w-8'> 
                     <OpenModalButton
                         buttonText={<BiEditAlt size={30}/>}
                         onItemClick={closeMenu}
