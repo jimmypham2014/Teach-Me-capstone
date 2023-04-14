@@ -194,12 +194,14 @@ def add_review(service_id):
 
     reviews = Review.query.all()
 
+    if service.tutor_id == current_user.id:
+        return {'errors':'Cannot review your own service'},406
+
     for review in reviews:
         if review.user_id == current_user.id:
             return {'errors':'You have submitted a review, please update or delete your old review to make new one'},406
 
-    if service.tutor_id == current_user.id:
-        return {'errors':'Cannot review your own service'},406
+    
 
     
     if "reviewImage" in request.files:
