@@ -425,7 +425,7 @@ function ServiceDetailPage(){
                     </div>
                   
                 </div>
-                <div className= 'z-0 bg-white ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px]   lg:flex lg:flex-col lg:w-[300px] md:fixed md:top-[20rem] md:right-[20rem] '>
+                <div className= 'z-0 bg-white ml-[100px] sm:flex sm:flex-col sm:items-center sm:w-[0px]   lg:flex lg:flex-col lg:w-[300px] md:fixed md:top-[20rem] md:right-[10rem] '>
                 <CreateBookingForm serviceId ={service.id}/>
                 </div>
 
