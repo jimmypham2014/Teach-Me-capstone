@@ -39,29 +39,38 @@ function EditProfile({userId, closeModal}){
     }
 
     return (
-        <div >
-        <form onSubmit={handleSubmit}>
-        <lable>Full Name</lable>
+        <div className='flex flex-col w-[40rem] h-[20rem]' >
+        <form onSubmit={handleSubmit} className='flex flex-col items-center'>
+        
+        <lable className='text-xl'>Full Name</lable>
 
+        <div>
+          <lable> First Name </lable>
         <input
+        className='border'
         type ='text'
+        placeholder='First Name'
         value ={firstName}
         onChange ={(e)=> setFirstName(e.target.value)}
         />
-
+        <lable> Last Name </lable>
         <input
+        className='border'
         type='text'
+        placeholder='Last Name'
         value ={lastName}
         onChange={(e) =>setLastName(e.target.value)}
         />
-
-        <label>Description</label>
+       </div>
+        <label className='text-xl'>Description</label>
         <input
+        className='w-[30rem] border h-[10rem] '
+        placeholder='Write something about yourself'
         type='text'
         value ={description}
         onChange={(e) =>setDescription(e.target.value)}
         />
-        <label>Image</label>
+        <label className='text-xl'>Image</label>
         <input
         type = 'file'
         accept='image/*'
